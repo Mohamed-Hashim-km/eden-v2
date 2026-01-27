@@ -2,20 +2,22 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-jost); /* Use Jost as default sans */
-  --font-serif: var(--font-gilda); /* Use Gilda as serif */
+  --: var(--font-gilda); /* Use Gilda as serif */
+  --color-primary: #1b1b1b;
+  --color-secondary: #65676b;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #ffffff;
   }
 }
 
@@ -33,4 +35,15 @@ h4,
 h5,
 h6 {
   font-family: var(--font-gilda), serif;
+}
+
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-lg1: 1200px;
+  --breakpoint-lg2: 1300px;
+  --breakpoint-xl: 1580px;
+  --breakpoint-2xl: 2000px;
 }

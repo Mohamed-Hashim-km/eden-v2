@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Button } from "../ui/Button";
+import Image from "next/image";
 
 // Simple SVG Icons
 const MailIcon = () => (
@@ -41,7 +42,7 @@ export const Navbar = () => {
   return (
     <header className="w-full bg-[#001446] text-[#FAF5EB] flex flex-col items-center">
       {/* Top Row */}
-      <div className="w-full max-w-[1440px] px-8 py-6 flex justify-between items-center relative border-b border-[#FAF5EB]/10">
+      <div className="w-full  px-8 py-6 flex justify-between items-center relative border-b border-[#FAF5EB]/10">
         {/* Left Actions */}
         <div className="flex items-center gap-6 z-10">
           <button className="text-sm uppercase tracking-widest hover:opacity-80 font-sans">En</button>
@@ -51,10 +52,9 @@ export const Navbar = () => {
         </div>
 
         {/* Logo (Centered) */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-          <h2 className="text-sm tracking-[0.2em] uppercase mb-1 font-serif opacity-80">Hotel</h2>
-          <h1 className="text-5xl font-serif tracking-wide">EDEN</h1>
-        </div>
+       <Link href={"/"}> <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+        <Image src="/svgs/edenNav.svg" alt="Logo" width={100} height={100} />
+        </div></Link> 
 
         {/* Right Actions */}
         <div className="flex items-center gap-6 z-10">
@@ -66,17 +66,20 @@ export const Navbar = () => {
       </div>
 
       {/* Bottom Row: Navigation */}
-      <nav className="w-full flex justify-center py-6">
-        <div className="flex items-center gap-12 text-lg font-sans">
+      <nav className="w-full flex  justify-center py-6">
+        <div className="flex items-center gap-32 text-lg font-sans">
+           <Link href="/dining" className="hover:opacity-80 transition-opacity">
+            Location
+          </Link>
           <Link href="/dining" className="hover:opacity-80 transition-opacity">
             Dining
           </Link>
           <Link href="/spa" className="hover:opacity-80 transition-opacity">
             Spa
           </Link>
-          <Link href="/events" className="hover:opacity-80 transition-opacity">
+          {/* <Link href="/events" className="hover:opacity-80 transition-opacity">
             Events
-          </Link>
+          </Link> */}
           <Link href="/contact" className="hover:opacity-80 transition-opacity">
             Contact
           </Link>

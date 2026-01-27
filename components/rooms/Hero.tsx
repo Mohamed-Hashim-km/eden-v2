@@ -32,16 +32,16 @@ export const Hero: React.FC<HeroProps> = ({ title="A New Standard of Comfort", d
           <Button variant="primary" className="min-w-[150px] !py-3 !text-base font-medium">
             Book Now
           </Button>
-          <Button variant="outline" className="min-w-[150px] !py-3 !text-base font-medium ">
+          {/* <Button variant="outline" className="min-w-[150px] !py-3 !text-base font-medium ">
             Sign Up
-          </Button>
+          </Button> */}
         </div>
       </div>
 
       {/* Booking Bar Container - Positioned absolutely at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 z-20 px-4 translate-y-1/2 flex justify-center w-full">
+      {/* <div className="absolute bottom-0 left-0 right-0 z-20 px-4 translate-y-1/2 flex justify-center w-full">
         <BookingBar locations={bookingBarLocations} defaultLocation={bookingBarDefaultLocation} enableLocationSelection={bookingBarEnableSelection} />
-      </div>
+      </div> */}
     </section>
   );
 };
