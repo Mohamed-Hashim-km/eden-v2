@@ -1,15 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Gilda_Display, Jost } from "next/font/google"; // Import the requested fonts
 import "./globals.css";
+import { Navbar } from "@/components/layout/Navbar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Configure Gilda Display
+const gildaDisplay = Gilda_Display({
+  variable: "--font-gilda",
   subsets: ["latin"],
+  weight: "400", // Gilda Display usually only comes in 400
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Configure Jost
+const jost = Jost({
+  variable: "--font-jost",
   subsets: ["latin"],
+  // Jost is a variable font, so we might not strictly need to specify weights,
+  // but if we did, it handles ranges. Default is usually fine for variable fonts.
 });
 
 export const metadata: Metadata = {
@@ -24,9 +30,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${gildaDisplay.variable} ${jost.variable} antialiased`}>
+        <Navbar />
         {children}
       </body>
     </html>
