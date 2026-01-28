@@ -36,7 +36,7 @@ function DiningSection() {
               {/* Positioned absolute at bottom left */}
               <div className="absolute bottom-10 left-8 z-10">
                 {/* Title: Serif font to match the elegant look in the image */}
-                <h3 className="text-white text-4xl font-serif mb-8 tracking-wide">{item.title}</h3>
+                <h3 className="text-white text-4xl  mb-8 tracking-wide">{item.title}</h3>
 
                 {/* Button: Transparent with White Border */}
                 <Link href="#">

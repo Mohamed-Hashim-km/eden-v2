@@ -8,7 +8,7 @@ import { Button } from "../ui/Button";
 
 const Dining = () => {
   return (
-    <section className="py-16 md:py-24 bg-white overflow-hidden">
+    <section className="py-16 md:pb-24 pt-52 bg-white overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         
         {/* Layout Wrapper */}

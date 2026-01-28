@@ -284,7 +284,7 @@ export const Footer = () => {
 
   return (
     <footer className="bg-[#020412] text-[#FAF5EB] py-8 antialiased">
-      <div className="container mx-auto px-6 lg:px-16 max-w-[1400px]">
+      <div className="container mx-auto px-6 lg:px-16 ">
         {/* --- DESKTOP LAYOUT --- */}
         <div className="hidden md:block">
           {/* --- SECTION 1: TOP CONTENT --- */}

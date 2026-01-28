@@ -24,12 +24,7 @@ interface ContentCarouselProps {
   className?: string;
 }
 
-export const ContentCarousel: React.FC<ContentCarouselProps> = ({
-  title,
-  description,
-  items,
-  className = "",
-}) => {
+export const ContentCarousel: React.FC<ContentCarouselProps> = ({ title, description, items, className = "" }) => {
   const [prevEl, setPrevEl] = useState(null);
   const [nextEl, setNextEl] = useState(null);
 
@@ -39,16 +34,10 @@ export const ContentCarousel: React.FC<ContentCarouselProps> = ({
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12 md:mb-16">
           <div className="flex items-center gap-4">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl text-primary leading-tight">
-              {title}
-            </h2>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl text-primary leading-tight">{title}</h2>
           </div>
 
-          {description && (
-            <div className="max-w-xl text-secondary text-base md:text-lg leading-relaxed">
-              {description}
-            </div>
-          )}
+          {description && <div className="max-w-xl text-secondary text-base md:text-lg leading-relaxed">{description}</div>}
         </div>
 
         {/* Carousel Section */}
@@ -75,9 +64,7 @@ export const ContentCarousel: React.FC<ContentCarouselProps> = ({
           >
             {items.map((item, index) => (
               <SwiperSlide key={index} className="h-auto">
-                <div
-                  className="block h-full group cursor-pointer"
-                >
+                <div className="block h-full group cursor-pointer">
                   {/* Image Container */}
                   <div className="relative overflow-hidden mb-6 aspect-[4/5] md:aspect-square">
                     <Image
@@ -90,21 +77,17 @@ export const ContentCarousel: React.FC<ContentCarouselProps> = ({
                   </div>
 
                   {/* Text Container */}
-                  <h3 className="text-primary text-lg md:text-xl mb-6 font-serif uppercase tracking-wide leading-snug transition-colors duration-300">
+                  <h3 className="text-primary text-lg md:text-xl mb-6  uppercase tracking-wide leading-snug transition-colors duration-300">
                     {item.title}
                   </h3>
-                  {item.description && (
-                    <p className="text-secondary text-sm leading-relaxed mb-6 flex-grow">
-                      {item.description}
-                    </p>
-                  )}
+                  {item.description && <p className="text-secondary text-sm leading-relaxed mb-6 flex-grow">{item.description}</p>}
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
 
           {/* --- Navigation Buttons --- */}
-          
+
           {/* Previous Button */}
           <button
             ref={(node) => setPrevEl(node as any)}
@@ -131,7 +114,7 @@ export const ContentCarousel: React.FC<ContentCarouselProps> = ({
           {/* Next Button */}
           <button
             ref={(node) => setNextEl(node as any)}
-             // CHANGES MADE:
+            // CHANGES MADE:
             // 1. top-[40%]: Align with Image
             // 2. xl:-right-24: Push outside container
             className="absolute top-[40%] -right-4 lg:-right-20 xl:-right-24 z-20 -translate-y-1/2 w-12 h-12 rounded-full border border-[#001446]/20 bg-white flex items-center justify-center text-[#001446] transition-all duration-300 hover:bg-[#001446] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed opacity-0 group-hover/slider:opacity-100 shadow-md"

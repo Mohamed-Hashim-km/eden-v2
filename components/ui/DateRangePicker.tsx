@@ -120,7 +120,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
        'overflow-x-auto' ensures that if the BookingBar is too small for 2 calendars, 
        it scroll internally rather than pushing the BookingBar's width.
     */
-    <div className="absolute top-full left-0 right-0 mt-4 bg-white shadow-xl rounded-lg border border-gray-100 p-8 z-[60] flex flex-col animate-in fade-in zoom-in-95 duration-200 overflow-x-auto min-w-0">
+    <div className="absolute top-full left-0 right-0 mt-4 bg-white  rounded-sm  p-8 z-[60] flex flex-col animate-in fade-in zoom-in-95 duration-200 overflow-x-auto min-w-0">
       <div className="flex gap-4 mb-8 min-w-[600px]">
         <div className={`flex-1 border-b-2 pb-2 text-center transition-colors ${!endDate ? "border-[#001446]" : "border-gray-200"}`}>
           <div className="text-gray-500 text-xs mb-1">Check-In Date</div>

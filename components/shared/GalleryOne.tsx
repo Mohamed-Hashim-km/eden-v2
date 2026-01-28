@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Button } from "../ui/Button";
 
 // Import Swiper styles
-import "swiper/css";
+
 
 // Image data
 
@@ -60,10 +60,7 @@ function GalleryOne({ title, description, cta,galleryImages }) {
             spaceBetween={0} // Removed gap for seamless full width look, or set to 24 if you want gaps
             loop={true}
             speed={1000}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
+           
             breakpoints={{
               480: { slidesPerView: 2 },
               640: { slidesPerView: 3 },
@@ -72,7 +69,7 @@ function GalleryOne({ title, description, cta,galleryImages }) {
             }}
           >
             {galleryImages.map((imgSrc, index) => (
-              <SwiperSlide key={index}>
+              <SwiperSlide className="!opacity-100" key={index}>
                 {/* Added padding wrapper if you want space between images, else remove p-3 */}
                 <div className="p-3 h-full"> 
                   <div

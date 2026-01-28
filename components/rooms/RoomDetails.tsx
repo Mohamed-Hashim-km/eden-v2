@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "../ui/Button";
 // Ensure you have these icons installed or replace with your own
-import { FaRegsnowflake, FaBath, FaPlug } from "react-icons/fa"; 
+import { FaRegsnowflake, FaBath, FaPlug } from "react-icons/fa";
 
 interface Amenity {
   icon: React.ReactNode;
@@ -38,7 +38,6 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({
   return (
     <section className="py-12 md:pb-20 md:pt-16 bg-white text-gray-800 ">
       <div className="container mx-auto px-4 md:px-8 max-w-7xl">
-        
         {/* Breadcrumbs */}
         <nav className="text-base text-secondary mb-16 flex items-center gap-3">
           {breadcrumbs.map((crumb, index) => (
@@ -57,51 +56,35 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({
 
         {/* Title Section */}
         <div className="mb-10 md:mb-10">
-          <h1 className="text-2xl md:text-4xl font-serif text-primary mb-6">
-            {title}
-          </h1>
+          <h1 className="text-2xl md:text-4xl  text-primary mb-6">{title}</h1>
           {/* Decorative underline matching the image style */}
           <div className="h-[1px] w-32 bg-gray-300"></div>
         </div>
 
         {/* Main Grid: Changed to 12 columns for precise sizing */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
-          
           {/* Left Column: Description - Takes 7/12 columns (approx 58%) */}
           <div className="lg:col-span-7 flex flex-col gap-16">
             <div className="text-secondary leading-loose text-[1.05rem] space-y-8 font-light">
-              {Array.isArray(description) ? (
-                description.map((para, idx) => <p key={idx}>{para}</p>)
-              ) : (
-                <p>{description}</p>
-              )}
+              {Array.isArray(description) ? description.map((para, idx) => <p key={idx}>{para}</p>) : <p>{description}</p>}
             </div>
 
             <div className="">
               <Link href={bookNowLink}>
-                <Button 
-                  variant="tertiary" 
-                >
-                  Book Now
-                </Button>
+                <Button variant="tertiary">Book Now</Button>
               </Link>
             </div>
           </div>
-          
 
           {/* Right Column: Details - Takes 5/12 columns (approx 42%) */}
           <div className="lg:col-span-5">
-            
             {/* Details Grid (View, Size, etc) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-10 gap-x-8 mb-16  pb-12">
-              
               {/* View */}
               {details.view && (
                 <div>
                   <h4 className="text-primary font-bold text-lg mb-3">View:</h4>
-                  <p className="text-secondary text-[15px] leading-relaxed font-light">
-                    {details.view}
-                  </p>
+                  <p className="text-secondary text-[15px] leading-relaxed font-light">{details.view}</p>
                 </div>
               )}
 
@@ -136,12 +119,8 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({
               <div className="flex flex-wrap items-start gap-10">
                 {amenities.map((item, index) => (
                   <div key={index} className="flex flex-col items-center gap-4 text-center group">
-                    <div className="text-3xl text-primary group-hover:scale-110 transition-transform duration-300">
-                      {item.icon}
-                    </div>
-                    <span className="text-[11px] text-secondary leading-tight max-w-[80px]">
-                      {item.label}
-                    </span>
+                    <div className="text-3xl text-primary group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
+                    <span className="text-[11px] text-secondary leading-tight max-w-[80px]">{item.label}</span>
                   </div>
                 ))}
 
@@ -153,7 +132,6 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>

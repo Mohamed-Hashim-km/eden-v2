@@ -118,11 +118,8 @@ export const BookingBar: React.FC<BookingBarProps> = ({
       {enableLocationSelection && (
         <div className="relative flex flex-col gap-1 min-w-[180px] w-full md:w-auto border-b border-gray-200 pb-2" ref={locationRef}>
           <span className="text-[#001446] mb-3 text-lg tracking-wide">Location</span>
-          <div
-            className="flex items-center justify-between group cursor-pointer"
-            onClick={toggleLocation}
-          >
-            <span className="text-secondary text-sm transition-colors font-sans">{selectedLocation}</span>
+          <div className="flex items-center justify-between group cursor-pointer" onClick={toggleLocation}>
+            <span className="text-secondary text-sm transition-colors ">{selectedLocation}</span>
             <span className={`transform transition-transform duration-200 ${isLocationOpen ? "rotate-180" : ""}`}>
               <ChevronDownIcon />
             </span>
@@ -148,20 +145,14 @@ export const BookingBar: React.FC<BookingBarProps> = ({
       {/* Check-In/Check-Out Section */}
       <div className="relative flex flex-col gap-1 min-w-[220px] w-full md:w-auto border-b border-gray-200 pb-2">
         <span className="text-[#001446] mb-3 text-lg tracking-wide">Check-In/Check-Out</span>
-        <div 
-            className="flex items-center justify-between cursor-pointer group"
-            onClick={() => setIsDateOpen(!isDateOpen)}
-        >
-          <span className="text-secondary text-sm transition-colors font-sans">
-            {dateRange.start && dateRange.end 
-                ? `${formatDate(dateRange.start)} - ${formatDate(dateRange.end)}` 
-                : "Select Dates"}
+        <div className="flex items-center justify-between cursor-pointer group" onClick={() => setIsDateOpen(!isDateOpen)}>
+          <span className="text-secondary text-sm transition-colors ">
+            {dateRange.start && dateRange.end ? `${formatDate(dateRange.start)} - ${formatDate(dateRange.end)}` : "Select Dates"}
           </span>
           <ChevronDownIcon />
         </div>
 
         {/* Date Picker Component */}
-        
       </div>
 
       {/* Adults */}
@@ -176,24 +167,24 @@ export const BookingBar: React.FC<BookingBarProps> = ({
 
       {/* Check Availability Button */}
       <div className="w-full md:w-auto">
-         <Button 
-            variant="tertiary" 
-            className="w-full md:w-auto"
-            onClick={() => console.log("Searching...", { selectedLocation, dateRange, adults, children })}
-         >
-            Check Availability
-         </Button>
+        <Button
+          variant="tertiary"
+          className="w-full md:w-auto"
+          onClick={() => console.log("Searching...", { selectedLocation, dateRange, adults, children })}
+        >
+          Check Availability
+        </Button>
       </div>
       <DateRangePicker
-          isOpen={isDateOpen}
-          onClose={() => setIsDateOpen(false)}
-          onSelect={(start, end) => {
-            setDateRange({ start, end });
-            if (start && end) setIsDateOpen(false); // Auto-close when both selected
-          }}
-          initialStart={dateRange.start}
-          initialEnd={dateRange.end}
-        />
+        isOpen={isDateOpen}
+        onClose={() => setIsDateOpen(false)}
+        onSelect={(start, end) => {
+          setDateRange({ start, end });
+          if (start && end) setIsDateOpen(false); // Auto-close when both selected
+        }}
+        initialStart={dateRange.start}
+        initialEnd={dateRange.end}
+      />
     </div>
   );
 };

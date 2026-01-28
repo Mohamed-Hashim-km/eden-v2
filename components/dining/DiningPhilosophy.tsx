@@ -25,7 +25,7 @@ const PlaceholderIcon = ({ className = "" }) => (
 
 const DiningPhilosophy = () => {
   return (
-    <section className="py-16 md:py-24 bg-white overflow-hidden">
+    <section className="py-16 md:pb-24 md:pt-0 bg-white overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
           

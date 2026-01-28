@@ -21,18 +21,11 @@ export const Hero: React.FC<HeroProps> = ({
   return (
     // FIX 1: Added 'pt-24' (96px) to offset the absolute Navbar height.
     <section className="relative w-full h-[100vh] flex flex-col justify-center items-center pt-24">
-      
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/30 z-10" />
-        <Image
-          src="/1.webp"
-          alt="Luxury Bedroom"
-          fill
-          className="object-cover"
-          priority
-        />
+        <Image src="/1.webp" alt="Luxury Bedroom" fill className="object-cover" priority />
       </div>
 
       {/* Content */}
@@ -41,18 +34,18 @@ export const Hero: React.FC<HeroProps> = ({
         <h1 className="text-5xl md:text-7xl mb-6 drop-shadow-lg tracking-wide">
           {title}
         </h1>
-        <p className="max-w-2xl text-base md:text-lg font-sans opacity-95 mb-10 drop-shadow-md leading-relaxed tracking-wide">
+        <p className="max-w-2xl text-base md:text-lg  opacity-95 mb-10 drop-shadow-md leading-relaxed tracking-wide">
           {description}
         </p> */}
 
-        {/* <div className="flex items-center gap-6">
+      {/* <div className="flex items-center gap-6">
           <Button variant="primary" className="min-w-[150px] !py-3 !text-base font-medium">
             Book Now
           </Button> */}
-          {/* <Button variant="outline" className="min-w-[150px] !py-3 !text-base font-medium ">
+      {/* <Button variant="outline" className="min-w-[150px] !py-3 !text-base font-medium ">
             Sign Up
           </Button> */}
-        {/* </div>
+      {/* </div>
       </div> */}
 
       {/* Booking Bar Container - Commented out as per your code */}

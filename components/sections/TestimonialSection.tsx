@@ -52,14 +52,14 @@ export const TestimonialSection: React.FC<TestimonialSectionProps> = ({ title, s
 
   return (
     <section className="py-20 md:py-32 bg-[#FFF9F0]">
-      <div className=" ml-auto pl-20">
+      <div className="ml-auto px-5 lg:pl-20 lg:pr-0">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
           {/* Left Column: Content */}
           <div className="lg:w-[50%] flex flex-col justify-center">
             <h2 className="text-4xl md:text-5xl lg:text-6xl  text-primary mb-6 leading-tight">{title}</h2>
             <p className="text-secondary text-lg md:max-w-[70%] mb-12 leading-relaxed">{subtitle}</p>
 
-            <div>
+            <div className="hidden lg:block">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-2xl  text-primary font-bold">{averageRating} Stars</span>
               </div>
@@ -78,7 +78,7 @@ export const TestimonialSection: React.FC<TestimonialSectionProps> = ({ title, s
             <Swiper
               modules={[Navigation, Pagination]}
               spaceBetween={30}
-              slidesPerView={1.2}
+              slidesPerView={1}
               breakpoints={{
                 640: { slidesPerView: 1.5 },
                 1024: { slidesPerView: 1.5 },
@@ -101,30 +101,40 @@ export const TestimonialSection: React.FC<TestimonialSectionProps> = ({ title, s
             </Swiper>
 
             {/* Navigation Controls and Progress Bar container */}
-            <div className="flex items-center justify-between mt-8 relative pl-0 ">
-              {/* Custom Progress Bar or Just spacer if using swiper pagination? 
-                    Design shows a line. Swiper pagination can be customized or we add a static line or specialized component.
-                    For now, focusing on arrows as per design screenshot on the right.
-                    The design shows a progress bar on the left of arrows.
-                */}
-              <div className="h-1 bg-white grow mr-8 rounded-full overflow-hidden">
-                <div className="h-full bg-[#D4AF37] rounded-full transition-all duration-300 ease-out" style={{ width: `${progress}%` }} />
+         <div className="flex items-center gap-6 mt-8">
+
+              {/* PROGRESS BAR (same width as card area) */}
+              <div className="flex-1 md:ml-auto max-w-full md:max-w-[70%]">
+                <div className="h-1 bg-white rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-[#D4AF37] transition-all duration-300"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
               </div>
 
+              {/* NAV BUTTONS */}
               <div className="flex gap-4">
-                <button
-                  ref={setPrevEl}
-                  className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                >
+                <button ref={setPrevEl} className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-black/5">
                   <ChevronLeft />
                 </button>
-                <button
-                  ref={setNextEl}
-                  className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                >
+                <button ref={setNextEl} className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-black/5">
                   <ChevronRight />
                 </button>
               </div>
+            
+          </div>
+          </div>
+          {/* Mobile Rating Section */}
+          <div className="block lg:hidden mt-12">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-2xl text-primary font-bold">{averageRating} Stars</span>
+            </div>
+            <p className="text-secondary text-sm mb-4">Average Rating by Past Guests</p>
+            <div className="flex gap-1">
+              {[...Array(averageRating)].map((_, i) => (
+                <StarIcon key={i} />
+              ))}
             </div>
           </div>
         </div>

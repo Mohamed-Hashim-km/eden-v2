@@ -8,7 +8,7 @@ const EventShowcase = ({ title, description, buttonText, buttonLink, imageSrc })
   return (
     <section className="py-20 overflow-hidden">
       {/* Container: Full width with padding on right for larger screens */}
-      <div className="w-full pl-0 pr-4 md:pr-12 lg:pr-16">
+      <div className="w-full pl-0   lg:pr-16">
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
           {/* Left Side: Image */}
           {/* w-full on mobile, w-1/2 on desktop. "h-[600px]" matches min-height: 600px */}
