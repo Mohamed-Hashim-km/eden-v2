@@ -27,6 +27,7 @@ import { ContentGridCarousel } from "@/components/shared/ContentGrid";
 import Faq from "@/components/shared/Faq";
 import { FeatureShowcase } from "@/components/shared/FeatureShowcase";
 import InTheKarwar from "@/components/sections/InTheKarwar";
+import EventSpaces from "@/components/sections/EventSpaces";
 
 const amenities = [
   { id: 1, title: "Multi-cuisine Restaurants & Rooftop Dining", image: "/1.webp" },
@@ -165,6 +166,7 @@ export default function KarwarPage() {
         imageSrc="/1.webp"
         buttonLink="/dining"
       />
+      <EventSpaces />
     </main>
   );
 }

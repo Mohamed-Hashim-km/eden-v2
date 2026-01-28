@@ -12,7 +12,7 @@ function GoldenLeafe() {
 
   return (
     <>
-      <div className="py-20 lg:pt-28 lg:pb-10 bg-white overflow-hidden">
+      <div className="py-20 lg:pt-54 lg:pb-10 bg-white overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
             

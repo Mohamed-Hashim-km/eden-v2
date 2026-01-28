@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
 
-// --- Custom Icons matching the refined style ---
+// --- Icons ---
 const ChevronLeft = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M15 19L8 12L15 5" stroke="#1B1B1B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -24,136 +24,158 @@ const ChevronRight = () => (
 const diningOptions = [
   {
     title: "Tulip – The Gourmet Restaurant",
-    description: "Refined multi-cuisine dining in an elegant setting, where thoughtfully crafted flavours and warm service come together for memorable meals.",
-    image: "/assets/images/insta/2.webp", 
+    description: "Refined multi-cuisine dining in an elegant setting, where thoughtfully crafted flavours and warm service come together.",
+    image: "/1.webp",
   },
   {
-    title: "Food & Forest – Rooftop Dining",
-    description: "A relaxed rooftop experience with great views, food and crafted cocktails perfect for laid-back evenings and lively gatherings.",
-    image: "/assets/images/insta/2.webp",
+    title: "Food & Forest – Rooftop",
+    description: "A relaxed rooftop experience with great views, food and crafted cocktails perfect for laid-back evenings.",
+    image: "/1.webp",
   },
   {
     title: "Oyster Bar",
-    description: "Fresh coastal flavours served by the coast, serving celebrate traditions.",
-    image: "/assets/images/insta/2.webp",
+    description: "Fresh coastal flavours served by the coast, serving celebrate traditions and fresh catches.",
+    image: "/1.webp",
   },
   {
     title: "In-Room Dining",
-    description: "Enjoy our gourmet offerings in the comfort of your room.",
-    image: "/assets/images/insta/2.webp",
+    description: "Enjoy our gourmet offerings in the comfort of your room with our 24/7 service.",
+    image: "/1.webp",
+  },
+  {
+    title: "The Vintage Lounge",
+    description: "Classic spirits and fine cigars in a sophisticated, leather-bound atmosphere.",
+    image: "/1.webp",
+  },
+   {
+    title: "Tulip – The Gourmet Restaurant",
+    description: "Refined multi-cuisine dining in an elegant setting, where thoughtfully crafted flavours and warm service come together.",
+    image: "/1.webp",
+  },
+  {
+    title: "Food & Forest – Rooftop",
+    description: "A relaxed rooftop experience with great views, food and crafted cocktails perfect for laid-back evenings.",
+    image: "/1.webp",
+  },
+  {
+    title: "Oyster Bar",
+    description: "Fresh coastal flavours served by the coast, serving celebrate traditions and fresh catches.",
+    image: "/1.webp",
+  },
+  {
+    title: "In-Room Dining",
+    description: "Enjoy our gourmet offerings in the comfort of your room with our 24/7 service.",
+    image: "/1.webp",
+  },
+  {
+    title: "The Vintage Lounge",
+    description: "Classic spirits and fine cigars in a sophisticated, leather-bound atmosphere.",
+    image: "/1.webp",
   },
 ];
 
 interface DiningShowcaseProps {
   title?: string;
-  description?: string;
 }
 
 export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
-  const [prevEl, setPrevEl] = useState<HTMLButtonElement | null>(null);
-  const [nextEl, setNextEl] = useState<HTMLButtonElement | null>(null);
-
   return (
-    <section className="py-24 bg-white overflow-hidden relative">
+    <section className="py-24 bg-white overflow-hidden">
       
-      {/* Optional Section Title */}
+      {/* Title */}
       {title && (
-        <div className="container mx-auto px-4 mb-10 text-center relative z-10">
-           <h2 className="text-4xl font-serif text-gray-900">{title}</h2>
+        <div className="container mx-auto px-4 mb-20 text-center">
+          <h2 className="text-4xl font-serif text-gray-900">{title}</h2>
         </div>
       )}
 
-      {/* Slider Wrapper */}
-      <div className="relative w-full max-w-[1920px] mx-auto px-4 md:px-0">
+      {/* CONTAINER WRAPPER 
+         We make this 'relative' so the buttons can position themselves 
+         specifically against the width of the slide area.
+      */}
+      <div className="relative mx-auto max-w-[95%] md:max-w-[75%] xl:max-w-[1200px]">
         
-        {/* Navigation Buttons:
-            Positioned absolutely. They sit vertically centered relative to the IMAGE height (approx 400px), 
-            not the whole card. 
+        {/* --- NAVIGATION BUTTONS --- */}
+        {/* Positioned absolutely within the container. 
+            z-50 ensures they sit on top of images.
+            -translate-x-1/2 pulls them slightly outward to straddle the edge.
         */}
-        <div className="pointer-events-none absolute inset-0 z-40 flex items-start justify-center pt-[180px] md:pt-[220px] lg:pt-[250px]">
-           <div className="relative w-full max-w-[900px] flex justify-between px-2 md:px-0">
-             {/* Prev Button - sits on left edge of active image */}
-             <button
-               ref={setPrevEl}
-               className="pointer-events-auto w-12 h-12 bg-white rounded-full shadow-[0_4px_14px_rgba(0,0,0,0.08)] flex items-center justify-center text-gray-900 transition-all hover:scale-110 -ml-6"
-               aria-label="Previous slide"
-             >
-               <ChevronLeft />
-             </button>
+        <div className="absolute top-[40%] md:top-[250px] w-full flex justify-between z-50 pointer-events-none">
+            
+            {/* Previous Button - Left Edge */}
+            <button className="swiper-button-prev-custom pointer-events-auto w-10 h-10 bg-white rounded-full  flex items-center justify-center text-gray-900 hover:scale-110 transition-transform absolute left-0 -translate-x-1/2">
+              <ChevronLeft />
+            </button>
 
-             {/* Next Button - sits on right edge of active image */}
-             <button
-               ref={setNextEl}
-               className="pointer-events-auto w-12 h-12 bg-white rounded-full shadow-[0_4px_14px_rgba(0,0,0,0.08)] flex items-center justify-center text-gray-900 transition-all hover:scale-110 -mr-6"
-               aria-label="Next slide"
-             >
-               <ChevronRight />
-             </button>
-           </div>
+            {/* Next Button - Right Edge */}
+            <button className="swiper-button-next-custom pointer-events-auto w-10 h-10 bg-white rounded-full  flex items-center justify-center text-gray-900 hover:scale-110 transition-transform absolute right-0 translate-x-1/2">
+              <ChevronRight />
+            </button>
         </div>
 
-        <Swiper
-          modules={[Navigation, Autoplay]}
-          spaceBetween={20}
-          slidesPerView={1.1} // Mobile default
-          centeredSlides={true}
-          loop={true}
-          speed={800}
-          navigation={{ prevEl, nextEl }}
-          // Ensure navigation works after state update
-          onBeforeInit={(swiper) => {
-             // @ts-ignore
-             swiper.params.navigation.prevEl = prevEl;
-             // @ts-ignore
-             swiper.params.navigation.nextEl = nextEl;
-          }}
-          autoplay={{ delay: 6000, disableOnInteraction: true }}
-          breakpoints={{
-            640: { slidesPerView: 1.5, spaceBetween: 30 },
-            1024: { slidesPerView: 1.8, spaceBetween: 60 }, // This creates the specific "Center + Partial Sides" look
-            1400: { slidesPerView: 2.2, spaceBetween: 80 },
-          }}
-          className="!overflow-visible"
-        >
-          {diningOptions.map((item, index) => (
-            <SwiperSlide key={index} className="transition-all duration-500">
-              {({ isActive }) => (
-                <div className="relative group">
-                  
-                  {/* THE WHITE FOG OVERLAY
-                      If !isActive, we overlay a white div with 60% opacity. 
-                      This matches the reference image where side items look washed out.
-                  */}
-                  <div 
-                    className={`absolute inset-0 z-20 bg-white transition-opacity duration-500 pointer-events-none 
-                    ${isActive ? "opacity-0" : "opacity-60"}`} 
-                  />
 
-                  {/* Image Container */}
-                  <div className="relative w-full aspect-[4/3] bg-gray-50 mb-8 overflow-hidden shadow-sm">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
-                    />
-                  </div>
+        {/* SWIPER CONTAINER */}
+        <div className="pb-24">
+          <Swiper
+            modules={[Navigation, Autoplay]}
+            loop={true}
+            loopAdditionalSlides={3} 
+            speed={800}
+            spaceBetween={30}
+            slidesPerView={1.2}
+            centeredSlides={false}
+            navigation={{
+              prevEl: '.swiper-button-prev-custom',
+              nextEl: '.swiper-button-next-custom',
+            }}
+            autoplay={{ delay: 2000, disableOnInteraction: true }}
+            breakpoints={{
+              640: { slidesPerView: 1, spaceBetween: 20 },
+              768: { slidesPerView: 1.5, spaceBetween: 24 },
+              1024: { slidesPerView: 2, spaceBetween: 30 }
+            }}
+            className="!overflow-visible" 
+          >
+            {diningOptions.map((item, index) => (
+              <SwiperSlide key={index}>
+                {({ isActive, isNext }) => (
+                  <div className={`
+                    relative group transition-all duration-700 ease-out select-none
+                    ${(isActive || isNext) ? 'opacity-100 blur-0' : 'opacity-40 '}
+                  `}>
+                    
+                    {/* IMAGE CONTAINER */}
+                    <div className="relative w-full h-[350px] md:h-[500px] overflow-hidden shadow-sm">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                      />
+                    </div>
 
-                  {/* Text Content */}
-                  <div className={`text-left px-2 max-w-xl mx-auto md:mx-0 transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-40'}`}>
-                    <h3 className="text-2xl md:text-[28px] font-serif text-[#1B1B1B] mb-4 leading-tight">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm md:text-[15px] leading-7 font-light tracking-wide">
-                      {item.description}
-                    </p>
+                    {/* OVERLAPPING TEXT CARD */}
+                    <div className="
+                      absolute bottom-0 w-[70%] left-10 
+                      translate-y-[50%] 
+                       mx-auto 
+                      bg-white p-6 
+                      z-20
+                    ">
+                      <h3 className="text-xl md:text-2xl font-serif text-primary mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-secondary text-sm leading-relaxed font-light line-clamp-2">
+                        {item.description}
+                      </p>
+                    </div>
+
                   </div>
-                </div>
-              )}
-            </SwiperSlide>
-          ))}
-        </Swiper>
+                )}
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
     </section>
   );

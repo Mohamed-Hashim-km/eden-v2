@@ -11,19 +11,36 @@ interface HeroProps {
   description?: string;
 }
 
-export const Hero: React.FC<HeroProps> = ({ title="A New Standard of Comfort", description="Defined by comfort, calm and considered design, every stay offers a refined environment for rest and renewal", bookingBarLocations, bookingBarDefaultLocation, bookingBarEnableSelection }) => {
+export const Hero: React.FC<HeroProps> = ({
+  title = "A New Standard of Comfort",
+  description = "Defined by comfort, calm and considered design, every stay offers a refined environment for rest and renewal",
+  bookingBarLocations,
+  bookingBarDefaultLocation,
+  bookingBarEnableSelection,
+}) => {
   return (
-    <section className="relative w-full h-[90vh] min-h-[600px] flex flex-col justify-center items-center">
-      {/* Background Image */}
+    // CHANGE 1: Added 'pt-20' (assuming navbar is ~80px). 
+    // This pushes the "flex center" calculation down so text doesn't hide behind the nav.
+    <section className="relative w-full h-[100vh] flex flex-col justify-center items-center pt-20">
+      
+      {/* Background Image - Stays full screen because of absolute inset-0 */}
       <div className="absolute inset-0 z-0">
-        {/* Overlay - adjusting opacity for readability */}
         <div className="absolute inset-0 bg-black/30 z-10" />
-        <Image src="/1.webp" alt="Luxury Bedroom" fill className="object-cover" priority />
+        <Image
+          src="/1.webp"
+          alt="Luxury Bedroom"
+          fill
+          className="object-cover"
+          priority
+        />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center text-white flex flex-col items-center justify-center pb-20">
-        <h1 className="text-5xl md:text-7xl  mb-6 drop-shadow-lg tracking-wide">{title}</h1>
+      {/* CHANGE 2: Removed 'pb-20'. That padding was lifting the text up higher. */}
+      <div className="relative z-10 container mx-auto px-4 text-center text-white flex flex-col items-center justify-center">
+        <h1 className="text-5xl md:text-7xl mb-6 drop-shadow-lg tracking-wide">
+          {title}
+        </h1>
         <p className="max-w-2xl text-base md:text-lg font-sans opacity-95 mb-10 drop-shadow-md leading-relaxed tracking-wide">
           {description}
         </p>
@@ -32,15 +49,19 @@ export const Hero: React.FC<HeroProps> = ({ title="A New Standard of Comfort", d
           <Button variant="primary" className="min-w-[150px] !py-3 !text-base font-medium">
             Book Now
           </Button>
-          <Button variant="outline" className="min-w-[150px] !py-3 !text-base font-medium ">
+          <Button variant="outline" className="min-w-[150px] !py-3 !text-base font-medium">
             Sign Up
           </Button>
         </div>
       </div>
 
-      {/* Booking Bar Container - Positioned absolutely at bottom */}
+      {/* Booking Bar Container */}
       <div className="absolute bottom-0 left-0 right-0 z-20 px-4 translate-y-1/2 flex justify-center w-full">
-        <BookingBar locations={bookingBarLocations} defaultLocation={bookingBarDefaultLocation} enableLocationSelection={bookingBarEnableSelection} />
+        <BookingBar
+          locations={bookingBarLocations}
+          defaultLocation={bookingBarDefaultLocation}
+          enableLocationSelection={bookingBarEnableSelection}
+        />
       </div>
     </section>
   );
