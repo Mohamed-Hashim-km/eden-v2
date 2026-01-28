@@ -38,13 +38,13 @@ function GalleryOne({ title, description, cta,galleryImages }) {
             )}
 
             {description && (
-              <p className="text-secondary text-lg max-w-2xl mb-8">
+              <p className="text-secondary text-lg max-w-2xl ">
                 {description}
               </p>
             )}
 
             {cta && (
-              <Button variant="tertiary">
+              <Button variant="tertiary" className="mt-8">
                 {cta}
               </Button>
             )}

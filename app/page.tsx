@@ -62,7 +62,14 @@ export default function Home() {
       <AboutSection />
       <RoomOne className={""} />
       <RoomsShowcase />
-<GalleryOne galleryImages={galleryImages} cta="Explore All Restaurants"  title={"A Culinary Experience for Every Mood"} description={"From fine dining and rooftop indulgence to the freshest coastal flavours, Hotel Eden brings you three distinctive dining destinations under one roof."}/>
+      <GalleryOne
+        galleryImages={galleryImages}
+        cta="Explore All Restaurants"
+        title={"A Culinary Experience for Every Mood"}
+        description={
+          "From fine dining and rooftop indulgence to the freshest coastal flavours, Hotel Eden brings you three distinctive dining destinations under one roof."
+        }
+      />
       <TestimonialSection
         title="What Our Guests Love About Us"
         subtitle="From authentic guest experiences and cherished memories, discover why Hotel Eden is the perfect choice for your stay."
@@ -97,11 +104,7 @@ export default function Home() {
         description=" Essential information to help you enjoy a seamless stay at Hotel Eden."
       />
 
-      <DiningShowcase
-        title=""
-        description=""
-        cta="Explore All Restaurants"
-      />
+      <DiningShowcase title="" description="" cta="Explore All Restaurants" />
       <ImageCtaSection
         backgroundImage="/1.webp"
         title="Your perfect stay in Karwar is

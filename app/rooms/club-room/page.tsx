@@ -1,5 +1,5 @@
 import React from "react";
-import { Hero } from "@/components/sections/Hero";
+
 import { ContentCarousel } from "@/components/shared/ContentCarousel";
 
 
@@ -26,6 +26,11 @@ import PopularFacilities from "@/components/shared/PopularFacilities";
 import {  ContentGridCarousel } from "@/components/shared/ContentGrid";
 import Faq from "@/components/shared/Faq";
 import { FeatureShowcase } from "@/components/shared/FeatureShowcase";
+import { Hero } from "@/components/rooms/Hero";
+import GalleryOne from "@/components/shared/GalleryOne";
+import { TestimonialSection } from "@/components/sections/TestimonialSection";
+import { ImageCtaSection } from "@/components/shared/ImageCtaSection";
+import OtherRooms from "@/components/rooms/OtherRooms";
 
 const amenities = [
    
@@ -83,63 +88,106 @@ const faqData=[
     { icon: <FaSwimmingPool />, title: "Swimming Pool" },
   ];
 const rooms = [
+  
     {
-      title: "10-Bed Dormitory",
-      slug: "/rooms/10-bed-dormitory",
-    image:"/1.webp",
-      description: "A spacious and thoughtfully designed dormitory, perfect for large groups seeking comfort, privacy, and modern amenities.",
-    },
-    {
+        image:"/1.webp",
       title: "6-Bed Dormitory",
       slug: "/rooms/6-bed-dormitory",
-       image:"/1.webp",
       description: "A cozy, group-friendly dormitory offering essential comforts for a relaxed and convenient stay.",
     },
     {
+        image:"/1.webp",
       title: "Premium Room",
       slug: "/rooms/premium-room",
-       image:"/1.webp",
       description: "Our most luxurious and spacious accommodation for a truly exceptional stay.",
     },
     {
+        image:"/1.webp",
       title: "Suite Double Room",
       slug: "/rooms/suite-room-double",
-       image:"/1.webp",
       description: "The Suite Double Room features a spacious, elegantly designed interior with a comfortable double bed, modern amenities, and a relaxing atmosphere.",
     },
     {
+        image:"/1.webp",
       title: "Suite Room",
       slug: "/rooms/suite-room",
-       image:"/1.webp",
       description: "An expansive suite with sophisticated decor and thoughtful amenities, designed for comfort and relaxation",
     },
     {
+        image:"/1.webp",
       title: "Suite Room With Loft",
       slug: "/rooms/suite-room-with-loft",
-       image:"/1.webp",
       description: "A stylish suite featuring a loft area, offering extra space and a unique, airy atmosphere for guests.",
     },
   ];
-export default function GokarnaPage() {
+
+
+  const galleryImages = [
+  "/1.webp",
+  "/1.webp",
+  "/1.webp",
+  "/1.webp",
+  "/1.webp",
+  "/1.webp",
+  "/1.webp",
+  "/1.webp",
+  "/1.webp",
+  "/1.webp",
+  "/1.webp",
+  "/1.webp",
+];
+
+
+const testimonialData = [
+  {
+    id: 1,
+    author: "Ravindra Tayalur",
+   
+    text:
+      "Stayed for two days at the new Hotel Eden. Rooms are spacious with modern amenities, staff were polite and helpful, housekeeping was good, and breakfast was excellent. Great stay within budget.",
+    
+    rating: 5,
+    
+  },
+  {
+    id: 2,
+    author: "Natalie Harper",
+   
+    text:
+      "One of the nicest budget hotels I’ve stayed at in India. Staff were amazing, went out of their way to help, and the restaurant served delicious meals. It felt like a 5-star experience at a great price.",
+   
+    rating: 5,
+    
+  },
+  {
+    id: 3,
+    author: "Umang Malhotra",
+   
+    text:
+      "I loved my 1-night stay at Hotel Eden, Karwar. Spacious, comfortable rooms with cozy bathrooms, great breakfast buffet, and excellent staff service. Affordable and highly recommended.",
+   
+    rating: 5,
+    
+  },
+];
+export default function RoomPage() {
   return (
     <main className="min-h-screen">
-      <Hero title="Experience the Best of Gokarna" description="Blessed with serene beaches, sacred temples and scenic coastal landscapes, Gokarna is a peaceful seaside town where spirituality and nature come together perfect for a refreshing getaway." bookingBarLocations={["Gokarna"]} bookingBarDefaultLocation="Gokarna" bookingBarEnableSelection={false} />
-        <ContentGridCarousel title="Rooms Designed for Comfort and Space" description="At Hotel Eden, every room is crafted to be your personal retreat, combining elegant interiors, modern amenities and space to ensure a truly relaxing stay."  items={rooms} />
-        <PopularFacilities facilities={facilities} title="Popular Facilities" description="Hotel Eden Castle Ember offers a range of thoughtfully curated facilities to make your visit effortless and enjoyable." subtitle="" />
+      <Hero title="Club Room" description="Spacious and refined, offering added comfort and thoughtful conveniences."  />
+        {/* specefic amanitles want to add futrue  */}
+        <GalleryOne galleryImages={galleryImages} />
+         
+        <TestimonialSection title="Testimonials" reviews={testimonialData}/>
+          
+           <ImageCtaSection
+                backgroundImage="/1.webp"
+                title="Book Your Stay Now"
+                buttonText="Book Now"
+                buttonLink="/karwar"
+                
+              />
 
-    <ContentCarousel  title="Common Amenities"
-        description=""
-        items={amenities} />
-      
-
-      <Faq title="Frequently Asked Questions" description="" faqData={faqData}/>
-<FeatureShowcase
-        title="Discover Our Signature Dinner Offerings"
-        description="Elevate your evenings with exclusive dinner offerings, including curated set menus and dining credits redeemable across our restaurants."
-        buttonText="Explore"
-        imageSrc="/1.webp"
-        buttonLink="/dining"
-      />
+              <OtherRooms title={"Other Rooms"} data={rooms} />
     </main>
   );
 }

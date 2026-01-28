@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+
 
 import { Pagination, Autoplay } from "swiper/modules";
 import { Button } from "../ui/Button";
@@ -57,7 +57,6 @@ export const ContentGridCarousel: React.FC<ContentCarouselProps> = ({
             modules={[Pagination, Autoplay]}
             spaceBetween={32}
             slidesPerView={1}
-            pagination={{ clickable: true, dynamicBullets: true }}
             autoplay={{
               delay: 5000,
               disableOnInteraction: false,
@@ -121,11 +120,7 @@ export const ContentGridCarousel: React.FC<ContentCarouselProps> = ({
         </div>
       </div>
 
-      <style jsx global>{`
-        .swiper-pagination-bullet-active {
-          background-color: #006994 !important;
-        }
-      `}</style>
+     
     </section>
   );
 };

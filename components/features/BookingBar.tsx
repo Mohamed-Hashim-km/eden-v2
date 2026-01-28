@@ -99,37 +99,43 @@ export const BookingBar: React.FC<BookingBarProps> = ({
   };
 
   return (
-    <div className="w-full container bg-[#FEFEFE] p-6 lg:p-8 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 rounded-sm">
-      {/* Location */}
-      <div className="relative flex flex-col gap-1 min-w-[180px] w-full md:w-auto border-b border-gray-200 pb-2" ref={locationRef}>
-        <span className="text-[#001446] mb-3 text-lg tracking-wide">Location</span>
-        <div
-          className={`flex items-center justify-between group ${enableLocationSelection ? "cursor-pointer" : "cursor-default"}`}
-          onClick={toggleLocation}
-        >
-          <span className="text-secondary text-sm transition-colors font-sans">{selectedLocation}</span>
-          {enableLocationSelection && (
+    // Updated Wrapper:
+    // - w-full (full width)
+    // - px-6 (section padding)
+    // - md:space-x-3 (space between items on desktop)
+    // - space-y-3 (space between items on mobile)
+    <div className="  w-auto mx-auto bg-[#FEFEFE] py-6 px-6 flex flex-col md:flex-row items-center md:space-x-16 space-y-3 md:space-y-0 rounded-sm">
+      
+      {/* Location Section */}
+      {enableLocationSelection && (
+        <div className="relative flex flex-col gap-1 min-w-[180px] w-full md:w-auto border-b border-gray-200 pb-2" ref={locationRef}>
+          <span className="text-[#001446] mb-3 text-lg tracking-wide">Location</span>
+          <div
+            className="flex items-center justify-between group cursor-pointer"
+            onClick={toggleLocation}
+          >
+            <span className="text-secondary text-sm transition-colors font-sans">{selectedLocation}</span>
             <span className={`transform transition-transform duration-200 ${isLocationOpen ? "rotate-180" : ""}`}>
               <ChevronDownIcon />
             </span>
+          </div>
+
+          {/* Dropdown Menu */}
+          {isLocationOpen && (
+            <div className="absolute top-full left-0 mt-2 w-full bg-white border border-gray-100 shadow-lg rounded-md overflow-hidden z-50">
+              {locations.map((loc) => (
+                <div
+                  key={loc}
+                  className="px-4 py-3 text-sm text-[#001446] hover:bg-gray-50 cursor-pointer transition-colors"
+                  onClick={() => handleLocationSelect(loc)}
+                >
+                  {loc}
+                </div>
+              ))}
+            </div>
           )}
         </div>
-
-        {/* Dropdown Menu */}
-        {isLocationOpen && enableLocationSelection && (
-          <div className="absolute top-full left-0 mt-2 w-full bg-white border border-gray-100 shadow-lg rounded-md overflow-hidden z-50">
-            {locations.map((loc) => (
-              <div
-                key={loc}
-                className="px-4 py-3 text-sm text-[#001446] hover:bg-gray-50 cursor-pointer transition-colors"
-                onClick={() => handleLocationSelect(loc)}
-              >
-                {loc}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+      )}
 
       {/* Check-In/Check-Out */}
       <div className="flex flex-col gap-1 min-w-[220px] w-full md:w-auto border-b border-gray-200 pb-2">
@@ -151,7 +157,9 @@ export const BookingBar: React.FC<BookingBarProps> = ({
       </div>
 
       {/* Check Availability Button */}
-      <Button variant="tertiary">Check Availability</Button>
+      <div className="w-full md:w-auto">
+         <Button variant="tertiary" className="w-full md:w-auto">Check Availability</Button>
+      </div>
     </div>
   );
 };

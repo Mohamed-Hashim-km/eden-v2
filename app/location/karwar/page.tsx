@@ -148,7 +148,7 @@ export default function KarwarPage() {
         subtitle=""
       />
 
-      <InTheKarwar/>
+      <InTheKarwar />
 
       <ContentCarousel
         title="Everything You Need for a Comfortable Stay"
@@ -156,9 +156,8 @@ export default function KarwarPage() {
         items={amenities}
       />
 
-
       <Faq title="Frequently Asked Questions" description="" faqData={faqData} />
-      
+
       <FeatureShowcase
         title="Discover Our Signature Dinner Offerings"
         description="Elevate your evenings with exclusive dinner offerings, including curated set menus and dining credits redeemable across our restaurants."
