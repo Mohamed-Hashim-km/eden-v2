@@ -4,7 +4,7 @@ import Image from "next/image";
 function Contact() {
   return (
     <>
-      <div className="py-20 lg:py-28 bg-white">
+      <div className="py-20 lg:pb-28 lg:pt-54 bg-white">
         <div className="container mx-auto px-4">
           
           {/* Top Section: Intro & Image */}

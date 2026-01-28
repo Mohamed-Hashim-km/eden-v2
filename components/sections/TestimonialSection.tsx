@@ -57,7 +57,7 @@ export const TestimonialSection: React.FC<TestimonialSectionProps> = ({ title, s
           {/* Left Column: Content */}
           <div className="lg:w-[50%] flex flex-col justify-center">
             <h2 className="text-4xl md:text-5xl lg:text-6xl  text-primary mb-6 leading-tight">{title}</h2>
-            <p className="text-secondary text-lg mb-12 leading-relaxed">{subtitle}</p>
+            <p className="text-secondary text-lg md:max-w-[70%] mb-12 leading-relaxed">{subtitle}</p>
 
             <div>
               <div className="flex items-center gap-2 mb-2">

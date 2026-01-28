@@ -3,7 +3,7 @@
 import React from "react";
 import { FaSnowflake, FaBath, FaPlug } from "react-icons/fa";
 import { Hero } from "@/components/rooms/Hero";
-import GalleryOne from "@/components/shared/GalleryOne";
+import RoomGalleryCarousel from "@/components/rooms/RoomGalleryCarousel";
 import { TestimonialSection } from "@/components/sections/TestimonialSection";
 import { ImageCtaSection } from "@/components/shared/ImageCtaSection";
 import OtherRooms from "@/components/rooms/OtherRooms";
@@ -108,7 +108,7 @@ export default function RoomPage() {
         extraAmenitiesCount={3}
       />
 
-      <GalleryOne galleryImages={galleryImages} title="Gallery" description="Explore our Suite Double Room." cta="" />
+      <RoomGalleryCarousel images={galleryImages} title="Gallery" />
 
       <TestimonialSection title="Testimonials" subtitle="Read what our guests have to say about their stay." reviews={testimonialData} />
 

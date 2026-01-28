@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "../ui/Button";
+import { DateRangePicker } from "../ui/DateRangePicker"; // Assuming it is in the same folder
 
 // Simple Minus/Plus Icons
 const MinusIcon = () => (
@@ -70,6 +71,13 @@ export const BookingBar: React.FC<BookingBarProps> = ({
   const [isLocationOpen, setIsLocationOpen] = useState(false);
   const locationRef = useRef<HTMLDivElement>(null);
 
+  // --- Date Picker State ---
+  const [isDateOpen, setIsDateOpen] = useState(false);
+  const [dateRange, setDateRange] = useState<{ start: Date | null; end: Date | null }>({
+    start: null,
+    end: null,
+  });
+
   // Handle click outside to close dropdown
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -98,14 +106,14 @@ export const BookingBar: React.FC<BookingBarProps> = ({
     setIsLocationOpen(false);
   };
 
+  // Format date display helper
+  const formatDate = (date: Date | null) => {
+    if (!date) return "";
+    return date.toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric" });
+  };
+
   return (
-    // Updated Wrapper:
-    // - w-full (full width)
-    // - px-6 (section padding)
-    // - md:space-x-3 (space between items on desktop)
-    // - space-y-3 (space between items on mobile)
-    <div className="  w-auto mx-auto bg-[#FEFEFE] py-6 px-6 flex flex-col md:flex-row items-center md:space-x-16 space-y-3 md:space-y-0 rounded-sm">
-      
+    <div className="relative w-auto mx-auto bg-[#FEFEFE] py-6 px-6 flex flex-col md:flex-row items-center md:space-x-16 space-y-3 md:space-y-0 rounded-sm">
       {/* Location Section */}
       {enableLocationSelection && (
         <div className="relative flex flex-col gap-1 min-w-[180px] w-full md:w-auto border-b border-gray-200 pb-2" ref={locationRef}>
@@ -137,13 +145,23 @@ export const BookingBar: React.FC<BookingBarProps> = ({
         </div>
       )}
 
-      {/* Check-In/Check-Out */}
-      <div className="flex flex-col gap-1 min-w-[220px] w-full md:w-auto border-b border-gray-200 pb-2">
+      {/* Check-In/Check-Out Section */}
+      <div className="relative flex flex-col gap-1 min-w-[220px] w-full md:w-auto border-b border-gray-200 pb-2">
         <span className="text-[#001446] mb-3 text-lg tracking-wide">Check-In/Check-Out</span>
-        <div className="flex items-center justify-between cursor-pointer group">
-          <span className="text-secondary text-sm transition-colors font-sans">Select Dates</span>
+        <div 
+            className="flex items-center justify-between cursor-pointer group"
+            onClick={() => setIsDateOpen(!isDateOpen)}
+        >
+          <span className="text-secondary text-sm transition-colors font-sans">
+            {dateRange.start && dateRange.end 
+                ? `${formatDate(dateRange.start)} - ${formatDate(dateRange.end)}` 
+                : "Select Dates"}
+          </span>
           <ChevronDownIcon />
         </div>
+
+        {/* Date Picker Component */}
+        
       </div>
 
       {/* Adults */}
@@ -158,8 +176,24 @@ export const BookingBar: React.FC<BookingBarProps> = ({
 
       {/* Check Availability Button */}
       <div className="w-full md:w-auto">
-         <Button variant="tertiary" disabled className="w-full md:w-auto">Check Availability</Button>
+         <Button 
+            variant="tertiary" 
+            className="w-full md:w-auto"
+            onClick={() => console.log("Searching...", { selectedLocation, dateRange, adults, children })}
+         >
+            Check Availability
+         </Button>
       </div>
+      <DateRangePicker
+          isOpen={isDateOpen}
+          onClose={() => setIsDateOpen(false)}
+          onSelect={(start, end) => {
+            setDateRange({ start, end });
+            if (start && end) setIsDateOpen(false); // Auto-close when both selected
+          }}
+          initialStart={dateRange.start}
+          initialEnd={dateRange.end}
+        />
     </div>
   );
 };

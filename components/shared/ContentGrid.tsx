@@ -57,6 +57,7 @@ export const ContentGridCarousel: React.FC<ContentCarouselProps> = ({
             modules={[Pagination, Autoplay]}
             spaceBetween={32}
             slidesPerView={1}
+            loop={true}
             autoplay={{
               delay: 5000,
               disableOnInteraction: false,

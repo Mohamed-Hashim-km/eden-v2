@@ -37,23 +37,23 @@ export const Hero: React.FC<HeroProps> = ({
 
       {/* Content */}
       {/* FIX 2: Removed 'pb-20'. It was pushing the text up unnecessarily. */}
-      <div className="relative z-10 container mx-auto px-4 text-center text-white flex flex-col items-center justify-center">
+      {/* <div className="relative z-10 container mx-auto px-4 text-center text-white flex flex-col items-center justify-center">
         <h1 className="text-5xl md:text-7xl mb-6 drop-shadow-lg tracking-wide">
           {title}
         </h1>
         <p className="max-w-2xl text-base md:text-lg font-sans opacity-95 mb-10 drop-shadow-md leading-relaxed tracking-wide">
           {description}
-        </p>
+        </p> */}
 
-        <div className="flex items-center gap-6">
+        {/* <div className="flex items-center gap-6">
           <Button variant="primary" className="min-w-[150px] !py-3 !text-base font-medium">
             Book Now
-          </Button>
+          </Button> */}
           {/* <Button variant="outline" className="min-w-[150px] !py-3 !text-base font-medium ">
             Sign Up
           </Button> */}
-        </div>
-      </div>
+        {/* </div>
+      </div> */}
 
       {/* Booking Bar Container - Commented out as per your code */}
       {/* <div className="absolute bottom-0 left-0 right-0 z-20 px-4 translate-y-1/2 flex justify-center w-full">
