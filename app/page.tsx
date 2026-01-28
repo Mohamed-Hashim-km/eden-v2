@@ -59,7 +59,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <Hero bookingBarLocations={["Karwar", "Gokarna"]} bookingBarDefaultLocation="Karwar" />
-      <AboutSection />
+      {/* <AboutSection />
       <RoomOne className={""} />
       <RoomsShowcase />
       <GalleryOne
@@ -102,7 +102,7 @@ export default function Home() {
         faqData={faqData}
         title="Everything You Need to Know"
         description=" Essential information to help you enjoy a seamless stay at Hotel Eden."
-      />
+      /> */}
 
       <DiningShowcase title="" description="" cta="Explore All Restaurants" />
       <ImageCtaSection
