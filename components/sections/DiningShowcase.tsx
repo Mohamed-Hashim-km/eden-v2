@@ -47,6 +47,31 @@ const diningOptions = [
     description: "Classic spirits and fine cigars in a sophisticated, leather-bound atmosphere.",
     image: "/1.webp",
   },
+   {
+    title: "Tulip – The Gourmet Restaurant",
+    description: "Refined multi-cuisine dining in an elegant setting, where thoughtfully crafted flavours and warm service come together.",
+    image: "/1.webp",
+  },
+  {
+    title: "Food & Forest – Rooftop",
+    description: "A relaxed rooftop experience with great views, food and crafted cocktails perfect for laid-back evenings.",
+    image: "/1.webp",
+  },
+  {
+    title: "Oyster Bar",
+    description: "Fresh coastal flavours served by the coast, serving celebrate traditions and fresh catches.",
+    image: "/1.webp",
+  },
+  {
+    title: "In-Room Dining",
+    description: "Enjoy our gourmet offerings in the comfort of your room with our 24/7 service.",
+    image: "/1.webp",
+  },
+  {
+    title: "The Vintage Lounge",
+    description: "Classic spirits and fine cigars in a sophisticated, leather-bound atmosphere.",
+    image: "/1.webp",
+  },
 ];
 
 interface DiningShowcaseProps {
@@ -59,64 +84,55 @@ export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
       
       {/* Title */}
       {title && (
-        <div className="container mx-auto px-4 mb-12 text-center">
+        <div className="container mx-auto px-4 mb-20 text-center">
           <h2 className="text-4xl font-serif text-gray-900">{title}</h2>
         </div>
       )}
 
-      {/* LAYOUT STRATEGY: 
-        1. We create a container that is narrower than the screen (e.g., 70-80% width).
-        2. This container holds exactly 2 cards.
-        3. We allow the Swiper to overflow this container, revealing the side cards.
+      {/* CONTAINER WRAPPER 
+         We make this 'relative' so the buttons can position themselves 
+         specifically against the width of the slide area.
       */}
-      <div className="relative w-full">
+      <div className="relative mx-auto max-w-[95%] md:max-w-[75%] xl:max-w-[1200px]">
         
-        {/* Navigation Wrapper - Positioned outside the cards */}
-        <div className="absolute top-1/2 left-0 right-0 z-50 -translate-y-1/2 flex justify-between px-4 md:px-12 pointer-events-none">
-          <div className="container mx-auto flex justify-between">
-            <button className="swiper-button-prev-custom pointer-events-auto w-14 h-14 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-900 hover:scale-110 transition-transform">
+        {/* --- NAVIGATION BUTTONS --- */}
+        {/* Positioned absolutely within the container. 
+            z-50 ensures they sit on top of images.
+            -translate-x-1/2 pulls them slightly outward to straddle the edge.
+        */}
+        <div className="absolute top-[40%] md:top-[250px] w-full flex justify-between z-50 pointer-events-none">
+            
+            {/* Previous Button - Left Edge */}
+            <button className="swiper-button-prev-custom pointer-events-auto w-10 h-10 bg-white rounded-full  flex items-center justify-center text-gray-900 hover:scale-110 transition-transform absolute left-0 -translate-x-1/2">
               <ChevronLeft />
             </button>
-            <button className="swiper-button-next-custom pointer-events-auto w-14 h-14 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-900 hover:scale-110 transition-transform">
+
+            {/* Next Button - Right Edge */}
+            <button className="swiper-button-next-custom pointer-events-auto w-10 h-10 bg-white rounded-full  flex items-center justify-center text-gray-900 hover:scale-110 transition-transform absolute right-0 translate-x-1/2">
               <ChevronRight />
             </button>
-          </div>
         </div>
 
-        {/* SWIPER CONTAINER 
-          - max-w-[85%] or max-w-[1200px]: Defines the width of the "2 center cards".
-          - overflow-visible: Allows the "Partial" cards to be seen on the sides.
-        */}
-        <div className="mx-auto max-w-[90%] md:max-w-[80%] xl:max-w-[1100px]">
+
+        {/* SWIPER CONTAINER */}
+        <div className="pb-24">
           <Swiper
             modules={[Navigation, Autoplay]}
             loop={true}
+            loopAdditionalSlides={3} 
             speed={800}
-            spaceBetween={24} // Gap between the cards
-            // This forces exactly 2 cards to fill our centered container
-            slidesPerView={1.2} 
+            spaceBetween={30}
+            slidesPerView={1.2}
             centeredSlides={false}
             navigation={{
               prevEl: '.swiper-button-prev-custom',
               nextEl: '.swiper-button-next-custom',
             }}
-            autoplay={{ delay: 5000, disableOnInteraction: true }}
+            autoplay={{ delay: 2000, disableOnInteraction: true }}
             breakpoints={{
-              // Mobile: 1 card visible (standard)
-              640: { 
-                slidesPerView: 1,
-                spaceBetween: 20
-              },
-              // Tablet: 1.5 cards
-              768: {
-                slidesPerView: 1.5,
-                spaceBetween: 24
-              },
-              // Desktop: Exactly 2 cards in the center box
-              1024: { 
-                slidesPerView: 2, 
-                spaceBetween: 32 // 2rem gap
-              }
+              640: { slidesPerView: 1, spaceBetween: 20 },
+              768: { slidesPerView: 1.5, spaceBetween: 24 },
+              1024: { slidesPerView: 2, spaceBetween: 30 }
             }}
             className="!overflow-visible" 
           >
@@ -124,37 +140,34 @@ export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
               <SwiperSlide key={index}>
                 {({ isActive, isNext }) => (
                   <div className={`
-                    relative group transition-all duration-500
-                    /* OPACITY LOGIC:
-                       Since we have 2 visible cards in the center container:
-                       - The 1st one is "isActive"
-                       - The 2nd one is "isNext"
-                       We want both of these to be fully opaque.
-                       Everything else (the partial sides) should be faded.
-                    */
-                    ${(isActive || isNext) ? 'opacity-100 scale-100' : 'opacity-40 scale-95'}
+                    relative group transition-all duration-700 ease-out select-none
+                    ${(isActive || isNext) ? 'opacity-100 blur-0' : 'opacity-40 '}
                   `}>
                     
-                    {/* Image */}
-                    <div className="relative w-full h-[450px] md:h-[550px] bg-gray-100 overflow-hidden shadow-sm">
+                    {/* IMAGE CONTAINER */}
+                    <div className="relative w-full h-[350px] md:h-[500px] overflow-hidden shadow-sm">
                       <Image
                         src={item.image}
                         alt={item.title}
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="object-cover transition-transform duration-1000 group-hover:scale-105"
                       />
-                      {/* Fog Overlay */}
-                      <div className={`absolute inset-0 bg-white transition-opacity duration-500 ${(isActive || isNext) ? 'opacity-0' : 'opacity-50'}`} />
                     </div>
 
-                    {/* Content */}
-                    <div className={`
-                      bg-white pt-6 pr-4
-                      transition-all duration-500
-                      ${(isActive || isNext) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
-                    `}>
-                      <h3 className="text-2xl font-serif text-gray-900 mb-2">{item.title}</h3>
-                      <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">{item.description}</p>
+                    {/* OVERLAPPING TEXT CARD */}
+                    <div className="
+                      absolute bottom-0 w-[70%] left-10 
+                      translate-y-[50%] 
+                       mx-auto 
+                      bg-white p-6 
+                      z-20
+                    ">
+                      <h3 className="text-xl md:text-2xl font-serif text-primary mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-secondary text-sm leading-relaxed font-light line-clamp-2">
+                        {item.description}
+                      </p>
                     </div>
 
                   </div>

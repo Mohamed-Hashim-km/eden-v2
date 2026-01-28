@@ -158,7 +158,7 @@ export const BookingBar: React.FC<BookingBarProps> = ({
 
       {/* Check Availability Button */}
       <div className="w-full md:w-auto">
-         <Button variant="tertiary" className="w-full md:w-auto">Check Availability</Button>
+         <Button variant="tertiary" disabled className="w-full md:w-auto">Check Availability</Button>
       </div>
     </div>
   );

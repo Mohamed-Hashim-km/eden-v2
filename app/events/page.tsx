@@ -1,5 +1,6 @@
 import CelebrationsList from "@/components/events/CelebrationsList";
 import { Hero } from "@/components/events/Hero";
+import VenueSlider from "@/components/events/VenueSlider";
 import WhatToExpect from "@/components/events/WhatToExpect";
 import { TestimonialSection } from "@/components/sections/TestimonialSection";
 import GalleryOne from "@/components/shared/GalleryOne";
@@ -48,6 +49,8 @@ export default function RoomPage() {
         title="A Destination for Your Finest Celebrations"
         description="Terminal 5 offers both an elegant indoor hall for intimate gatherings and a spacious open rooftop venue with stunning panoramic views of Karwar, making it ideal for everything from private celebrations to grand corporate events."
       />
+
+      <VenueSlider/>
       <CelebrationsList/>
       <WhatToExpect />
       <GalleryOne
