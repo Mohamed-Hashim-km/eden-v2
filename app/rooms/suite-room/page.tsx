@@ -4,6 +4,7 @@ import React from "react";
 import { FaSnowflake, FaBath, FaPlug } from "react-icons/fa";
 import { Hero } from "@/components/rooms/Hero";
 import RoomGalleryCarousel from "@/components/rooms/RoomGalleryCarousel";
+import RoomVideo from "@/components/rooms/RoomVideo";
 import { TestimonialSection } from "@/components/sections/TestimonialSection";
 import { ImageCtaSection } from "@/components/shared/ImageCtaSection";
 import OtherRooms from "@/components/rooms/OtherRooms";
@@ -110,11 +111,17 @@ export default function RoomPage() {
 
       <RoomGalleryCarousel images={galleryImages} title="Gallery" />
 
-      <TestimonialSection title="Testimonials" subtitle="Read what our guests have to say about their stay." reviews={testimonialData} />
+      <RoomVideo coverImage="/1.webp" />
 
-      <ImageCtaSection backgroundImage="/1.webp" title="Book Your Stay Now" buttonText="Book Now" buttonLink="/karwar" />
+      <TestimonialSection
+        title="What Our Guests Love About Us"
+        subtitle="From authentic guest experiences and cherished memories, discover why Hotel Eden is the perfect choice for your stay."
+        reviews={testimonialData}
+      />
 
-      <OtherRooms title={"Other Rooms"} description="Explore other accommodation options at Eden Ember Castle." data={rooms} />
+      {/* <ImageCtaSection backgroundImage="/1.webp" title="Book Your Stay Now" buttonText="Book Now" buttonLink="/karwar" />
+
+      <OtherRooms title={"Other Rooms"} description="Explore other accommodation options at Eden Ember Castle." data={rooms} /> */}
     </main>
   );
 }

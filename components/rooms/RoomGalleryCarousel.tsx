@@ -28,7 +28,7 @@ const RoomGalleryCarousel: React.FC<RoomGalleryCarouselProps> = ({
   const thumbWidthPercent = 100 / images.length;
 
   return (
-    <div className="py-12 bg-white relative">
+    <div className="py-12 md:pb-24 bg-white relative">
       <div className="w-full flex flex-col gap-8">
         <Swiper
           modules={[Autoplay]}
