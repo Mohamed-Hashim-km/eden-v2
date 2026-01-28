@@ -21,7 +21,7 @@ function OtherRooms({ data, title, description }) {
             <div className="w-full max-w-2xl wow fadeInUp" data-wow-delay=".3s">
               <div className="flex flex-col items-center">
                 {title && <span className="text-4xl md:text-5xl lg:text-6xl  text-primary mb-4 leading-tight  block">{title}</span>}
-                {description && <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">{description}</h2>}
+                {description && <h2 className="  text-secondary leading-tight">{description}</h2>}
               </div>
             </div>
           </div>
