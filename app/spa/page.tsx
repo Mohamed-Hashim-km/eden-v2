@@ -1,4 +1,5 @@
 "use client";
+import { Hero } from "@/components/rooms/Hero";
 import GoldenLeafe from "@/components/spa/GoldenLeafe";
 import OtherAmenities from "@/components/spa/OtherAmenities";
 import SignatureServices from "@/components/spa/SignatureServices";
@@ -50,7 +51,11 @@ function page() {
 
   return (
     <div>
-    <GoldenLeafe/>
+    {/* <GoldenLeafe/> */}
+    <Hero
+            title="Suite Room (Without Balcony)"
+            description="A spacious and elegant suite offering extra comfort and a calm, relaxing stay environment."
+          />
     <WhatToExpect title="What to Expect" description="A thoughtfully curated wellness experience designed for complete relaxation and renewal." venueData={venueData}/>
    <SpaTreatment/>
     <SignatureServices/>
