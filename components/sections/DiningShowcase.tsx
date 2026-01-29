@@ -82,7 +82,7 @@ interface DiningShowcaseProps {
 
 export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
   return (
-    <section className="py-24 bg-white overflow-hidden">
+    <section className="md:py-24 bg-white overflow-hidden">
       {/* Title */}
       {title && (
         <div className="container mx-auto px-4 mb-20 text-center">
@@ -94,13 +94,13 @@ export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
          We make this 'relative' so the buttons can position themselves 
          specifically against the width of the slide area.
       */}
-      <div className="relative mx-auto max-w-[95%] md:max-w-[75%] xl:max-w-[1200px]">
+      <div className="relative mx-auto max-w-[95%] lg:max-w-[75%] xl:max-w-[1200px]">
         {/* --- NAVIGATION BUTTONS --- */}
         {/* Positioned absolutely within the container. 
             z-50 ensures they sit on top of images.
             -translate-x-1/2 pulls them slightly outward to straddle the edge.
         */}
-        <div className="absolute top-[40%] md:top-[250px] w-full hidden md:flex justify-between z-50 pointer-events-none">
+        <div className="absolute top-[40%] md:top-[250px] w-full hidden lg:flex justify-between z-50 pointer-events-none">
           {/* Previous Button - Left Edge */}
           <button className="swiper-button-prev-custom pointer-events-auto w-10 h-10 bg-white rounded-full  flex items-center justify-center text-gray-900 hover:scale-110 transition-transform absolute left-0 -translate-x-1/2">
             <ChevronLeft />
@@ -112,7 +112,7 @@ export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
           </button>
         </div>
 
-        <div className="pb-24 relative">
+        <div className="md:pb-24 pb-16 relative">
           <Swiper
             modules={[Navigation, Autoplay, Scrollbar]}
             loop={true}
@@ -133,6 +133,7 @@ export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
             breakpoints={{
               320: { slidesPerView: 1.15, spaceBetween: 16, centeredSlides: true },
               640: { slidesPerView: 1.1, spaceBetween: 20, centeredSlides: true },
+              // iPad / Tablet -> stays mobile layout but slightly more slides visible
               768: { slidesPerView: 1.5, spaceBetween: 24, centeredSlides: false },
               1024: { slidesPerView: 2, spaceBetween: 30 },
             }}
@@ -145,7 +146,7 @@ export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
                     {/* --- DESKTOP LAYOUT (Original) --- */}
                     <div
                       className={`
-                    hidden md:block
+                    hidden lg:block
                     relative group transition-all duration-700 ease-out select-none
                     ${isActive || isNext ? "opacity-100 blur-0" : "opacity-40 "}
                   `}
@@ -176,7 +177,7 @@ export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
                     </div>
 
                     {/* --- MOBILE LAYOUT (New, Overlapping Text Card) --- */}
-                    <div className="block md:hidden relative group select-none h-full pt-4">
+                    <div className="block lg:hidden relative group select-none h-full pt-4">
                       {/* IMAGE CONTAINER */}
                       <div className="relative w-full h-[400px] overflow-hidden shadow-sm">
                         <Image src={item.image} alt={item.title} fill className="object-cover" />
@@ -201,7 +202,7 @@ export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
           </Swiper>
 
           {/* Custom Scrollbar Container */}
-          <div className="swiper-scrollbar-custom h-1 bg-gray-200 mt-10 relative overflow-hidden rounded-full w-[90%] mx-auto md:hidden">
+          <div className="swiper-scrollbar-custom h-1 bg-gray-200 mt-10 relative overflow-hidden rounded-full w-[90%] mx-auto lg:hidden">
             {/* Swiper will inject the drag handle here automatically */}
           </div>
         </div>

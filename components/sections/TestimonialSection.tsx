@@ -51,7 +51,7 @@ export const TestimonialSection: React.FC<TestimonialSectionProps> = ({ title, s
   const progress = ((activeIndex + 1) / reviews.length) * 100;
 
   return (
-    <section className="py-20 md:py-32 bg-[#FFF9F0]">
+    <section className="pt-10 pb-14  md:py-32 bg-[#FFF9F0]">
       <div className="ml-auto px-5 lg:pl-20 lg:pr-0">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
           {/* Left Column: Content */}

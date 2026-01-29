@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "../ui/Button";
-import { DateRangePicker } from "../ui/DateRangePicker"; // Assuming it is in the same folder
+import { DateRangePicker } from "../ui/DateRangePicker"; 
 
-// Simple Minus/Plus Icons
+// --- Icons ---
 const MinusIcon = () => (
   <svg width="10" height="2" viewBox="0 0 10 2" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M9 1H1" stroke="#ACACAC" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -23,6 +23,7 @@ const ChevronDownIcon = () => (
   </svg>
 );
 
+// --- Counter Component ---
 interface CounterProps {
   label: string;
   value: number;
@@ -54,6 +55,7 @@ const Counter: React.FC<CounterProps> = ({ label, value, min = 0, onChange }) =>
   );
 };
 
+// --- Main BookingBar Component ---
 interface BookingBarProps {
   locations?: string[];
   defaultLocation?: string;
@@ -81,7 +83,7 @@ export const BookingBar: React.FC<BookingBarProps> = ({
   // Mobile specific state
   const [isMobileExpanded, setIsMobileExpanded] = useState(false);
 
-  // Handle click outside to close dropdown (Desktop)
+  // Handle click outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (locationRef.current && !locationRef.current.contains(event.target as Node)) {
@@ -109,7 +111,6 @@ export const BookingBar: React.FC<BookingBarProps> = ({
     setIsLocationOpen(false);
   };
 
-  // Format date display helper
   const formatDate = (date: Date | null) => {
     if (!date) return "";
     return date.toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric" });
@@ -120,10 +121,12 @@ export const BookingBar: React.FC<BookingBarProps> = ({
       {/* =========================================
           DESKTOP VERSION (Hidden on Mobile)
           ========================================= */}
-      <div className="hidden md:flex relative w-auto mx-auto bg-[#FEFEFE] py-6 px-6  flex-row items-center space-x-16 rounded-sm shadow-sm transition-all duration-300">
+      {/* FIX: Changed 'space-x-16' to 'gap-16'. Gap handles absolute children correctly. */}
+      <div className="hidden lg:flex relative w-auto mx-auto bg-[#FEFEFE] py-6 px-6 flex-row items-center gap-16 rounded-sm transition-all duration-300">
+        
         {/* Location Section */}
         {enableLocationSelection && (
-          <div className="relative flex flex-col gap-1 min-w-[180px]  border-b border-gray-200 pb-2" ref={locationRef}>
+          <div className="relative flex flex-col gap-1 min-w-[180px] border-b border-gray-200 pb-2" ref={locationRef}>
             <span className="text-[#001446] mb-3 text-lg tracking-wide">Location</span>
             <div className="flex items-center justify-between group cursor-pointer" onClick={toggleLocation}>
               <span className="text-secondary text-sm transition-colors ">{selectedLocation}</span>
@@ -150,7 +153,7 @@ export const BookingBar: React.FC<BookingBarProps> = ({
         )}
 
         {/* Check-In/Check-Out Section */}
-        <div className="relative flex flex-col gap-1 min-w-[220px]  border-b border-gray-200 pb-2">
+        <div className="relative flex flex-col gap-1 min-w-[220px] border-b border-gray-200 pb-2">
           <span className="text-[#001446] mb-3 text-lg tracking-wide">Check-In/Check-Out</span>
           <div className="flex items-center justify-between cursor-pointer group" onClick={() => setIsDateOpen(!isDateOpen)}>
             <span className="text-secondary text-sm transition-colors ">
@@ -183,7 +186,7 @@ export const BookingBar: React.FC<BookingBarProps> = ({
           onClose={() => setIsDateOpen(false)}
           onSelect={(start, end) => {
             setDateRange({ start, end });
-            if (start && end) setIsDateOpen(false); // Auto-close when both selected
+            if (start && end) setIsDateOpen(false); 
           }}
           initialStart={dateRange.start}
           initialEnd={dateRange.end}
@@ -191,14 +194,13 @@ export const BookingBar: React.FC<BookingBarProps> = ({
       </div>
 
       {/* =========================================
-         MOBILE VERSION (Hidden on Desktop)
-         ========================================= */}
-      <div className="md:hidden w-full px-0">
+          MOBILE VERSION (Hidden on Desktop)
+          ========================================= */}
+      <div className="lg:hidden w-full px-0">
         {/* Initial Collapsed State (The Card) */}
         {!isMobileExpanded && (
           <div className="bg-white p-6 shadow-lg rounded-sm w-full mx-auto" onClick={() => setIsMobileExpanded(true)}>
             <h3 className="text-[#001446] font-medium text-lg mb-4 font-serif">Check-In/Check-Out</h3>
-
             <div className="flex items-center justify-between border-b border-gray-200 pb-2 cursor-pointer">
               <span className="text-gray-400 text-sm">
                 {dateRange.start && dateRange.end ? `${formatDate(dateRange.start)} - ${formatDate(dateRange.end)}` : "SelectDates"}
@@ -213,10 +215,7 @@ export const BookingBar: React.FC<BookingBarProps> = ({
         {/* Expanded State (The Full Form) */}
         {isMobileExpanded && (
           <div className="bg-[#f9f9f9] w-full flex flex-col gap-6 pb-10">
-            {/* Top Header */}
             <h3 className="text-[#001446] font-medium text-xl font-serif">Check-In/Check-Out</h3>
-
-            {/* SelectDates Dropdown Trigger (Visual) */}
             <div className="border-b border-gray-200 pb-2 flex justify-between items-center" onClick={() => setIsMobileExpanded(false)}>
               <span className="text-gray-500 text-base">
                 {dateRange.start && dateRange.end ? `${formatDate(dateRange.start)} - ${formatDate(dateRange.end)}` : "SelectDates"}
@@ -224,7 +223,6 @@ export const BookingBar: React.FC<BookingBarProps> = ({
               <ChevronDownIcon />
             </div>
 
-            {/* Location Section */}
             {enableLocationSelection && (
               <div className="flex flex-col gap-2 pt-2">
                 <h4 className="text-[#001446] text-xl font-serif">Location</h4>
@@ -253,20 +251,17 @@ export const BookingBar: React.FC<BookingBarProps> = ({
               </div>
             )}
 
-            {/* Date Boxes */}
             <div className="flex gap-4 pt-2">
               <div
                 className={`flex-1 border rounded-sm p-4 flex flex-col items-center justify-center bg-white cursor-pointer ${!dateRange.end ? "border-[#E2BA86]" : "border-gray-200"}`}
                 onClick={() => setDateRange({ ...dateRange, end: null })}
               >
                 <span className="text-[#001446] text-base font-medium">Check-In Date</span>
-                {/* <span className="text-gray-400 text-xs mt-1">{dateRange.start ? formatDate(dateRange.start) : ""}</span> */}
               </div>
               <div
                 className={`flex-1 border rounded-sm p-4 flex flex-col items-center justify-center bg-white cursor-pointer ${dateRange.end ? "border-[#E2BA86]" : "border-gray-200"}`}
               >
                 <span className="text-[#001446] text-base font-medium">Check-Out Date</span>
-                {/* <span className="text-gray-400 text-xs mt-1">{dateRange.end ? formatDate(dateRange.end) : ""}</span> */}
               </div>
             </div>
 
@@ -322,30 +317,10 @@ export const BookingBar: React.FC<BookingBarProps> = ({
               </div>
             </div>
 
-            {/* Legend */}
-            <div className="flex flex-col gap-3 mt-4 border-b border-gray-200 pb-8">
-              <div className="flex items-center gap-3">
-                <div className="w-5 h-5 rounded-full bg-[#001446]"></div>
-                <span className="text-[#001446] text-sm font-serif">Selected</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-5 h-5 rounded-full border border-gray-200 bg-white"></div>
-                <span className="text-[#001446] text-sm font-serif">Available</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-5 h-5 rounded-full border border-gray-200 flex items-center justify-center text-xs text-gray-300">X</div>
-                <span className="text-[#001446] text-sm font-serif">Please contact the Hotel</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-5 h-5 rounded-full bg-[#D2B48C]"></div>
-                <span className="text-[#001446] text-sm font-serif">Restrictions Apply</span>
-              </div>
-            </div>
-
-            {/* Room 1 */}
+            {/* Room Control */}
             <div className="pt-4">
               <h4 className="text-[#001446] text-xl font-serif mb-6">Room 1</h4>
-
+              {/* Adults Mobile */}
               <div className="flex justify-between items-center mb-6">
                 <div>
                   <div className="text-[#001446] text-lg font-serif">Adults</div>
@@ -367,7 +342,7 @@ export const BookingBar: React.FC<BookingBarProps> = ({
                   </button>
                 </div>
               </div>
-
+              {/* Children Mobile */}
               <div className="flex justify-between items-center mb-0">
                 <div>
                   <div className="text-[#001446] text-lg font-serif">Children</div>
@@ -391,13 +366,6 @@ export const BookingBar: React.FC<BookingBarProps> = ({
               </div>
             </div>
 
-            {/* Add Another Room */}
-            <div className="flex justify-center items-center py-6 border-t border-b border-gray-200 mt-2">
-              <span className="text-[#001446] text-lg font-serif mr-2">Add Another Room</span>
-              <PlusIcon />
-            </div>
-
-            {/* Check Availability Button */}
             <div className="pt-2">
               <Button
                 variant="tertiary"
@@ -407,7 +375,7 @@ export const BookingBar: React.FC<BookingBarProps> = ({
                 Check Availability
               </Button>
             </div>
-            {/* Close Expansion Button (Optional, or click outside behavior) */}
+            
             <div className="text-center mt-2">
               <button onClick={() => setIsMobileExpanded(false)} className="text-sm text-gray-500 underline">
                 Close

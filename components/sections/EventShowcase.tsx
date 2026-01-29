@@ -6,7 +6,7 @@ import { Button } from "../ui/Button"; // Assuming you have a reusable Button co
 
 const EventShowcase = ({ title, description, buttonText, buttonLink, imageSrc }) => {
   return (
-    <section className="py-20 overflow-hidden">
+    <section className="py-0 md:py-20 overflow-hidden">
       {/* Container: Full width with padding on right for larger screens */}
       <div className="w-full pl-0   lg:pr-16">
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">

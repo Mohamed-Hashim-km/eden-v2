@@ -197,8 +197,8 @@ export const Navbar = () => {
 
         <div className="flex items-center gap-4">
           {/* Book Now Button simplified for mobile if needed, or keeping standard */}
-          <Link href="#" className="bg-white text-[#001446] px-4 py-2 text-sm font-medium">
-            Book
+          <Link href={"#"}>
+          <Button variant="primary">Book</Button>
           </Link>
         </div>
       </div>
@@ -211,7 +211,7 @@ export const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0  w-[80%] top-[72px] bg-white text-[#001446] z-50 md:hidden flex flex-col"
+            className="fixed inset-0  w-[80%] top-[70px] bg-white text-[#001446] z-50 md:hidden flex flex-col"
           >
             <div className="w-full h-full relative overflow-hidden">
               {/* Main Menu */}
@@ -227,15 +227,15 @@ export const Navbar = () => {
                 </div>
 
                 <nav className="flex flex-col gap-6 text-xl font-medium">
-                  <button onClick={() => setActiveMenu("location")} className="flex items-center justify-between border-b pb-4 border-gray-200">
+                  <button onClick={() => setActiveMenu("location")} className="flex items-center justify-between border-b pb-4 border-secondary">
                     <span>Location</span>
                     <FiChevronRight />
                   </button>
-                  <button onClick={() => setActiveMenu("dining")} className="flex items-center justify-between border-b pb-4 border-gray-200">
+                  <button onClick={() => setActiveMenu("dining")} className="flex items-center justify-between border-b pb-4 border-secondary">
                     <span>Dining</span>
                     <FiChevronRight />
                   </button>
-                  <Link href="/spa" onClick={closeMenu} className="border-b pb-4 border-gray-200">
+                  <Link href="/spa" onClick={closeMenu} className="border-b pb-4 border-secondary">
                     Spa
                   </Link>
                   <Link href="/contact" onClick={closeMenu} className="">
@@ -245,47 +245,69 @@ export const Navbar = () => {
               </motion.div>
 
               {/* Location Submenu */}
-              <motion.div
-                className="absolute inset-0 w-full h-full p-6 bg-white"
-                initial={{ x: "100%" }}
-                animate={{ x: activeMenu === "location" ? 0 : "100%" }}
-                transition={{ type: "tween" }}
-              >
-                <button onClick={() => setActiveMenu("main")} className="flex items-center gap-2 mb-8 text-[#001446] font-medium">
-                  <FiChevronLeft /> <span>Location</span>
-                </button>
-                <nav className="flex flex-col gap-6 text-lg text-gray-600">
-                  <Link href="/location/gokarna" onClick={closeMenu} className="border-b pb-4 border-gray-100">
-                    Eden Ember Castle Gokarna
-                  </Link>
-                  <Link href="/location/karwar" onClick={closeMenu} className="">
-                    Hotel Eden Karwar
-                  </Link>
-                </nav>
-              </motion.div>
+             {/* Location Submenu */}
+<motion.div
+  className="absolute inset-0 w-full h-full p-6 bg-white"
+  initial={{ x: "100%" }}
+  animate={{ x: activeMenu === "location" ? 0 : "100%" }}
+  transition={{ type: "tween" }}
+>
+  {/* Header with Back Arrow and Centered Title */}
+  <div className="relative flex items-center justify-center mb-4">
+    <button 
+      onClick={() => setActiveMenu("main")} 
+      className="absolute left-0  text-secondary"
+    >
+      <FiChevronLeft size={30} strokeWidth={1} />
+    </button>
+    <h2 className="text-2xl font-medium text-primary">Location</h2>
+  </div>
 
+  {/* Separator Line */}
+  <hr className="border-secondary mb-" />
+
+  {/* Links */}
+  <nav className="flex flex-col text-lg text-secondary">
+    <Link href="/location/gokarna" onClick={closeMenu} className="border-b py-6 border-secondary">
+      Eden Ember Castle Gokarna
+    </Link>
+    <Link href="/location/karwar" onClick={closeMenu} className="py-6">
+      Hotel Eden Karwar
+    </Link>
+  </nav>
+</motion.div>
               {/* Dining Submenu */}
-              <motion.div
-                className="absolute inset-0 w-full h-full p-6 bg-white"
-                initial={{ x: "100%" }}
-                animate={{ x: activeMenu === "dining" ? 0 : "100%" }}
-                transition={{ type: "tween" }}
-              >
-                <button onClick={() => setActiveMenu("main")} className="flex items-center gap-2 mb-8 text-[#001446] font-medium">
-                  <FiChevronLeft /> <span>Dining</span>
-                </button>
-                <nav className="flex flex-col gap-6 text-lg text-gray-600">
-                  <Link href="/dining/tulip" onClick={closeMenu} className="border-b pb-4 border-gray-100">
-                    Tulip - Fine Dine Multi-Cuisine
-                  </Link>
-                  <Link href="/dining/oyster-bay" onClick={closeMenu} className="border-b pb-4 border-gray-100">
-                    Oyster Bay - Coastal Seafood Dining
-                  </Link>
-                  <Link href="/dining/food-and-forest" onClick={closeMenu} className="">
-                    Food & Forest - Rooftop Casual Dining
-                  </Link>
-                </nav>
-              </motion.div>
+             {/* Dining Submenu */}
+<motion.div
+  className="absolute inset-0 w-full h-full p-6 bg-white"
+  initial={{ x: "100%" }}
+  animate={{ x: activeMenu === "dining" ? 0 : "100%" }}
+  transition={{ type: "tween" }}
+>
+  <div className="relative flex items-center justify-center mb-4">
+    <button 
+      onClick={() => setActiveMenu("main")} 
+      className="absolute left-0  text-secondary"
+    >
+      <FiChevronLeft size={30} strokeWidth={1} />
+    </button>
+    <h2 className="text-2xl font-medium text-primary">Dining</h2>
+  </div>
+
+  <hr className="border-secondary " />
+
+  <nav className="flex flex-col text-lg text-secondary">
+    <Link href="/dining/tulip" onClick={closeMenu} className="border-b py-6 border-secondary">
+      Tulip - Fine Dine Multi-Cuisine
+    </Link>
+    <Link href="/dining/oyster-bay" onClick={closeMenu} className="border-b py-6 border-secondary">
+      Oyster Bay - Coastal Seafood Dining
+    </Link>
+    <Link href="/dining/food-and-forest" onClick={closeMenu} className="py-6">
+      Food & Forest - Rooftop Casual Dining
+    </Link>
+  </nav>
+</motion.div>
             </div>
           </motion.div>
         )}

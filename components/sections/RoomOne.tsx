@@ -46,7 +46,7 @@ const roomTypes = [
 function RoomOne({ className }) {
   return (
     // Used pb-20 from reference, minimal padding
-    <section className={`pb-20 bg-white ${className}`}>
+    <section className={`pb-5 md:pb-20 bg-white ${className}`}>
       
       {/* HEADER SECTION: Keep inside container for alignment */}
       <div className="container mx-auto px-4 mb-16">

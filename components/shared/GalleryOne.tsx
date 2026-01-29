@@ -26,7 +26,7 @@ function GalleryOne({ title, description, cta,galleryImages }) {
 
   return (
     <>
-      <section className="py-20 bg-white">
+      <section className="pt-16 pb-8 md:py-20 bg-white">
         
         {/* 1. Header Section: Kept inside a container for centering */}
         <div className="container mx-auto px-4">
