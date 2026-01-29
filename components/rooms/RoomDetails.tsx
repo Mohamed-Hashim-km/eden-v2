@@ -37,7 +37,7 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({
 }) => {
   return (
     <section className="py-12 md:pb-20 md:pt-16 bg-white text-gray-800 ">
-      <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+      <div className="container mx-auto px-4  max-w-7xl">
         {/* Breadcrumbs */}
         <nav className="text-base text-secondary mb-16 flex items-center gap-3">
           {breadcrumbs.map((crumb, index) => (
@@ -77,13 +77,13 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({
           </div>
 
           {/* Right Column: Details - Takes 5/12 columns (approx 42%) */}
-          <div className="lg:col-span-5">
-            {/* Details Grid (View, Size, etc) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-10 gap-x-8 mb-16  pb-12">
+       <div className="lg:col-span-5 pt-2">
+            {/* Details Grid (View, Size, Occupancy, Bedding) */}
+            <div className="grid grid-cols-2 gap-y-12 gap-x-8 mb-20">
               {/* View */}
               {details.view && (
                 <div>
-                  <h4 className="text-primary font-bold text-lg mb-3">View:</h4>
+                  <h4 className="text-primary font-bold text-[15px] mb-2 tracking-wide font-sans">View:</h4>
                   <p className="text-secondary text-[15px] leading-relaxed font-light">{details.view}</p>
                 </div>
               )}
@@ -91,7 +91,7 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({
               {/* Size */}
               {details.size && (
                 <div>
-                  <h4 className="text-primary font-bold text-lg mb-3">Size:</h4>
+                  <h4 className="text-primary font-bold text-[15px] mb-2 tracking-wide font-sans">Size:</h4>
                   <p className="text-secondary text-[15px] font-light">{details.size}</p>
                 </div>
               )}
@@ -99,7 +99,7 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({
               {/* Occupancy */}
               {details.occupancy && (
                 <div>
-                  <h4 className="text-primary font-bold text-lg mb-3">Occupancy:</h4>
+                  <h4 className="text-primary font-bold text-[15px] mb-2 tracking-wide font-sans">Occupancy:</h4>
                   <p className="text-secondary text-[15px] font-light">{details.occupancy}</p>
                 </div>
               )}
@@ -107,7 +107,7 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({
               {/* Bedding */}
               {details.bedding && (
                 <div>
-                  <h4 className="text-primary font-bold text-lg mb-3">Bedding:</h4>
+                  <h4 className="text-primary font-bold text-[15px] mb-2 tracking-wide font-sans">Bedding:</h4>
                   <p className="text-secondary text-[15px] font-light">{details.bedding}</p>
                 </div>
               )}
@@ -115,18 +115,18 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({
 
             {/* Amenities Section */}
             <div>
-              <h4 className="text-primary font-bold text-lg mb-8">Amenities</h4>
-              <div className="flex flex-wrap items-start gap-10">
+              <h4 className="text-primary font-bold text-[15px] mb-8 tracking-wide font-sans">Amenities</h4>
+              <div className="flex flex-wrap items-center gap-12">
                 {amenities.map((item, index) => (
-                  <div key={index} className="flex flex-col items-center gap-4 text-center group">
-                    <div className="text-3xl text-primary group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
-                    <span className="text-[11px] text-secondary leading-tight max-w-[80px]">{item.label}</span>
+                  <div key={index} className="flex flex-col items-center gap-3 group">
+                    <div className="text-[32px] text-[#333333] font-light stroke-[0.5px]">{item.icon}</div>
+                    <span className="text-[11px] text-secondary tracking-wide text-center">{item.label}</span>
                   </div>
                 ))}
 
                 {extraAmenitiesCount > 0 && (
-                  <div className="flex flex-col items-center justify-start pt-1">
-                    <span className="text-3xl text-[#1C2E3D] font-light">+{extraAmenitiesCount}</span>
+                  <div className="flex flex-col items-center justify-center h-full mb-5">
+                    <span className="text-2xl text-[#333333] font-light">+{extraAmenitiesCount}</span>
                   </div>
                 )}
               </div>
