@@ -31,9 +31,9 @@ export const ContentCarousel: React.FC<ContentCarouselProps> = ({ title, descrip
 
   return (
     <section className={`py-12 md:py-16 lg:pt-24 lg:pb-0 bg-white overflow-hidden ${className}`}>
-      <div className="container mx-auto md:px-4">
+      <div className="container mx-auto  md:px-4">
         {/* Header Section */}
-           <h2 className="text-primary text-sm md:text-lg mb-4 font-semibold tracking-wide">Common Amenities</h2>
+           <h2 className="text-primary px-4 text-sm md:text-lg mb-4 font-semibold tracking-wide">Common Amenities</h2>
         <div className="flex flex-col px-4 md:px-0 md:flex-row justify-between items-start gap-4 md:gap-8 mb-8 md:mb-16">
           <div className="flex flex-col gap-2 md:gap-4 max-w-2xl">
          

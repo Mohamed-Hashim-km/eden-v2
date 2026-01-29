@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "../ui/Button";
-import { DateRangePicker } from "../ui/DateRangePicker"; 
+import { DateRangePicker } from "../ui/DateRangePicker";
 
 // --- Icons ---
 const MinusIcon = () => (
@@ -22,6 +22,40 @@ const ChevronDownIcon = () => (
     <path d="M1 1L5 5L9 1" stroke="#ACACAC" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
+
+const CrossCircleIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="11.5" stroke="#E5E7EB" />
+    <path d="M15 9L9 15M9 9L15 15" stroke="#ACACAC" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const PlusSmallIcon = () => (
+  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M6 1V11M11 6H1" stroke="#001446" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const MinusSmallIcon = () => (
+  <svg width="10" height="2" viewBox="0 0 10 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M9 1H1" stroke="#001446" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const ChevronLeftIcon = () => (
+  <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 9L1 5L5 1" stroke="#ACACAC" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const ChevronRightIcon = () => (
+  <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1 9L5 5L1 1" stroke="#ACACAC" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const getDaysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
+const getFirstDayOfMonth = (year: number, month: number) => new Date(year, month, 1).getDay();
 
 // --- Counter Component ---
 interface CounterProps {
@@ -82,6 +116,48 @@ export const BookingBar: React.FC<BookingBarProps> = ({
 
   // Mobile specific state
   const [isMobileExpanded, setIsMobileExpanded] = useState(false);
+  const [currentMobileDate, setCurrentMobileDate] = useState(new Date());
+
+  // Init mobile date on open
+  useEffect(() => {
+    if (isMobileExpanded) {
+      // If we have a start date, show that month, else show today
+      if (dateRange.start) {
+        setCurrentMobileDate(new Date(dateRange.start));
+      } else {
+        setCurrentMobileDate(new Date());
+      }
+    }
+  }, [isMobileExpanded, dateRange.start]);
+
+  const handleMobilePrevMonth = () => {
+    const newDate = new Date(currentMobileDate.getFullYear(), currentMobileDate.getMonth() - 1, 1);
+    const today = new Date();
+    if (newDate.getMonth() < today.getMonth() && newDate.getFullYear() <= today.getFullYear()) return; // Prevent going before current month
+    setCurrentMobileDate(newDate);
+  };
+
+  const handleMobileNextMonth = () => {
+    setCurrentMobileDate(new Date(currentMobileDate.getFullYear(), currentMobileDate.getMonth() + 1, 1));
+  };
+
+  const handleMobileDateClick = (day: number) => {
+    const selectedDate = new Date(currentMobileDate.getFullYear(), currentMobileDate.getMonth(), day);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (selectedDate < today) return;
+
+    if (!dateRange.start || (dateRange.start && dateRange.end)) {
+      setDateRange({ start: selectedDate, end: null });
+    } else {
+      if (selectedDate < dateRange.start) {
+        setDateRange({ start: selectedDate, end: null });
+      } else {
+        setDateRange({ ...dateRange, end: selectedDate });
+      }
+    }
+  };
 
   // Handle click outside
   useEffect(() => {
@@ -123,7 +199,6 @@ export const BookingBar: React.FC<BookingBarProps> = ({
           ========================================= */}
       {/* FIX: Changed 'space-x-16' to 'gap-16'. Gap handles absolute children correctly. */}
       <div className="hidden lg:flex relative w-auto mx-auto bg-[#FEFEFE] py-6 px-6 flex-row items-center gap-16 rounded-sm transition-all duration-300">
-        
         {/* Location Section */}
         {enableLocationSelection && (
           <div className="relative flex flex-col gap-1 min-w-[180px] border-b border-gray-200 pb-2" ref={locationRef}>
@@ -186,7 +261,7 @@ export const BookingBar: React.FC<BookingBarProps> = ({
           onClose={() => setIsDateOpen(false)}
           onSelect={(start, end) => {
             setDateRange({ start, end });
-            if (start && end) setIsDateOpen(false); 
+            if (start && end) setIsDateOpen(false);
           }}
           initialStart={dateRange.start}
           initialEnd={dateRange.end}
@@ -199,7 +274,7 @@ export const BookingBar: React.FC<BookingBarProps> = ({
       <div className="lg:hidden w-full px-0">
         {/* Initial Collapsed State (The Card) */}
         {!isMobileExpanded && (
-          <div className="bg-white p-6 shadow-lg rounded-sm w-full mx-auto" onClick={() => setIsMobileExpanded(true)}>
+          <div className="bg-white p-6  rounded-sm w-full mx-auto" onClick={() => setIsMobileExpanded(true)}>
             <h3 className="text-[#001446] font-medium text-lg mb-4 font-serif">Check-In/Check-Out</h3>
             <div className="flex items-center justify-between border-b border-gray-200 pb-2 cursor-pointer">
               <span className="text-gray-400 text-sm">
@@ -214,7 +289,7 @@ export const BookingBar: React.FC<BookingBarProps> = ({
 
         {/* Expanded State (The Full Form) */}
         {isMobileExpanded && (
-          <div className="bg-[#f9f9f9] w-full flex flex-col gap-6 pb-10">
+          <div className="bg-[#f9f9f9] w-full flex flex-col gap-6 py-12 px-6 rounded-b-xl  animate-in slide-in-from-top-2 duration-300">
             <h3 className="text-[#001446] font-medium text-xl font-serif">Check-In/Check-Out</h3>
             <div className="border-b border-gray-200 pb-2 flex justify-between items-center" onClick={() => setIsMobileExpanded(false)}>
               <span className="text-gray-500 text-base">
@@ -265,105 +340,156 @@ export const BookingBar: React.FC<BookingBarProps> = ({
               </div>
             </div>
 
-            {/* Custom Mobile Calendar (Visual Match) */}
-            <div className="pt-2">
-              <div className="flex items-center justify-center gap-2 mb-6 cursor-pointer">
-                <span className="text-[#001446] text-lg font-serif">January 2026</span>
-                <ChevronDownIcon />
+            {/* Custom Mobile Calendar */}
+            <div className="pt-2 px-1">
+              <div className="flex items-center justify-between gap-4 mb-6 px-2">
+                <button onClick={handleMobilePrevMonth} className="p-2 hover:bg-gray-100 rounded-full">
+                  <ChevronLeftIcon />
+                </button>
+                <span className="text-[#001446] text-lg font-serif font-medium">
+                  {currentMobileDate.toLocaleDateString("en-GB", { month: "long", year: "numeric" })}
+                </span>
+                <button onClick={handleMobileNextMonth} className="p-2 hover:bg-gray-100 rounded-full">
+                  <ChevronRightIcon />
+                </button>
               </div>
 
               {/* Days Grid */}
               <div className="grid grid-cols-7 mb-4">
                 {["S", "M", "T", "W", "T", "F", "S"].map((d, i) => (
-                  <div key={i} className="text-center text-sm font-serif font-bold text-[#001446]">
+                  <div key={i} className="text-center text-xs font-serif font-bold text-[#001446] opacity-60">
                     {d}
                   </div>
                 ))}
               </div>
 
-              {/* Dates Grid (Mocking Jan 2026 Logic roughly) 
-                    Jan 1 2026 is a Thursday.
-                */}
+              {/* Dates Grid */}
               <div className="grid grid-cols-7 gap-y-4 gap-x-1">
-                {/* Blanks for S M T W */}
-                {[...Array(4)].map((_, i) => (
+                {/* Blanks */}
+                {[...Array(getFirstDayOfMonth(currentMobileDate.getFullYear(), currentMobileDate.getMonth()))].map((_, i) => (
                   <div key={`b-${i}`} />
                 ))}
 
-                {/* Days 1-31 */}
-                {[...Array(31)].map((_, i) => {
+                {/* Days */}
+                {[...Array(getDaysInMonth(currentMobileDate.getFullYear(), currentMobileDate.getMonth()))].map((_, i) => {
                   const day = i + 1;
-                  // Mocking "27-31" as example relevant dates or interactive
-                  const isSelected = day === 27; // Just matching image roughly
-                  const hasPrice = day >= 27;
+                  const date = new Date(currentMobileDate.getFullYear(), currentMobileDate.getMonth(), day);
+                  const today = new Date();
+                  today.setHours(0, 0, 0, 0);
+                  const isDisabled = date < today;
+
+                  const isStart = dateRange.start && date.toDateString() === dateRange.start.toDateString();
+                  const isEnd = dateRange.end && date.toDateString() === dateRange.end.toDateString();
+                  const isInRange = dateRange.start && dateRange.end && date > dateRange.start && date < dateRange.end;
+
+                  let bgClass = "";
+                  let textClass = "text-[#001446]";
+
+                  if (isStart || isEnd) {
+                    bgClass = "bg-[#001446] text-white rounded-full";
+                    textClass = "text-white";
+                  } else if (isInRange) {
+                    bgClass = "bg-[#E6F0FA] rounded-sm";
+                  }
 
                   return (
-                    <div key={day} className="flex flex-col items-center gap-1 cursor-pointer">
+                    <div
+                      key={day}
+                      className={`flex flex-col items-center gap-1 cursor-pointer ${isDisabled ? "opacity-30 pointer-events-none" : ""}`}
+                      onClick={() => handleMobileDateClick(day)}
+                    >
                       <div
-                        className={`w-8 h-8 flex items-center justify-center text-sm font-serif ${isSelected ? "text-[#001446] font-bold" : "text-gray-500"}`}
+                        className={`w-9 h-9 flex items-center justify-center text-sm font-serif transition-all duration-200 ${bgClass} ${textClass} ${!isStart && !isEnd && !isInRange ? "hover:bg-gray-50 rounded-full" : ""}`}
                       >
                         {day}
                       </div>
-                      {hasPrice && (
-                        <span className="text-[9px] text-[#001446] font-medium leading-none">
-                          INR
-                          <br />
-                          1,265
-                        </span>
-                      )}
                     </div>
                   );
                 })}
               </div>
             </div>
 
+            {/* Legend Section */}
+            <div className="pt-4 border-t border-gray-100">
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-[#001446]"></div>
+                  <span className="text-[#001446] text-sm font-serif">Selected</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full border border-gray-200 bg-white"></div>
+                  <span className="text-[#001446] text-sm font-serif">Available</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CrossCircleIcon />
+                  <span className="text-[#001446] text-sm font-serif">Please contact the Hotel</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 rounded-full bg-[#D2B48C]"></div>
+                  <span className="text-[#001446] text-sm font-serif">Restrictions Apply</span>
+                </div>
+              </div>
+            </div>
+
             {/* Room Control */}
-            <div className="pt-4">
+            <div className="pt-6 border-t border-gray-100 mt-4">
               <h4 className="text-[#001446] text-xl font-serif mb-6">Room 1</h4>
+
               {/* Adults Mobile */}
               <div className="flex justify-between items-center mb-6">
                 <div>
                   <div className="text-[#001446] text-lg font-serif">Adults</div>
-                  <div className="text-gray-400 text-xs font-sans">(12 Years & above)</div>
+                  <div className="text-gray-400 text-xs font-sans mt-1">(12 Years & above)</div>
                 </div>
                 <div className="flex items-center gap-4">
                   <button
                     onClick={() => setAdults(Math.max(1, adults - 1))}
-                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-[#001446] hover:text-[#001446] disabled:opacity-50"
+                    className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors"
                   >
-                    <MinusIcon />
+                    <MinusSmallIcon />
                   </button>
-                  <span className="text-[#001446] w-4 text-center font-medium">{adults}</span>
+                  <span className="text-[#001446] w-4 text-center font-lg font-medium">{adults}</span>
                   <button
                     onClick={() => setAdults(adults + 1)}
-                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-[#001446] hover:text-[#001446]"
+                    className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors"
                   >
-                    <PlusIcon />
+                    <PlusSmallIcon />
                   </button>
                 </div>
               </div>
+
               {/* Children Mobile */}
               <div className="flex justify-between items-center mb-0">
                 <div>
                   <div className="text-[#001446] text-lg font-serif">Children</div>
-                  <div className="text-gray-400 text-xs font-sans">(0-11 years)</div>
+                  <div className="text-gray-400 text-xs font-sans mt-1">(0-11 years)</div>
                 </div>
                 <div className="flex items-center gap-4">
                   <button
                     onClick={() => setChildren(Math.max(0, children - 1))}
-                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-[#001446] hover:text-[#001446] disabled:opacity-50"
+                    className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors"
                   >
-                    <MinusIcon />
+                    <MinusSmallIcon />
                   </button>
-                  <span className="text-[#001446] w-4 text-center font-medium">{children}</span>
+                  <span className="text-[#001446] w-4 text-center font-lg font-medium">{children}</span>
                   <button
                     onClick={() => setChildren(children + 1)}
-                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-[#001446] hover:text-[#001446]"
+                    className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors"
                   >
-                    <PlusIcon />
+                    <PlusSmallIcon />
                   </button>
                 </div>
               </div>
+            </div>
+
+            {/* Add Another Room */}
+            <div className="border-t border-gray-100 mt-4 pt-6 pb-2">
+              <button className="flex items-center justify-center gap-2 w-full text-[#001446] font-serif text-lg py-2">
+                Add Another Room
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 1V13M13 7H1" stroke="#001446" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
             </div>
 
             <div className="pt-2">
@@ -375,7 +501,7 @@ export const BookingBar: React.FC<BookingBarProps> = ({
                 Check Availability
               </Button>
             </div>
-            
+
             <div className="text-center mt-2">
               <button onClick={() => setIsMobileExpanded(false)} className="text-sm text-gray-500 underline">
                 Close

@@ -98,12 +98,13 @@ export default function Home() {
         buttonLink="/events"
         imageSrc="/1.webp"
       />
+      <div className="py-16 md:py-0">
       <Faq
         faqData={faqData}
         title="Everything You Need to Know"
         description=" Essential information to help you enjoy a seamless stay at Hotel Eden."
       />
-
+</div>
       <DiningShowcase title="" description="" cta="Explore All Restaurants" />
       <ImageCtaSection
         backgroundImage="/1.webp"

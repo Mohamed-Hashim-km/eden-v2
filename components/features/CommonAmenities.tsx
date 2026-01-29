@@ -26,7 +26,7 @@ export function CommonAmenities({
   items,
 }: CommonAmenitiesProps) {
   return (
-    <section className="container mx-auto py-12 px-4 md:py-24">
+    <section className="container mx-auto pt-12 px-4 md:py-24">
       <div className="flex flex-col gap-6 md:gap-12">
         <div className="max-w-3xl">
           <span className="text-primary tracking-wide text-sm md:text-lg font-semibold mb-2 md:mb-4 block">{eyebrow}</span>
@@ -48,7 +48,7 @@ export function CommonAmenities({
         </div>
 
         {/* Mobile Carousel View */}
-        <div className="md:hidden relative pb-12">
+        <div className="md:hidden relative pb-5 md:pb-12">
           <Swiper
             modules={[Scrollbar, Autoplay]}
             spaceBetween={16}

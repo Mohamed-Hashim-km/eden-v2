@@ -7,7 +7,7 @@ const PopularFacilities = ({ title, subtitle, description, facilities }) => {
   const isThreeItemsInLastRow = facilities.length % 5 === 3;
 
   return (
-    <section className="py-16 md:py-24 bg-[#FFF9F0]">
+    <section className="pt-16 pb-2 md:py-24 bg-[#FFF9F0]">
       <div className="container mx-auto px-4">
         {/* Header Section */}
         <div className="flex justify-center text-center mb-12">

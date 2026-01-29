@@ -17,13 +17,14 @@ const getFirstDayOfMonth = (year: number, month: number) => new Date(year, month
 const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const DAYS = ["S", "M", "T", "W", "T", "F", "S"];
 
-export const DateRangePicker: React.FC<DateRangePickerProps> = ({ 
-  isOpen, 
-  onClose, 
-  onSelect, 
-  initialStart = null, 
-  initialEnd = null 
-}) => {
+const CrossCircleIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="11.5" stroke="#E5E7EB" />
+    <path d="M15 9L9 15M9 9L15 15" stroke="#ACACAC" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const DateRangePicker: React.FC<DateRangePickerProps> = ({ isOpen, onClose, onSelect, initialStart = null, initialEnd = null }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [startDate, setStartDate] = useState<Date | null>(initialStart);
   const [endDate, setEndDate] = useState<Date | null>(initialEnd);
@@ -69,16 +70,20 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
 
     return (
       <div className="w-full">
-        <div className="text-center font-medium text-[#001446] mb-4 text-lg">
+        <div className="text-center font-medium text-primary mb-4 text-lg">
           {MONTH_NAMES[month]} {year}
         </div>
         <div className="grid grid-cols-7 mb-2">
           {DAYS.map((d, i) => (
-            <div key={i} className="text-center text-xs font-semibold text-[#001446]">{d}</div>
+            <div key={i} className="text-center text-xs font-semibold text-primary">
+              {d}
+            </div>
           ))}
         </div>
         <div className="grid grid-cols-7 gap-y-1">
-          {blanks.map((_, i) => <div key={`blank-${i}`} />)}
+          {blanks.map((_, i) => (
+            <div key={`blank-${i}`} />
+          ))}
           {days.map((day) => {
             const date = new Date(year, month, day);
             const isSelectedStart = startDate?.getTime() === date.getTime();
@@ -91,7 +96,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
             let textClass = "text-[#001446]";
 
             if (isSelectedStart || isSelectedEnd) {
-              bgClass = "bg-[#001446] text-white rounded-md";
+              bgClass =  "bg-[#001446] text-white rounded-md";
               textClass = "text-white";
             } else if (isInRange || isHovered) {
               bgClass = "bg-[#E6F0FA]";
@@ -120,20 +125,24 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
        'overflow-x-auto' ensures that if the BookingBar is too small for 2 calendars, 
        it scroll internally rather than pushing the BookingBar's width.
     */
-    <div className="absolute top-full left-0 right-0 mt-4 bg-white  rounded-sm  p-8 z-[60] flex flex-col animate-in fade-in zoom-in-95 duration-200 overflow-x-auto min-w-0">
+    <div className="absolute top-full left-0 right-0  bg-white  rounded-sm  p-8 z-[60] flex flex-col animate-in fade-in zoom-in-95 duration-200 overflow-x-auto min-w-0">
       <div className="flex gap-4 mb-8 min-w-[600px]">
-        <div className={`flex-1 border-b-2 pb-2 text-center transition-colors ${!endDate ? "border-[#001446]" : "border-gray-200"}`}>
-          <div className="text-gray-500 text-xs mb-1">Check-In Date</div>
+        <div className={`flex-1 border-2 py-2 text-center transition-colors ${!endDate ? "border-primary" : "border-secondary"}`}>
+          <div className="text-gray-500 text-xs md:text-md mb-1">Check-In Date</div>
           <div className="text-lg font-medium text-[#001446]">{startDate ? startDate.toLocaleDateString() : "-"}</div>
         </div>
-        <div className={`flex-1 border-b-2 pb-2 text-center transition-colors ${startDate && !endDate ? "border-[#001446]" : "border-gray-200"}`}>
-          <div className="text-gray-500 text-xs mb-1">Check-Out Date</div>
+        <div className={`flex-1 border-2 py-2 text-center transition-colors ${startDate && !endDate ? "border-primary" : "border-secondary"}`}>
+          <div className="text-gray-500 text-xs md:text-md mb-1">Check-Out Date</div>
           <div className="text-lg font-medium text-[#001446]">{endDate ? endDate.toLocaleDateString() : "-"}</div>
         </div>
       </div>
 
       <div className="flex relative min-w-[600px]">
-        <button onClick={prevMonth} className="absolute left-0 top-2 p-2 hover:bg-gray-100 rounded-full z-10" disabled={currentDate <= new Date(today.getFullYear(), today.getMonth(), 1)}>
+        <button
+          onClick={prevMonth}
+          className="absolute left-0 top-2 p-2 hover:bg-gray-100 rounded-full z-10"
+          disabled={currentDate <= new Date(today.getFullYear(), today.getMonth(), 1)}
+        >
           <svg width="6" height="10" viewBox="0 0 6 10" fill="none" className="transform rotate-180">
             <path d="M1 9L5 5L1 1" stroke="#ACACAC" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
@@ -154,7 +163,26 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
         </button>
       </div>
 
-      <div className="mt-6 flex justify-end">
+      <div className="mt-8 pt-6 border-t border-gray-100 w-full flex items-center justify-between">
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-[#001446]"></div>
+            <span className="text-gray-600 text-xs font-medium">Selected</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full border border-secondary bg-white"></div>
+            <span className="text-gray-600 text-xs font-medium">Available</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <CrossCircleIcon />
+            <span className="text-gray-600 text-xs font-medium">Please Contact The Resort</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-[#F2D2BD]"></div>
+            <span className="text-gray-600 text-xs font-medium">Restrictions Apply</span>
+          </div>
+        </div>
+
         <Button variant="tertiary" className="text-xs py-2 px-4" onClick={onClose}>
           Close
         </Button>
