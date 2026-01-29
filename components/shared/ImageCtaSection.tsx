@@ -30,7 +30,7 @@ export const ImageCtaSection: React.FC<ImageCtaSectionProps> = ({
 
         {/* Content */}
         <div className="relative z-20 container mx-auto px-4 md:px-8">
-          <div className="max-w-3xl">
+          <div className="max-w-4xl">
             <h2 className="text-4xl md:text-5xl lg:text-6xl text-white  mb-8 leading-tight drop-shadow-lg tracking-wide">{title}</h2>
             <a href={buttonLink}>
               <Button variant="primary" className="min-w-[150px]  ">
