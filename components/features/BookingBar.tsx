@@ -78,7 +78,10 @@ export const BookingBar: React.FC<BookingBarProps> = ({
     end: null,
   });
 
-  // Handle click outside to close dropdown
+  // Mobile specific state
+  const [isMobileExpanded, setIsMobileExpanded] = useState(false);
+
+  // Handle click outside to close dropdown (Desktop)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (locationRef.current && !locationRef.current.contains(event.target as Node)) {
@@ -113,78 +116,306 @@ export const BookingBar: React.FC<BookingBarProps> = ({
   };
 
   return (
-    <div className="relative w-auto mx-auto bg-[#FEFEFE] py-6 px-6 flex flex-col md:flex-row items-center md:space-x-16 space-y-3 md:space-y-0 rounded-sm">
-      {/* Location Section */}
-      {enableLocationSelection && (
-        <div className="relative flex flex-col gap-1 min-w-[180px] w-full md:w-auto border-b border-gray-200 pb-2" ref={locationRef}>
-          <span className="text-[#001446] mb-3 text-lg tracking-wide">Location</span>
-          <div className="flex items-center justify-between group cursor-pointer" onClick={toggleLocation}>
-            <span className="text-secondary text-sm transition-colors ">{selectedLocation}</span>
-            <span className={`transform transition-transform duration-200 ${isLocationOpen ? "rotate-180" : ""}`}>
-              <ChevronDownIcon />
-            </span>
-          </div>
-
-          {/* Dropdown Menu */}
-          {isLocationOpen && (
-            <div className="absolute top-full left-0 mt-2 w-full bg-white border border-gray-100 shadow-lg rounded-md overflow-hidden z-50">
-              {locations.map((loc) => (
-                <div
-                  key={loc}
-                  className="px-4 py-3 text-sm text-[#001446] hover:bg-gray-50 cursor-pointer transition-colors"
-                  onClick={() => handleLocationSelect(loc)}
-                >
-                  {loc}
-                </div>
-              ))}
+    <>
+      {/* =========================================
+          DESKTOP VERSION (Hidden on Mobile)
+          ========================================= */}
+      <div className="hidden md:flex relative w-auto mx-auto bg-[#FEFEFE] py-6 px-6  flex-row items-center space-x-16 rounded-sm shadow-sm transition-all duration-300">
+        {/* Location Section */}
+        {enableLocationSelection && (
+          <div className="relative flex flex-col gap-1 min-w-[180px]  border-b border-gray-200 pb-2" ref={locationRef}>
+            <span className="text-[#001446] mb-3 text-lg tracking-wide">Location</span>
+            <div className="flex items-center justify-between group cursor-pointer" onClick={toggleLocation}>
+              <span className="text-secondary text-sm transition-colors ">{selectedLocation}</span>
+              <span className={`transform transition-transform duration-200 ${isLocationOpen ? "rotate-180" : ""}`}>
+                <ChevronDownIcon />
+              </span>
             </div>
-          )}
+
+            {/* Dropdown Menu */}
+            {isLocationOpen && (
+              <div className="absolute top-full left-0 mt-2 w-full bg-white border border-gray-100 shadow-lg rounded-md overflow-hidden z-50">
+                {locations.map((loc) => (
+                  <div
+                    key={loc}
+                    className="px-4 py-3 text-sm text-[#001446] hover:bg-gray-50 cursor-pointer transition-colors"
+                    onClick={() => handleLocationSelect(loc)}
+                  >
+                    {loc}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Check-In/Check-Out Section */}
+        <div className="relative flex flex-col gap-1 min-w-[220px]  border-b border-gray-200 pb-2">
+          <span className="text-[#001446] mb-3 text-lg tracking-wide">Check-In/Check-Out</span>
+          <div className="flex items-center justify-between cursor-pointer group" onClick={() => setIsDateOpen(!isDateOpen)}>
+            <span className="text-secondary text-sm transition-colors ">
+              {dateRange.start && dateRange.end ? `${formatDate(dateRange.start)} - ${formatDate(dateRange.end)}` : "Select Dates"}
+            </span>
+            <ChevronDownIcon />
+          </div>
         </div>
-      )}
 
-      {/* Check-In/Check-Out Section */}
-      <div className="relative flex flex-col gap-1 min-w-[220px] w-full md:w-auto border-b border-gray-200 pb-2">
-        <span className="text-[#001446] mb-3 text-lg tracking-wide">Check-In/Check-Out</span>
-        <div className="flex items-center justify-between cursor-pointer group" onClick={() => setIsDateOpen(!isDateOpen)}>
-          <span className="text-secondary text-sm transition-colors ">
-            {dateRange.start && dateRange.end ? `${formatDate(dateRange.start)} - ${formatDate(dateRange.end)}` : "Select Dates"}
-          </span>
-          <ChevronDownIcon />
+        {/* Adults */}
+        <div className=" border-gray-200 pb-0">
+          <Counter label="Adults" value={adults} min={1} onChange={setAdults} />
         </div>
 
-        {/* Date Picker Component */}
+        {/* Children */}
+        <div className=" border-gray-200 pb-0">
+          <Counter label="Children" value={children} min={0} onChange={setChildren} />
+        </div>
+
+        {/* Check Availability Button */}
+        <div className="">
+          <Button variant="tertiary" className="" onClick={() => console.log("Searching...", { selectedLocation, dateRange, adults, children })}>
+            Check Availability
+          </Button>
+        </div>
+
+        {/* Date Picker Component (Desktop) */}
+        <DateRangePicker
+          isOpen={isDateOpen}
+          onClose={() => setIsDateOpen(false)}
+          onSelect={(start, end) => {
+            setDateRange({ start, end });
+            if (start && end) setIsDateOpen(false); // Auto-close when both selected
+          }}
+          initialStart={dateRange.start}
+          initialEnd={dateRange.end}
+        />
       </div>
 
-      {/* Adults */}
-      <div className="w-full md:w-auto flex justify-between md:block border-b md:border-none border-gray-200 pb-2 md:pb-0">
-        <Counter label="Adults" value={adults} min={1} onChange={setAdults} />
-      </div>
+      {/* =========================================
+         MOBILE VERSION (Hidden on Desktop)
+         ========================================= */}
+      <div className="md:hidden w-full px-0">
+        {/* Initial Collapsed State (The Card) */}
+        {!isMobileExpanded && (
+          <div className="bg-white p-6 shadow-lg rounded-sm w-full mx-auto" onClick={() => setIsMobileExpanded(true)}>
+            <h3 className="text-[#001446] font-medium text-lg mb-4 font-serif">Check-In/Check-Out</h3>
 
-      {/* Children */}
-      <div className="w-full md:w-auto flex justify-between md:block border-b md:border-none border-gray-200 pb-2 md:pb-0">
-        <Counter label="Children" value={children} min={0} onChange={setChildren} />
-      </div>
+            <div className="flex items-center justify-between border-b border-gray-200 pb-2 cursor-pointer">
+              <span className="text-gray-400 text-sm">
+                {dateRange.start && dateRange.end ? `${formatDate(dateRange.start)} - ${formatDate(dateRange.end)}` : "SelectDates"}
+              </span>
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" className="opacity-50">
+                <path d="M1 1L5 5L9 1" stroke="#001446" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+          </div>
+        )}
 
-      {/* Check Availability Button */}
-      <div className="w-full md:w-auto">
-        <Button
-          variant="tertiary"
-          className="w-full md:w-auto"
-          onClick={() => console.log("Searching...", { selectedLocation, dateRange, adults, children })}
-        >
-          Check Availability
-        </Button>
+        {/* Expanded State (The Full Form) */}
+        {isMobileExpanded && (
+          <div className="bg-[#f9f9f9] w-full flex flex-col gap-6 pb-10">
+            {/* Top Header */}
+            <h3 className="text-[#001446] font-medium text-xl font-serif">Check-In/Check-Out</h3>
+
+            {/* SelectDates Dropdown Trigger (Visual) */}
+            <div className="border-b border-gray-200 pb-2 flex justify-between items-center" onClick={() => setIsMobileExpanded(false)}>
+              <span className="text-gray-500 text-base">
+                {dateRange.start && dateRange.end ? `${formatDate(dateRange.start)} - ${formatDate(dateRange.end)}` : "SelectDates"}
+              </span>
+              <ChevronDownIcon />
+            </div>
+
+            {/* Location Section */}
+            {enableLocationSelection && (
+              <div className="flex flex-col gap-2 pt-2">
+                <h4 className="text-[#001446] text-xl font-serif">Location</h4>
+                <div className="border-b border-gray-200 pb-2 flex justify-between items-center" onClick={() => setIsLocationOpen(!isLocationOpen)}>
+                  <span className="text-gray-500 text-base">{selectedLocation}</span>
+                  <span className={`transform transition-transform ${isLocationOpen ? "rotate-180" : ""}`}>
+                    <ChevronDownIcon />
+                  </span>
+                </div>
+                {isLocationOpen && (
+                  <div className="bg-white border border-gray-100 shadow-sm mt-1 rounded-sm">
+                    {locations.map((loc) => (
+                      <div
+                        key={loc}
+                        className="p-3 border-b border-gray-50 last:border-none text-sm text-[#001446]"
+                        onClick={() => {
+                          setSelectedLocation(loc);
+                          setIsLocationOpen(false);
+                        }}
+                      >
+                        {loc}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Date Boxes */}
+            <div className="flex gap-4 pt-2">
+              <div
+                className={`flex-1 border rounded-sm p-4 flex flex-col items-center justify-center bg-white cursor-pointer ${!dateRange.end ? "border-[#E2BA86]" : "border-gray-200"}`}
+                onClick={() => setDateRange({ ...dateRange, end: null })}
+              >
+                <span className="text-[#001446] text-base font-medium">Check-In Date</span>
+                {/* <span className="text-gray-400 text-xs mt-1">{dateRange.start ? formatDate(dateRange.start) : ""}</span> */}
+              </div>
+              <div
+                className={`flex-1 border rounded-sm p-4 flex flex-col items-center justify-center bg-white cursor-pointer ${dateRange.end ? "border-[#E2BA86]" : "border-gray-200"}`}
+              >
+                <span className="text-[#001446] text-base font-medium">Check-Out Date</span>
+                {/* <span className="text-gray-400 text-xs mt-1">{dateRange.end ? formatDate(dateRange.end) : ""}</span> */}
+              </div>
+            </div>
+
+            {/* Custom Mobile Calendar (Visual Match) */}
+            <div className="pt-2">
+              <div className="flex items-center justify-center gap-2 mb-6 cursor-pointer">
+                <span className="text-[#001446] text-lg font-serif">January 2026</span>
+                <ChevronDownIcon />
+              </div>
+
+              {/* Days Grid */}
+              <div className="grid grid-cols-7 mb-4">
+                {["S", "M", "T", "W", "T", "F", "S"].map((d, i) => (
+                  <div key={i} className="text-center text-sm font-serif font-bold text-[#001446]">
+                    {d}
+                  </div>
+                ))}
+              </div>
+
+              {/* Dates Grid (Mocking Jan 2026 Logic roughly) 
+                    Jan 1 2026 is a Thursday.
+                */}
+              <div className="grid grid-cols-7 gap-y-4 gap-x-1">
+                {/* Blanks for S M T W */}
+                {[...Array(4)].map((_, i) => (
+                  <div key={`b-${i}`} />
+                ))}
+
+                {/* Days 1-31 */}
+                {[...Array(31)].map((_, i) => {
+                  const day = i + 1;
+                  // Mocking "27-31" as example relevant dates or interactive
+                  const isSelected = day === 27; // Just matching image roughly
+                  const hasPrice = day >= 27;
+
+                  return (
+                    <div key={day} className="flex flex-col items-center gap-1 cursor-pointer">
+                      <div
+                        className={`w-8 h-8 flex items-center justify-center text-sm font-serif ${isSelected ? "text-[#001446] font-bold" : "text-gray-500"}`}
+                      >
+                        {day}
+                      </div>
+                      {hasPrice && (
+                        <span className="text-[9px] text-[#001446] font-medium leading-none">
+                          INR
+                          <br />
+                          1,265
+                        </span>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Legend */}
+            <div className="flex flex-col gap-3 mt-4 border-b border-gray-200 pb-8">
+              <div className="flex items-center gap-3">
+                <div className="w-5 h-5 rounded-full bg-[#001446]"></div>
+                <span className="text-[#001446] text-sm font-serif">Selected</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-5 h-5 rounded-full border border-gray-200 bg-white"></div>
+                <span className="text-[#001446] text-sm font-serif">Available</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-5 h-5 rounded-full border border-gray-200 flex items-center justify-center text-xs text-gray-300">X</div>
+                <span className="text-[#001446] text-sm font-serif">Please contact the Hotel</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-5 h-5 rounded-full bg-[#D2B48C]"></div>
+                <span className="text-[#001446] text-sm font-serif">Restrictions Apply</span>
+              </div>
+            </div>
+
+            {/* Room 1 */}
+            <div className="pt-4">
+              <h4 className="text-[#001446] text-xl font-serif mb-6">Room 1</h4>
+
+              <div className="flex justify-between items-center mb-6">
+                <div>
+                  <div className="text-[#001446] text-lg font-serif">Adults</div>
+                  <div className="text-gray-400 text-xs font-sans">(12 Years & above)</div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={() => setAdults(Math.max(1, adults - 1))}
+                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-[#001446] hover:text-[#001446] disabled:opacity-50"
+                  >
+                    <MinusIcon />
+                  </button>
+                  <span className="text-[#001446] w-4 text-center font-medium">{adults}</span>
+                  <button
+                    onClick={() => setAdults(adults + 1)}
+                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-[#001446] hover:text-[#001446]"
+                  >
+                    <PlusIcon />
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex justify-between items-center mb-0">
+                <div>
+                  <div className="text-[#001446] text-lg font-serif">Children</div>
+                  <div className="text-gray-400 text-xs font-sans">(0-11 years)</div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={() => setChildren(Math.max(0, children - 1))}
+                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-[#001446] hover:text-[#001446] disabled:opacity-50"
+                  >
+                    <MinusIcon />
+                  </button>
+                  <span className="text-[#001446] w-4 text-center font-medium">{children}</span>
+                  <button
+                    onClick={() => setChildren(children + 1)}
+                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-[#001446] hover:text-[#001446]"
+                  >
+                    <PlusIcon />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Add Another Room */}
+            <div className="flex justify-center items-center py-6 border-t border-b border-gray-200 mt-2">
+              <span className="text-[#001446] text-lg font-serif mr-2">Add Another Room</span>
+              <PlusIcon />
+            </div>
+
+            {/* Check Availability Button */}
+            <div className="pt-2">
+              <Button
+                variant="tertiary"
+                className="w-full bg-[#758098] !py-4 text-white text-lg rounded-sm font-medium tracking-wide shadow-sm hover:bg-[#64708A]"
+                onClick={() => console.log("Mobile Searching...", { selectedLocation, dateRange, adults, children })}
+              >
+                Check Availability
+              </Button>
+            </div>
+            {/* Close Expansion Button (Optional, or click outside behavior) */}
+            <div className="text-center mt-2">
+              <button onClick={() => setIsMobileExpanded(false)} className="text-sm text-gray-500 underline">
+                Close
+              </button>
+            </div>
+          </div>
+        )}
       </div>
-      <DateRangePicker
-        isOpen={isDateOpen}
-        onClose={() => setIsDateOpen(false)}
-        onSelect={(start, end) => {
-          setDateRange({ start, end });
-          if (start && end) setIsDateOpen(false); // Auto-close when both selected
-        }}
-        initialStart={dateRange.start}
-        initialEnd={dateRange.end}
-      />
-    </div>
+    </>
   );
 };

@@ -284,7 +284,7 @@ export const Footer = () => {
 
   return (
     <footer className="bg-[#020412] text-[#FAF5EB] py-8 antialiased">
-      <div className="container mx-auto px-6 lg:px-16 ">
+      <div className="container mx-auto px-6 lg:px-0 ">
         {/* --- DESKTOP LAYOUT --- */}
         <div className="hidden md:block">
           {/* --- SECTION 1: TOP CONTENT --- */}
@@ -294,9 +294,9 @@ export const Footer = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-y-12 mb-16">
-            {/* Column 1: Bookings & Support */}
-            <div className="lg:col-span-5 flex flex-col gap-20 pr-4">
+          <div className="flex flex-col lg:flex-row justify-between gap-y-12 mb-16">
+            {/* Left Side: Bookings & Support */}
+            <div className="flex flex-col gap-20 pr-4">
               <div>
                 <h3 className="text-3xl mb-4">For Bookings Contact</h3>
                 <div className="flex flex-wrap items-center gap-x-12 gap-y-2 text-base">
@@ -313,63 +313,66 @@ export const Footer = () => {
               </div>
             </div>
 
-            {/* Column 2: Navigation */}
-            <div className="lg:col-span-2 lg:col-start-7">
-              <nav className="flex flex-col gap-3 text-[15px]">
-                <Link href="#" className="w-max">
-                  Dining
-                </Link>
-                <Link href="#" className="w-max">
-                  Spa
-                </Link>
-                <Link href="#" className="w-max">
-                  Event Spaces
-                </Link>
-                <Link href="#" className="w-max">
-                  Karwar
-                </Link>
-                <Link href="#" className="w-max">
-                  Gokarna
-                </Link>
-                <Link href="#" className="w-max">
-                  About Us
-                </Link>
-                <Link href="#" className="w-max">
-                  Contact Us
-                </Link>
-              </nav>
-            </div>
+            {/* Right Side: Navigation, Contact, Socials */}
+            <div className="flex gap-16 lg:gap-32 xl:gap-36">
+              {/* Column 2: Navigation */}
+              <div>
+                <nav className="flex flex-col gap-3 text-[15px]">
+                  <Link href="#" className="w-max">
+                    Dining
+                  </Link>
+                  <Link href="#" className="w-max">
+                    Spa
+                  </Link>
+                  <Link href="#" className="w-max">
+                    Event Spaces
+                  </Link>
+                  <Link href="#" className="w-max">
+                    Karwar
+                  </Link>
+                  <Link href="#" className="w-max">
+                    Gokarna
+                  </Link>
+                  <Link href="#" className="w-max">
+                    About Us
+                  </Link>
+                  <Link href="#" className="w-max">
+                    Contact Us
+                  </Link>
+                </nav>
+              </div>
 
-            {/* Column 3: Contact Info */}
-            <div className="lg:col-span-3 lg:col-start-9">
-              <div className="flex flex-col gap-4 text-sm">
-                <div className="flex items-center gap-4">
-                  <PhoneIcon />
-                  <span>+91 9376537253</span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <MailIcon />
-                  <span>eden@gmail.com</span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <MapPinIcon />
-                  <span>123 Street, California</span>
+              {/* Column 3: Contact Info */}
+              <div>
+                <div className="flex flex-col gap-4 text-sm">
+                  <div className="flex items-center gap-4">
+                    <PhoneIcon />
+                    <span>+91 9376537253</span>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <MailIcon />
+                    <span>eden@gmail.com</span>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <MapPinIcon />
+                    <span>123 Street, California</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Column 4: Socials */}
-            <div className="lg:col-span-2 lg:col-start-12 flex justify-start lg:justify-end h-max">
-              <div className="flex gap-4">
-                <Link href="#" className="w-8 h-8 flex items-center justify-center rounded">
-                  <InstagramIcon />
-                </Link>
-                <Link href="#" className="w-8 h-8 flex items-center justify-center rounded">
-                  <FacebookIcon />
-                </Link>
-                <Link href="#" className="w-8 h-8 flex items-center justify-center rounded">
-                  <LinkedinIcon />
-                </Link>
+              {/* Column 4: Socials */}
+              <div className="flex h-max">
+                <div className="flex gap-4">
+                  <Link href="#" className="w-8 h-8 flex items-center justify-center rounded">
+                    <InstagramIcon />
+                  </Link>
+                  <Link href="#" className="w-8 h-8 flex items-center justify-center rounded">
+                    <FacebookIcon />
+                  </Link>
+                  <Link href="#" className="w-8 h-8 flex items-center justify-center rounded">
+                    <LinkedinIcon />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -450,15 +453,7 @@ export const Footer = () => {
             </div>
 
             {/* Row 4 */}
-            <Link href="#" className="w-max">
-              Karwar
-            </Link>
             <div />
-
-            {/* Row 5 */}
-            <Link href="#" className="w-max">
-              Gokarna
-            </Link>
             <div />
           </div>
         </div>
@@ -466,12 +461,12 @@ export const Footer = () => {
         {/* --- SECTION 2: DESTINATIONS ACCORDION --- */}
         <div className="border-t border-[#FAF5EB]/20">
           <button onClick={() => setDestinationsOpen(!destinationsOpen)} className="w-full flex justify-between items-center py-6 group outline-none">
-            <span className="text-2xl tracking-wide">Destinations</span>
+            <span className="text-2xl tracking-wide">Destination</span>
             <span>{destinationsOpen ? <MinusIcon /> : <PlusIcon />}</span>
           </button>
 
           <div className={`overflow-hidden transition-all duration-300 ease-in-out ${destinationsOpen ? "max-h-40 pb-8" : "max-h-0"}`}>
-            <div className="flex flex-col gap-4 pl-4 md:pl-20 text-[15px]">
+            <div className="flex flex-col items-center md:items-start pl-0 md:pl-10 gap-4 text-[15px]">
               <Link href="/location/karwar" className="w-max">
                 Karwar
               </Link>
@@ -483,7 +478,7 @@ export const Footer = () => {
         </div>
 
         {/* --- SECTION 3: OUR BRANDS --- */}
-        <div className="border-t border-[#FAF5EB]/20 py-10 flex flex-col lg:flex-row items-center">
+        <div className="border-t border-[#FAF5EB]/20 py-10 hidden md:flex flex-col lg:flex-row items-center">
           <div className="flex flex-wrap justify-between items-center w-full gap-8 lg:gap-12">
             <h4 className="text-2xl mb-10 lg:mb-0 whitespace-nowrap">Our Brands</h4>
 
@@ -532,15 +527,84 @@ export const Footer = () => {
             </div>
           </div>
         </div>
+        <div className="border-t md:hidden border-[#FAF5EB]/20 py-10 flex flex-col items-center">
+          <h4 className="text-2xl mb-10 text-center whitespace-nowrap">Our Brands</h4>
+          <div className="flex flex-wrap justify-center items-center w-full gap-8">
+            <div className="relative h-auto w-auto">
+              <Image
+                src="/svgs/brands/terminalMobile.svg"
+                alt="Terminal 5"
+                width={0}
+                height={0}
+                className="h-full w-auto object-contain brightness-0 invert"
+              />
+            </div>
+
+            <div className="relative h-auto w-auto">
+              <Image
+                src="/svgs/brands/tulipMobile.svg"
+                alt="Tulip"
+                width={0}
+                height={0}
+                className="h-full w-auto object-contain brightness-0 invert"
+              />
+            </div>
+
+            <div className="relative h-auto w-auto">
+              <Image
+                src="/svgs/brands/oysterMobile.svg"
+                alt="Oyster Bay"
+                width={0}
+                height={0}
+                className="h-full w-auto object-contain brightness-0 invert"
+              />
+            </div>
+
+            <div className="relative h-auto w-auto">
+              <Image
+                src="/svgs/brands/foodMobile.svg"
+                alt="Food Forest"
+                width={0}
+                height={0}
+                className="h-full w-auto object-contain brightness-0 invert"
+              />
+            </div>
+
+            <div className="relative h-auto w-auto">
+              <Image
+                src="/svgs/brands/goldenMobile.svg"
+                alt="The Golden Leaf"
+                width={0}
+                height={0}
+                className="h-full w-auto object-contain brightness-0 invert"
+              />
+            </div>
+          </div>
+        </div>
 
         {/* --- SECTION 4: COPYRIGHT --- */}
-        <div className="border-t border-[#FAF5EB]/20 pt-8 flex flex-col md:flex-row justify-between items-center text-xs tracking-wide">
+        <div className="border-t border-[#FAF5EB]/20 pt-8 hidden md:flex flex-col-reverse md:flex-row justify-between items-center text-xs tracking-wide">
           <p className="mb-4 md:mb-0">Copyright © 2026-27 Milan Hospitality and Management Services. All rights reserved.</p>
           <div className="flex gap-6">
             <Link href="#">Terms of Service</Link>
             <span className="w-[1px] h-3 bg-[#FAF5EB]"></span>
             <Link href="#">Privacy Policy</Link>
           </div>
+        </div>
+
+
+          <div className="border-y  border-[#FAF5EB]/20 py-8 md:hidden flex flex-col justify-center items-center text-sm tracking-wide">
+           <div className="flex gap-6">
+            <Link href="#">Terms of Service</Link>
+            <span className="w-[1px] h-6 bg-[#FAF5EB]"></span>
+            <Link href="#">Privacy Policy</Link>
+          </div>
+         
+        </div>
+         <div className="border-t border-[#FAF5EB]/20 pt-8 md:hidden flex flex-col justify-between items-center text-sm tracking-wide">
+          
+          <p className="mb-4 text-center md:mb-0">Copyright © 2026-27 Milan Hospitality and Management Services. All rights reserved.</p>
+         
         </div>
       </div>
     </footer>

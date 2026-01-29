@@ -34,6 +34,10 @@ const amenities = [
   { id: 2, title: "Spa & Wellness", image: "/1.webp" },
   { id: 3, title: "Fitness Studio & Recreation Zone", image: "/1.webp" },
   { id: 4, title: "Banquet & Conference Facilities", image: "/1.webp" },
+   { id: 1, title: "Multi-cuisine Restaurants & Rooftop Dining", image: "/1.webp" },
+  { id: 2, title: "Spa & Wellness", image: "/1.webp" },
+  { id: 3, title: "Fitness Studio & Recreation Zone", image: "/1.webp" },
+  { id: 4, title: "Banquet & Conference Facilities", image: "/1.webp" },
 ];
 
 const faqData = [

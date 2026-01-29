@@ -66,17 +66,13 @@ export const Hero: React.FC<HeroProps> = ({
         </div>
 
         {/* 2. Overlapping Booking Card */}
+        {/* 2. Overlapping Booking Card */}
         <div className="relative z-10 px-6 -mt-12 mb-8">
-          <div className="bg-white p-6 shadow-lg rounded-sm w-full max-w-sm mx-auto">
-            <h3 className="text-[#001446] font-medium text-base mb-4 font-serif">Check-In/Check-Out</h3>
-
-            <div className="flex items-center justify-between border-b border-gray-200 pb-2 cursor-pointer">
-              <span className="text-gray-400 text-sm">SelectDates</span>
-              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" className="opacity-50">
-                <path d="M1 1L5 5L9 1" stroke="#001446" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-          </div>
+          <BookingBar
+            locations={bookingBarLocations}
+            defaultLocation={bookingBarDefaultLocation}
+            enableLocationSelection={bookingBarEnableSelection}
+          />
         </div>
 
         {/* 3. Mobile Content */}
@@ -92,10 +88,10 @@ export const Hero: React.FC<HeroProps> = ({
           </p>
 
           <div className="flex flex-col gap-3 w-full max-w-xs">
-            <Button variant="tertiary" className="w-auto !py-3 !text-base font-medium bg-[#001446]">
+            <Button variant="tertiary" className="w-full !py-3 !text-base font-medium bg-[#001446] text-white">
               Book
             </Button>
-            <Button variant="primary" className="w-auto !py-3 !text-base font-medium text-[#001446] border-[#001446]">
+            <Button variant="outline2" className="w-full !py-3 !text-base font-medium text-[#001446] border-[#001446]">
               Sign Up
             </Button>
           </div>

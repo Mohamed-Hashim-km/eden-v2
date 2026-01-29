@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 
@@ -57,8 +58,13 @@ export default function VenueSlider() {
     },
   ];
 
+  const [currentBg, setCurrentBg] = useState(carouselItems[0].imageSrc);
+
   return (
-    <section className="relative w-full py-20 overflow-hidden bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/image 36.png')" }}>
+    <section
+      className="relative w-full py-20 overflow-hidden bg-cover bg-center bg-no-repeat transition-all duration-500 ease-in-out"
+      style={{ backgroundImage: `url('${currentBg}')` }}
+    >
       <style>{customStyles}</style>
 
       {/* Gradient Overlay */}
@@ -89,6 +95,7 @@ export default function VenueSlider() {
             loop={false}
             centeredSlides={true}
             centeredSlidesBounds={true}
+            onSlideChange={(swiper) => setCurrentBg(carouselItems[swiper.activeIndex].imageSrc)}
             navigation={{
               nextEl: ".custom-next",
               prevEl: ".custom-prev",
