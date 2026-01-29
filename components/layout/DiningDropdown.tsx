@@ -31,8 +31,8 @@ const DiningDropdown = () => {
           <Link href={item.link} key={index} className="group block relative">
             <div className={`flex flex-col items-center h-full px-8 ${index !== 0 ? "border-l  border-[FEFFFF]" : ""}`}>
               <div className="text-center mb-6">
-                <h3 className="text-white text-xl md:text-2xl font-normal mb-1">{item.title}</h3>
-                <p className="text-white/80 text-sm md:text-base font-light">{item.subtitle}</p>
+                <h3 className="text-white text-xl md:text-lg font-normal mb-1">{item.title}</h3>
+                <p className="text-white/80 text-xl md:text-lg font-light">{item.subtitle}</p>
               </div>
               <div className="relative w-full aspect-4/3 overflow-hidden">
                 <Image src={item.image} alt={item.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
