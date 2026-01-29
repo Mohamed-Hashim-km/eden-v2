@@ -59,7 +59,7 @@ const RoomsShowcase = () => {
   const [nextEl, setNextEl] = useState(null);
 
   return (
-    <div className="pb-20 bg-white">
+    <div className="pb-1 md:pb-20 bg-white">
       <div className="container mx-auto px-4">
         {/* Header Section */}
         <div className="flex justify-center text-center mb-16">

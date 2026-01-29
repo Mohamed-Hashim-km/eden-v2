@@ -13,10 +13,7 @@ interface RoomGalleryCarouselProps {
   title?: string;
 }
 
-const RoomGalleryCarousel: React.FC<RoomGalleryCarouselProps> = ({
-  images,
-  title,
-}) => {
+const RoomGalleryCarousel: React.FC<RoomGalleryCarouselProps> = ({ images, title }) => {
   if (!images || images.length === 0) return null;
 
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
@@ -58,12 +55,7 @@ const RoomGalleryCarousel: React.FC<RoomGalleryCarouselProps> = ({
                     isActive ? "scale-100 z-10" : "scale-80"
                   }`}
                 >
-                  <Image
-                    src={src}
-                    alt={`Room Gallery Image ${index + 1}`}
-                    fill
-                    className="object-cover"
-                  />
+                  <Image src={src} alt={`Room Gallery Image ${index + 1}`} fill className="object-cover" />
                 </div>
               )}
             </SwiperSlide>
@@ -71,7 +63,7 @@ const RoomGalleryCarousel: React.FC<RoomGalleryCarouselProps> = ({
         </Swiper>
 
         {/* --- CUSTOM SCROLLBAR TRACK --- */}
-        <div className="container mx-auto pt-10 px-4 flex justify-center w-full">
+        <div className="container mx-auto hidden pt-10 px-4 lg:flex justify-center w-full">
           {/* Fixed Height & Shrink-0: 
              Prevents the 'background compacting' bug when Swiper loops. 
           */}
@@ -89,7 +81,7 @@ const RoomGalleryCarousel: React.FC<RoomGalleryCarouselProps> = ({
           >
             {/* --- CUSTOM SCROLLBAR THUMB --- */}
             <motion.div
-              className="absolute top-0 bottom-0 bg-[#dbb380] hover:bg-[#cda06d]"
+              className="absolute top-0  bottom-0 bg-[#dbb380] hover:bg-[#cda06d]"
               // Animate the left position based on which slide is active
               animate={{
                 left: `${(activeIndex / images.length) * 100}%`,

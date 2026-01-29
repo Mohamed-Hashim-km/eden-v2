@@ -2,10 +2,11 @@
 
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
+import { Navigation, Autoplay, Scrollbar } from "swiper/modules";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/scrollbar";
 
 // --- Icons ---
 const ChevronLeft = () => (
@@ -20,6 +21,7 @@ const ChevronRight = () => (
   </svg>
 );
 
+// --- Data ---
 // --- Data ---
 const diningOptions = [
   {
@@ -80,7 +82,7 @@ interface DiningShowcaseProps {
 
 export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
   return (
-    <section className="py-24 bg-white overflow-hidden">
+    <section className="md:py-24 bg-white overflow-hidden">
       {/* Title */}
       {title && (
         <div className="container mx-auto px-4 mb-20 text-center">
@@ -92,13 +94,13 @@ export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
          We make this 'relative' so the buttons can position themselves 
          specifically against the width of the slide area.
       */}
-      <div className="relative mx-auto max-w-[95%] md:max-w-[75%] xl:max-w-[1200px]">
+      <div className="relative mx-auto max-w-[95%] lg:max-w-[75%] xl:max-w-[1200px]">
         {/* --- NAVIGATION BUTTONS --- */}
         {/* Positioned absolutely within the container. 
             z-50 ensures they sit on top of images.
             -translate-x-1/2 pulls them slightly outward to straddle the edge.
         */}
-        <div className="absolute top-[40%] md:top-[250px] w-full hidden md:flex justify-between z-50 pointer-events-none">
+        <div className="absolute top-[40%] md:top-[250px] w-full hidden lg:flex justify-between z-50 pointer-events-none">
           {/* Previous Button - Left Edge */}
           <button className="swiper-button-prev-custom pointer-events-auto w-10 h-10 bg-white rounded-full  flex items-center justify-center text-gray-900 hover:scale-110 transition-transform absolute left-0 -translate-x-1/2">
             <ChevronLeft />
@@ -110,10 +112,9 @@ export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
           </button>
         </div>
 
-        {/* SWIPER CONTAINER */}
-        <div className="pb-24">
+        <div className="md:pb-24 pb-16 relative">
           <Swiper
-            modules={[Navigation, Autoplay]}
+            modules={[Navigation, Autoplay, Scrollbar]}
             loop={true}
             loopAdditionalSlides={3}
             speed={800}
@@ -124,9 +125,15 @@ export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
               prevEl: ".swiper-button-prev-custom",
               nextEl: ".swiper-button-next-custom",
             }}
+            scrollbar={{
+              el: ".swiper-scrollbar-custom",
+              draggable: true,
+            }}
             autoplay={{ delay: 2000, disableOnInteraction: true }}
             breakpoints={{
+              320: { slidesPerView: 1.15, spaceBetween: 16, centeredSlides: true },
               640: { slidesPerView: 1.1, spaceBetween: 20, centeredSlides: true },
+              // iPad / Tablet -> stays mobile layout but slightly more slides visible
               768: { slidesPerView: 1.5, spaceBetween: 24, centeredSlides: false },
               1024: { slidesPerView: 2, spaceBetween: 30 },
             }}
@@ -139,7 +146,7 @@ export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
                     {/* --- DESKTOP LAYOUT (Original) --- */}
                     <div
                       className={`
-                    hidden md:block
+                    hidden lg:block
                     relative group transition-all duration-700 ease-out select-none
                     ${isActive || isNext ? "opacity-100 blur-0" : "opacity-40 "}
                   `}
@@ -169,17 +176,23 @@ export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
                       </div>
                     </div>
 
-                    {/* --- MOBILE LAYOUT (New, Text Below Image) --- */}
-                    <div className="block md:hidden relative group select-none h-full bg-white">
+                    {/* --- MOBILE LAYOUT (New, Overlapping Text Card) --- */}
+                    <div className="block lg:hidden relative group select-none h-full pt-4">
                       {/* IMAGE CONTAINER */}
-                      <div className="relative w-full h-[300px] overflow-hidden">
+                      <div className="relative w-full h-[400px] overflow-hidden shadow-sm">
                         <Image src={item.image} alt={item.title} fill className="object-cover" />
                       </div>
 
-                      {/* TEXT CONTENT (Below Image) */}
-                      <div className="pt-6 pb-2 pr-4">
-                        <h3 className="text-2xl text-primary mb-3 font-normal">{item.title}</h3>
-                        <p className="text-gray-600 text-base leading-relaxed font-light">{item.description}</p>
+                      {/* TEXT CONTENT (Overlapping) */}
+                      <div className="relative -mt-16 w-[90%] mx-auto bg-white p-6 shadow-md z-10 text-center">
+                        {item.mobileLogo ? (
+                          <div className="relative w-full h-12 mb-2 flex justify-center items-center">
+                            <Image src={item.mobileLogo} alt={item.title} width={100} height={40} className="object-contain" />
+                          </div>
+                        ) : (
+                          <h3 className="text-xl text-primary mb-2 font-normal">{item.title}</h3>
+                        )}
+                        <p className="text-gray-600 text-sm leading-relaxed font-light line-clamp-2 px-2">{item.description}</p>
                       </div>
                     </div>
                   </>
@@ -187,6 +200,11 @@ export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
               </SwiperSlide>
             ))}
           </Swiper>
+
+          {/* Custom Scrollbar Container */}
+          <div className="swiper-scrollbar-custom h-1 bg-gray-200 mt-10 relative overflow-hidden rounded-full w-[90%] mx-auto lg:hidden">
+            {/* Swiper will inject the drag handle here automatically */}
+          </div>
         </div>
       </div>
     </section>

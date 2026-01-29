@@ -2,13 +2,14 @@
 
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
+import { Navigation, Autoplay, Scrollbar } from "swiper/modules";
 import Link from "next/link";
 import Image from "next/image";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/scrollbar";
 
 export interface CarouselItem {
   image: string;
@@ -29,44 +30,64 @@ export const ContentCarousel: React.FC<ContentCarouselProps> = ({ title, descrip
   const [nextEl, setNextEl] = useState(null);
 
   return (
-    <section className={`py-16  md:pt-24 md:pb-0 bg-white ${className}`}>
-      <div className="container mx-auto px-4">
+    <section className={`py-12 md:py-16 lg:pt-24 lg:pb-0 bg-white overflow-hidden ${className}`}>
+      <div className="container mx-auto  md:px-4">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12 md:mb-16">
-          <div className="flex items-center gap-4">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl text-primary leading-tight">{title}</h2>
+           <h2 className="text-primary px-4 text-sm md:text-lg mb-4 font-semibold tracking-wide">Common Amenities</h2>
+        <div className="flex flex-col px-4 md:px-0 md:flex-row justify-between items-start gap-4 md:gap-8 mb-8 md:mb-16">
+          <div className="flex flex-col gap-2 md:gap-4 max-w-2xl">
+         
+            <h2 className="text-3xl md:text-5xl lg:text-6xl text-primary leading-[1.1] ">{title}</h2>
           </div>
 
-          {description && <div className="max-w-xl text-secondary text-base md:text-lg leading-relaxed">{description}</div>}
+          {description && <div className="max-w-xl text-secondary text-sm md:text-lg leading-relaxed ">{description}</div>}
         </div>
 
         {/* Carousel Section */}
-        {/* Added 'static' or removed relative from here so buttons can position relative to the wider section if needed, 
-            but usually keeping relative here is safer for containment. 
-            We will rely on negative positioning for the 'outside' look. */}
         <div className="relative group/slider">
           <Swiper
-            modules={[Navigation, Autoplay]}
-            spaceBetween={24}
-            slidesPerView={1}
-            loop={true}
+            modules={[Navigation, Autoplay, Scrollbar]}
+            spaceBetween={16}
+            slidesPerView={1.2}
+            loop={false}
             navigation={{
               prevEl,
               nextEl,
             }}
-            autoplay={{ delay: 5000, disableOnInteraction: false }}
-            breakpoints={{
-              640: { slidesPerView: 2 },
-              900: { slidesPerView: 3 },
-              1200: { slidesPerView: 4 },
+            scrollbar={{
+              draggable: true,
+              hide: false,
+              el: ".swiper-scrollbar",
             }}
-            className=""
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            className="pb-12! md:pb-0!"
+            centeredSlides={true}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 24,
+                loop: true,
+                centeredSlides: false,
+              },
+              900: {
+                slidesPerView: 3,
+                spaceBetween: 24,
+                loop: true,
+                centeredSlides: false,
+              },
+              1200: {
+                slidesPerView: 4,
+                spaceBetween: 24,
+                loop: true,
+                centeredSlides: false,
+              },
+            }}
           >
             {items.map((item, index) => (
               <SwiperSlide key={index} className="h-auto">
                 <div className="block h-full group cursor-pointer">
                   {/* Image Container */}
-                  <div className="relative overflow-hidden mb-6 aspect-[4/5] md:aspect-square">
+                  <div className="relative overflow-hidden mb-4 md:mb-6 aspect-3/4 w-full">
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -77,13 +98,16 @@ export const ContentCarousel: React.FC<ContentCarouselProps> = ({ title, descrip
                   </div>
 
                   {/* Text Container */}
-                  <h3 className="text-primary text-lg md:text-xl mb-6  uppercase tracking-wide leading-snug transition-colors duration-300">
+                  <h3 className="text-primary text-base md:text-xl md:mb-6 uppercase tracking-wide leading-snug transition-colors duration-300 font-medium">
                     {item.title}
                   </h3>
-                  {item.description && <p className="text-secondary text-sm leading-relaxed mb-6 flex-grow">{item.description}</p>}
+                  {item.description && <p className="text-secondary text-sm leading-relaxed mb-6 flex-grow hidden md:block">{item.description}</p>}
                 </div>
               </SwiperSlide>
             ))}
+            <div className="swiper-scrollbar mx-auto! w-[70%]! static! h-1! mt-4! bg-gray-200! md:hidden!">
+              <div className="swiper-scrollbar-drag bg-primary!"></div>
+            </div>
           </Swiper>
 
           {/* --- Navigation Buttons --- */}
@@ -91,10 +115,7 @@ export const ContentCarousel: React.FC<ContentCarouselProps> = ({ title, descrip
           {/* Previous Button */}
           <button
             ref={(node) => setPrevEl(node as any)}
-            // CHANGES MADE:
-            // 1. top-[40%] (was top-1/2): Moves button up to align with Image center instead of Card center
-            // 2. xl:-left-24 (was lg:-left-12): Pushes button further outside on large screens
-            className="absolute top-[40%] -left-4 lg:-left-20 xl:-left-24 z-20 -translate-y-1/2 w-12 h-12 rounded-full border border-[#001446]/20 bg-white flex items-center justify-center text-[#001446] transition-all duration-300 hover:bg-[#001446] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed opacity-0 group-hover/slider:opacity-100 shadow-md"
+            className="hidden md:flex absolute top-[40%] -left-4 lg:-left-12 lg2:-left-20 xl:-left-16 2xl:-left-24 z-20 -translate-y-1/2 w-12 h-12 rounded-full border border-primary bg-white items-center justify-center text-primary transition-all duration-300 hover:bg-primary hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Previous slide"
           >
             <svg
@@ -114,10 +135,7 @@ export const ContentCarousel: React.FC<ContentCarouselProps> = ({ title, descrip
           {/* Next Button */}
           <button
             ref={(node) => setNextEl(node as any)}
-            // CHANGES MADE:
-            // 1. top-[40%]: Align with Image
-            // 2. xl:-right-24: Push outside container
-            className="absolute top-[40%] -right-4 lg:-right-20 xl:-right-24 z-20 -translate-y-1/2 w-12 h-12 rounded-full border border-[#001446]/20 bg-white flex items-center justify-center text-[#001446] transition-all duration-300 hover:bg-[#001446] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed opacity-0 group-hover/slider:opacity-100 shadow-md"
+            className="hidden md:flex absolute top-[40%] -right-4 lg:-right-12 lg2:-right-20 xl:-right-16 2xl:-right-24 z-20 -translate-y-1/2 w-12 h-12 rounded-full border border-primary bg-white items-center justify-center text-primary transition-all duration-300 hover:bg-primary hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Next slide"
           >
             <svg

@@ -25,6 +25,7 @@ import PopularFacilities from "@/components/shared/PopularFacilities";
 import { ContentGridCarousel } from "@/components/shared/ContentGrid";
 import Faq from "@/components/shared/Faq";
 import { FeatureShowcase } from "@/components/shared/FeatureShowcase";
+import { CommonAmenities } from "@/components/features/CommonAmenities";
 
 const amenities = [
   {
@@ -160,7 +161,7 @@ export default function GokarnaPage() {
         subtitle=""
       />
 
-      <ContentCarousel title="Common Amenities" description="" items={amenities} />
+      <CommonAmenities items={amenities} />
 
       <Faq title="Frequently Asked Questions" description="" faqData={faqData} />
       <FeatureShowcase

@@ -2,6 +2,11 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import { motion } from "framer-motion";
+import type { Swiper as SwiperType } from "swiper";
+import "swiper/css";
 
 const overviewData = {
   tulip: [
@@ -23,6 +28,11 @@ const overviewData = {
 
 function Overview() {
   const [activeTab, setActiveTab] = useState("tulip");
+  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const currentImages = overviewData[activeTab];
+  const thumbWidthPercent = 100 / currentImages.length; // Dynamic width based on item count
 
   const getTabLabel = (key) => {
     switch (key) {
@@ -38,65 +48,127 @@ function Overview() {
   };
 
   return (
-    <section className="py-16 md:pb-24 md:pt-0 bg-white">
-      <div className="container mx-auto px-4 md:px-6">
+    <section className="py-16 md:py-24 bg-white">
+      <div className="container mx-auto   md:px-6">
         {/* --- Header --- */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          {/* Serif font matching the "World of Dining" image */}
-          <h2 className="text-4xl md:text-5xl lg:text-6xl text-primary leading-tight mb-6">A World of Dining</h2>
-          <p className="text-secondary text-lg font-light">
+        {/* --- Desktop Header --- */}
+        <div className="hidden md:block text-center  max-w-3xl mx-auto mb-16">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl text-primary leading-tight mb-6 ">A World of Dining</h2>
+          <p className="text-secondary text-lg font-light leading-relaxed">
             Discover diverse flavours and memorable dining experiences across our signature restaurants.
           </p>
         </div>
 
+        {/* --- Mobile Header --- */}
+        <div className="block md:hidden px-4 md:px-0 mb-12 text-left">
+          <h2 className="text-[32px] leading-[1.2] text-[#0A1629] mb-6 ">The Eden Dining Philosophy</h2>
+          <div className="w-16 border-t-2 border-[#9F9F9F] mb-6" />
+          <p className="text-[#5E5E5E] text-base font-light leading-relaxed">
+            Our culinary ethos is defined by a commitment to purity and artisanal technique. By pairing the finest ingredients with attentive
+            hospitality, we create a dining experience that is both comforting and profoundly flavorful.
+          </p>
+        </div>
+
         {/* --- Tabs --- */}
-        {/* Flex container to center the tabs */}
-        <div className="flex justify-center mb-12">
-          <div className="flex w-full md:w-full lg:w-full border-b border-gray-200">
+        <div className="flex justify-center px-4 md:px-0 mb-12">
+          {/* FIX 1: Removed 'pb-1' so buttons touch the border line */}
+          <div className="flex w-full md:w-full lg:w-full border-b-[4px] border-[#E5E5E5]">
             {["tulip", "oyster", "forest"].map((tab) => (
               <button
                 key={tab}
-                onClick={() => setActiveTab(tab)}
+                onClick={() => {
+                  setActiveTab(tab);
+                  // Optional: Reset swiper to 0 when tab changes if desired,
+                  // but swiper updates automatically due to key or content change usually.
+                }}
                 className={`
-                  flex-1 pb-4 text-lg font-semibold tracking-wide transition-all duration-300 relative
-                  ${
-                    activeTab === tab
-                      ? "text-primary" // Active text color
-                      : "text-secondary hover:text-secondary/50" // Inactive text color
-                  }
+                  flex-1 pb-4 text-xl font-normal cursor-pointer tracking-wide transition-all duration-300 relative 
+                  ${activeTab === tab ? "text-primary" : "text-gray-400 hover:text-gray-600"}
                 `}
               >
                 {getTabLabel(tab)}
 
-                {/* Active Indicator Line - Matches the black underline in image */}
-                {activeTab === tab && <span className="absolute bottom-[-1px] left-0 w-full h-[2px] bg-gray-800" />}
+                {/* FIX 2 & 3: Changed bottom to -4px (matches border width) and added z-10 */}
+                {activeTab === tab && <span className="absolute bottom-[-4px] left-0 w-full h-[4px] bg-[#E2BA86] z-10" />}
               </button>
             ))}
           </div>
         </div>
 
-        {/* --- Card Grid --- */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {overviewData[activeTab].map((item) => (
-            <div key={item.id} className="relative h-[450px] w-full rounded-lg overflow-hidden group">
+        {/* --- Desktop: Card Grid --- */}
+        <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          {currentImages.map((item) => (
+            <div key={item.id} className="relative h-[400px] w-full overflow-hidden group">
               {/* Image Layer */}
-              <div className="absolute inset-0 bg-slate-400">
-                {/* Note: I added 'bg-slate-400' as a fallback color. 
-                    The gradient overlay below ensures the text is readable 
-                    and matches the blue-grey look of the image.
-                 */}
+              <div className="absolute inset-0 bg-gray-100">
                 <Image src={item.image} alt={item.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
-
-              {/* Gradient Overlay Layer - Matches the blue/grey fade in screenshot */}
-              {/* <div className="absolute inset-0 bg-gradient-to-t from-slate-700/90 via-slate-600/50 to-slate-500/20 mix-blend-multiply" /> */}
-
-              {/* Text Content - Serif font for the "Dish #1" style */}
-              <div className="absolute top-10 left-8 right-8 z-10">
-                <h3 className="text-white text-4xl  tracking-wide">{item.title}</h3>
-              </div>
+              {/* No overlay or text as per the design */}
             </div>
           ))}
+        </div>
+
+        {/* --- Mobile: Swiper --- */}
+        <div className="md:hidden flex flex-col gap-8">
+          <Swiper
+            modules={[Autoplay]}
+            onSwiper={setSwiperInstance}
+            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+            spaceBetween={16}
+            slidesPerView={1.3}
+            centeredSlides={true}
+            
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            className="w-full"
+          >
+            {currentImages.map((item, index) => (
+              <SwiperSlide key={item.id} className="transition-all duration-500">
+                {({ isActive }) => (
+                  <div
+                    className={`relative h-[400px] w-full transition-all duration-500 ease-in-out overflow-hidden ${
+                      isActive ? "scale-100 z-10" : "scale-100 "
+                    }`}
+                  >
+                    <Image src={item.image} alt={item.title} fill className="object-cover" />
+                  </div>
+                )}
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* --- CUSTOM SCROLLBAR TRACK (Mobile Only) --- */}
+          <div className="flex justify-center w-full px-4">
+            <div
+              className="relative w-full max-w-[300px] h-[4px] bg-[#E5E5E5] shrink-0 overflow-hidden cursor-pointer"
+              onClick={(e) => {
+                if (!swiperInstance) return;
+                const rect = e.currentTarget.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const clickPercent = clickX / rect.width;
+                const targetSlide = Math.floor(clickPercent * currentImages.length);
+                swiperInstance.slideToLoop(targetSlide);
+              }}
+            >
+              {/* --- CUSTOM SCROLLBAR THUMB --- */}
+              <motion.div
+                className="absolute top-0 bottom-0 bg-[#001446]"
+                animate={{
+                  left: `${(activeIndex / currentImages.length) * 100}%`,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 30,
+                }}
+                style={{
+                  width: `${thumbWidthPercent}%`,
+                }}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

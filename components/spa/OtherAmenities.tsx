@@ -15,7 +15,7 @@ const OtherAmenities = () => {
         <div className="container mx-auto px-4">
           
           {/* Header Section */}
-          <div className="flex flex-wrap items-end mb-16">
+          <div className="flex flex-wrap items-center mb-16">
             <div className="w-full lg:w-1/2 mb-6 lg:mb-0">
               <div className="text-left">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl leading-tight text-primary">

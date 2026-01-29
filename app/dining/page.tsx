@@ -1,7 +1,10 @@
 import Dining from "@/components/dining/Dining";
 import DiningPhilosophy from "@/components/dining/DiningPhilosophy";
 import DiningSection from "@/components/dining/DiningSection";
+import FeatureSection from "@/components/dining/FeatureSection";
 import Overview from "@/components/dining/Overview";
+import { Hero } from "@/components/rooms/Hero";
+import RoomGalleryCarousel from "@/components/rooms/RoomGalleryCarousel";
 import GalleryOne from "@/components/shared/GalleryOne";
 import { ImageCtaSection } from "@/components/shared/ImageCtaSection";
 import React from "react";
@@ -22,20 +25,15 @@ const galleryImages = [
 const page = () => {
   return (
     <div>
-      <Dining />
-      <DiningPhilosophy />
+      <Hero title="Dining" description="" />
+      {/* <DiningPhilosophy /> */}
       <Overview/>
       <DiningSection/>
-      <div className="pb-10">
-      <GalleryOne  galleryImages={galleryImages}/>
+      <div className="md:pt-24">
+      <RoomGalleryCarousel images={galleryImages} title="Gallery" />
       </div>
-<ImageCtaSection
-        backgroundImage="/1.webp"
-        title="Your perfect stay in Karwar is
-just a moment away."
-        buttonText="Explore"
-        buttonLink="/karwar"
-      />
+      <FeatureSection/>
+
     </div>
   );
 };
