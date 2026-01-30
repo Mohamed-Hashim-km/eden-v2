@@ -55,7 +55,7 @@ const Faq = ({ faqData, title, description }) => {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
           {/* Left Side: Title and Description */}
           <div className="w-full lg:w-5/12">
-            <div className="mb-2 lg:mb-0">
+            <div className="mb- lg:mb-0">
               <h2 className="text-4xl md:text-5xl lg:text-6xl  text-primary mb-6 leading-tight capitalize">
                 {title || "Frequently Asked Questions"}
               </h2>

@@ -26,7 +26,7 @@ function RoomCardOne(props) {
         {/* Content positioned at the bottom left */}
         <div className="absolute bottom-0 left-0 p-8 z-10">
           {/* Title with large, elegant font */}
-          <h3 className="text-white text-4xl md:text-5xl  mb-4 drop-shadow-md">{Title}</h3>
+          <h3 className="text-white text-2xl md:text-4xl  mb-4 drop-shadow-md">{Title}</h3>
 
           {/* Description with smaller white font */}
           <p className="text-white text-lg md:text-xl font-light drop-shadow-sm">{Description}</p>
@@ -51,7 +51,7 @@ function RoomCardOne(props) {
         {/* Content positioned at the bottom left */}
         <div className="absolute bottom-0 left-0 p-8 z-10">
           {/* Title with large, elegant font */}
-          <h3 className="text-white text-4xl md:text-5xl  mb-4 drop-shadow-md">{Title}</h3>
+          <h3 className="text-white text-2xl md:text-4xl  mb-4 drop-shadow-md">{Title}</h3>
 
           {/* Description with smaller white font */}
           <p className="text-white text-lg md:text-xl font-light drop-shadow-sm">{Description}</p>

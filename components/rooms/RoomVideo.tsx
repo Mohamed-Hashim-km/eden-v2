@@ -13,7 +13,7 @@ const RoomVideo: React.FC<RoomVideoProps> = ({ coverImage, videoUrl = "https://w
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <section className=" bg-white">
+    <section className="pt-5 pb-16 md:pb-0 md:pt-0 bg-white">
       <div className="">
         <div
           className="relative w-full h-[300px] md:h-[500px] lg:h-[600px] rounded-sm overflow-hidden group cursor-pointer shadow-sm"

@@ -270,7 +270,7 @@ export const Navbar = () => {
                   <button onClick={() => setActiveMenu("main")} className="absolute left-0  text-secondary">
                     <FiChevronLeft size={30} strokeWidth={1} />
                   </button>
-                  <h2 className="text-2xl font-medium text-primary">Dining</h2>
+                  <Link href="/dining"><h2 className="text-2xl font-medium text-primary">Dining</h2></Link>
                 </div>
 
                 <hr className="border-secondary " />

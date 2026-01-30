@@ -32,7 +32,7 @@ export const AboutSection = () => {
               curated to ensure a comfortable and memorable stay.
             </p>
 
-            <ul className="flex flex-col gap-3 mb-10">
+            {/* <ul className="flex flex-col gap-3 mb-10">
               {[
                 "Elegantly designed rooms across multiple categories",
                 "Three distinctive dining experiences under one roof",
@@ -43,7 +43,7 @@ export const AboutSection = () => {
                   {item}
                 </li>
               ))}
-            </ul>
+            </ul> */}
 
             <Button variant="secondary">
               Discover Our Story

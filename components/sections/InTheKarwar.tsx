@@ -53,7 +53,7 @@ const InTheKarwar = () => {
   const [nextEl, setNextEl] = useState(null);
 
   return (
-    <div className="py-16 md:pt-24 bg-white">
+    <div className="pt-16 pb-5 md:pb-0 md:pt-24 bg-white">
       <div className="container mx-auto px-4">
         {/* Header Section */}
         <div className="flex justify-center text-center mb-16">

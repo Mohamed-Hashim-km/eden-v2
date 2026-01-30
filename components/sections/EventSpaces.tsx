@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const EventSpaces = () => {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 md:pt-16 md:pb-28 bg-white">
       <div className="container mx-auto px-4">
         {/* Added 'items-stretch' to ensure both columns have equal height */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">

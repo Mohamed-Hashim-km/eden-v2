@@ -27,7 +27,7 @@ function DiningSection() {
       <div className="container mx-auto">
         {/* Header */}
         <div className="text-left md:text-center mb-10 md:mb-16 px-4 md:px-0">
-          <h2 className="font-serif text-[32px] leading-tight md:text-6xl text-[#1A1A1A]">Curate Your Dining Experiences</h2>
+          <h2 className=" text-[32px] leading-tight md:text-6xl text-[#1A1A1A]">Curate Your Dining Experiences</h2>
         </div>
 
         {/* --- Desktop: Grid Container --- */}
@@ -59,7 +59,7 @@ function DiningSection() {
 
                 {/* Content Area */}
                 <div className="absolute bottom-8 left-8 right-8 z-20">
-                  <h3 className="text-white font-serif text-3xl md:text-3xl mb-6">{item.title}</h3>
+                  <h3 className="text-white  text-3xl md:text-3xl mb-6">{item.title}</h3>
 
                   <Link href="#" className="inline-block">
                     <Button variant="outline">View More</Button>
@@ -71,7 +71,7 @@ function DiningSection() {
         </div>
 
         {/* --- Mobile: Swiper --- */}
-        <div className="md:hidden flex flex-col gap-8">
+        <div className="md:hidden flex flex-col gap-16">
           <Swiper
             modules={[Autoplay]}
             onSwiper={setSwiperInstance}
@@ -106,11 +106,11 @@ function DiningSection() {
 
                   {/* Content Below Image */}
                   <div className="text-center">
-                    <h3 className="text-[#1A1A1A] font-serif text-2xl mb-4">{item.title}</h3>
+                    <h3 className="text-[#1A1A1A]  text-2xl mb-4">{item.title}</h3>
                     <Link href="#" className="inline-block">
-                      <Button variant="outline" className="border-[#1A1A1A] text-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white">
+                      <button className=" border border-[#D9D9D9] px-10 py-2 transition-all text-[#65676B] duration-300 font-medium  disabled:cursor-not-allowed cursor-pointer">
                         View More
-                      </Button>
+                      </button>
                     </Link>
                   </div>
                 </div>

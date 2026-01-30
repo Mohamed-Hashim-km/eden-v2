@@ -35,7 +35,7 @@ export function OtherDiningOptions({ data, title }: OtherDiningOptionsProps) {
       {/* Optional Title - Kept in container for alignment */}
       {title && (
         <div className="container mx-auto px-4 md:px-6 mb-12">
-          <h2 className="text-4xl md:text-5xl lg:text-5xl text-primary font-serif">{title}</h2>
+          <h2 className="text-4xl md:text-5xl lg:text-5xl text-primary ">{title}</h2>
         </div>
       )}
 
@@ -45,16 +45,19 @@ export function OtherDiningOptions({ data, title }: OtherDiningOptionsProps) {
           modules={[Autoplay]}
           onSwiper={setSwiperInstance}
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-          spaceBetween={0} // Removed gap to be truly edge-to-edge often preferred, or keep small gap
-          slidesPerView={1.2}
+          spaceBetween={16}
+          slidesPerView={1.15}
+          centeredSlides={true}
           loop={true}
           autoplay={{
             delay: 4000,
             disableOnInteraction: false,
           }}
           breakpoints={{
-            640: { slidesPerView: 2, spaceBetween: 10 },
-            1024: { slidesPerView: 4.1, spaceBetween: 10 },
+            320: { slidesPerView: 1.15, spaceBetween: 16, centeredSlides: true },
+            640: { slidesPerView: 1.1, spaceBetween: 20, centeredSlides: true },
+            768: { slidesPerView: 1.5, spaceBetween: 24, centeredSlides: false },
+            1024: { slidesPerView: 4.1, spaceBetween: 10, centeredSlides: false },
           }}
           className="w-full"
         >
@@ -76,15 +79,11 @@ export function OtherDiningOptions({ data, title }: OtherDiningOptionsProps) {
 
                 {/* Content */}
                 <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col items-start">
-                  <h3 className="text-white font-serif text-2xl md:text-3xl mb-4 leading-tight">{item.title}</h3>
+                  <h3 className="text-white  text-2xl md:text-3xl mb-4 leading-tight">{item.title}</h3>
 
                   <div className="">
-                    <Link
-                      href={item.link || "#"}
-                    >
-                        <Button variant="outline">
-                        Learn More
-                        </Button>
+                    <Link href={item.link || "#"}>
+                      <Button variant="outline">Learn More</Button>
                     </Link>
                   </div>
                 </div>

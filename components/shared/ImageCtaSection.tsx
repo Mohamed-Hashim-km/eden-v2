@@ -47,7 +47,7 @@ export const ImageCtaSection: React.FC<ImageCtaSectionProps> = ({
           <Image src={backgroundImage} alt={title} fill className="object-cover" priority />
         </div>
         <div className=" px-6 py-12 flex flex-col items-start text-left">
-          <h2 className="text-3xl text-[#001446] mb-8 leading-tight font-serif">{title}</h2>
+          <h2 className="text-3xl text-[#001446] mb-8 leading-tight ">{title}</h2>
           <a href={buttonLink}>
             <Button variant="outline2" className="min-w-[150px]">
               {buttonText}

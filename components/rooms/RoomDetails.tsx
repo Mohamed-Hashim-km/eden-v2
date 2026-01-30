@@ -36,10 +36,10 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({
   bookNowLink = "/contact",
 }) => {
   return (
-    <section className="py-12 md:pb-20 md:pt-16 bg-white text-gray-800 ">
+    <section className="pt-12 md:pb-20 md:pt-16 bg-white text-gray-800 ">
       <div className="container mx-auto px-4  max-w-7xl">
         {/* Breadcrumbs */}
-        <nav className="text-base text-secondary mb-16 flex items-center gap-3">
+        <nav className="text-base text-secondary mb-10 md:mb-16 flex items-center gap-3">
           {breadcrumbs.map((crumb, index) => (
             <React.Fragment key={index}>
               {crumb.href ? (
@@ -55,7 +55,7 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({
         </nav>
 
         {/* Title Section */}
-        <div className="mb-10 md:mb-10">
+        <div className="mb-8 md:mb-10">
           <h1 className="text-2xl md:text-4xl  text-primary mb-6">{title}</h1>
           {/* Decorative underline matching the image style */}
           <div className="h-[1px] w-32 bg-gray-300"></div>
@@ -64,7 +64,7 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({
         {/* Main Grid: Changed to 12 columns for precise sizing */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
           {/* Left Column: Description - Takes 7/12 columns (approx 58%) */}
-          <div className="lg:col-span-7 flex flex-col gap-16">
+          <div className="lg:col-span-7 flex flex-col gap-10 md:gap-16">
             <div className="text-secondary leading-loose text-[1.05rem] space-y-8 ">
               {Array.isArray(description) ? description.map((para, idx) => <p key={idx}>{para}</p>) : <p>{description}</p>}
             </div>
@@ -79,7 +79,7 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({
           {/* Right Column: Details - Takes 5/12 columns (approx 42%) */}
        <div className="lg:col-span-5 pt-2">
             {/* Details Grid (View, Size, Occupancy, Bedding) */}
-            <div className="grid grid-cols-2 gap-y-12 gap-x-8 mb-20">
+            <div className="grid grid-cols-2 gap-y-12 gap-x-8 mb-16 md:mb-20">
               {/* View */}
               {details.view && (
                 <div>

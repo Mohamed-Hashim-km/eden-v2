@@ -30,7 +30,7 @@ export const ContentCarousel: React.FC<ContentCarouselProps> = ({ title, descrip
   const [nextEl, setNextEl] = useState(null);
 
   return (
-    <section className={`py-12 md:py-16 lg:pt-24 lg:pb-0 bg-white overflow-hidden ${className}`}>
+    <section className={`pt-12 pb-5 md:py-16 lg:pt-24 lg:pb-0 bg-white overflow-hidden ${className}`}>
       <div className="container mx-auto  md:px-4">
         {/* Header Section */}
            <h2 className="text-primary px-4 text-sm md:text-lg mb-4 font-semibold tracking-wide">Common Amenities</h2>

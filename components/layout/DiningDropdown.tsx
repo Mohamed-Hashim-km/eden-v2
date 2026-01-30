@@ -25,7 +25,7 @@ const diningItems = [
 
 const DiningDropdown = () => {
   return (
-    <div className="w-[85vw] max-w-[1200px] bg-[#001446] border-t border-[FEFFFF] shadow-2xl px-8 pt-8 pb-20 rounded-b-lg">
+    <div className="w-[85vw] max-w-[1200px] bg-[#001446] border-t border-[FEFFFF] shadow-2xl px-8 pt-8 pb-20 ">
       <div className="grid grid-cols-1 md:grid-cols-3">
         {diningItems.map((item, index) => (
           <Link href={item.link} key={index} className="group block relative">

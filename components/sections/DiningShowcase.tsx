@@ -129,7 +129,7 @@ export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
               el: ".swiper-scrollbar-custom",
               draggable: true,
             }}
-            autoplay={{ delay: 2000, disableOnInteraction: true }}
+            autoplay={{ delay: 2000, disableOnInteraction: false }}
             breakpoints={{
               320: { slidesPerView: 1.15, spaceBetween: 16, centeredSlides: true },
               640: { slidesPerView: 1.1, spaceBetween: 20, centeredSlides: true },
@@ -184,7 +184,7 @@ export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
                       </div>
 
                       {/* TEXT CONTENT (Overlapping) */}
-                      <div className="relative -mt-16 w-[90%] mx-auto bg-white p-6 shadow-md z-10 text-center">
+                      <div className="relative -mt-16 w-[90%] ml-auto bg-white p-6 z-10 ">
                         {item.mobileLogo ? (
                           <div className="relative w-full h-12 mb-2 flex justify-center items-center">
                             <Image src={item.mobileLogo} alt={item.title} width={100} height={40} className="object-contain" />
@@ -202,7 +202,7 @@ export const DiningShowcase: React.FC<DiningShowcaseProps> = ({ title }) => {
           </Swiper>
 
           {/* Custom Scrollbar Container */}
-          <div className="swiper-scrollbar-custom h-1 bg-gray-200 mt-10 relative overflow-hidden rounded-full w-[90%] mx-auto lg:hidden">
+          <div className="swiper-scrollbar-custom h-1 bg-[#E2E2E2] mt-6 relative overflow-hidden rounded-full w-[90%] mx-auto lg:hidden [&_.swiper-scrollbar-drag]:!bg-[#001446]">
             {/* Swiper will inject the drag handle here automatically */}
           </div>
         </div>

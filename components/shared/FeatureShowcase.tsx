@@ -19,7 +19,7 @@ export const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({
   imageSrc = "/image_21915b.jpg",
 }) => {
   return (
-    <section className="pt-0 md:py-24 bg-white overflow-hidden">
+    <section className="pt-0 md:py-16 bg-white overflow-hidden">
       <div className="container mx-auto ">
         {/* Flex Container */}
         <div className="flex flex-col-reverse md:flex-row items-start relative">

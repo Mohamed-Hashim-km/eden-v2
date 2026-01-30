@@ -29,8 +29,8 @@ export function CommonAmenities({
     <section className="container mx-auto pt-12 px-4 md:py-24">
       <div className="flex flex-col gap-6 md:gap-12">
         <div className="max-w-3xl">
-          <span className="text-primary tracking-wide text-sm md:text-lg font-semibold mb-2 md:mb-4 block">{eyebrow}</span>
-          <h2 className="text-4xl md:text-5xl lg:text-[56px] leading-[1.1] font-serif text-slate-900">{title}</h2>
+          <span className="text-primary tracking-wide  md:text-lg font-semibold mb-2 md:mb-4 block">{eyebrow}</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl text-primary leading-tight  text-primary">{title}</h2>
         </div>
 
         {/* Desktop Grid View */}
@@ -41,7 +41,7 @@ export function CommonAmenities({
                 {/* Desktop Image */}
                 <Image src={item.image} alt={item.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
               </div>
-              <h3 className="text-xl md:text-2xl font-serif text-slate-900 leading-tight pr-4">{item.title}</h3>
+              <h3 className="text-xl md:text-2xl  text-primary leading-tight pr-4">{item.title}</h3>
               {item.description && <p className="text-secondary text-sm md:text-base mt-2 leading-relaxed">{item.description}</p>}
             </div>
           ))}
@@ -72,7 +72,7 @@ export function CommonAmenities({
                   <div className="relative aspect-3/4 w-full overflow-hidden mb-4">
                     <Image src={item.image} alt={item.title} fill className="object-cover" />
                   </div>
-                  <h3 className="text-xl font-serif text-slate-900 leading-tight">{item.title}</h3>
+                  <h3 className="text-xl  text-primary leading-tight">{item.title}</h3>
                   {item.description && <p className="text-secondary text-sm md:text-base mt-2 leading-relaxed">{item.description}</p>}
                 </div>
               </SwiperSlide>

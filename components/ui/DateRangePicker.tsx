@@ -96,7 +96,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({ isOpen, onClos
             let textClass = "text-[#001446]";
 
             if (isSelectedStart || isSelectedEnd) {
-              bgClass =  "bg-[#001446] text-white rounded-md";
+              bgClass = "bg-[#001446] text-white rounded-md";
               textClass = "text-white";
             } else if (isInRange || isHovered) {
               bgClass = "bg-[#E6F0FA]";
@@ -105,12 +105,18 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({ isOpen, onClos
             return (
               <div
                 key={day}
-                className={`relative flex flex-col items-center justify-center py-3 cursor-pointer transition-colors ${bgClass} ${isDisabled ? "opacity-30 cursor-not-allowed" : "hover:bg-gray-100"}`}
+                className={`relative flex flex-col items-center justify-center py-2 h-20 cursor-pointer transition-colors ${bgClass} ${isDisabled ? "opacity-30 cursor-not-allowed" : "hover:bg-gray-100"}`}
                 onClick={() => !isDisabled && handleDateClick(date)}
                 onMouseEnter={() => !isDisabled && setHoverDate(date)}
                 onMouseLeave={() => setHoverDate(null)}
               >
-                <div className={`text-sm font-medium ${textClass}`}>{day}</div>
+                <div className={`text-sm font-medium ${textClass} mb-0.5`}>{day}</div>
+                {!isDisabled && (
+                  <>
+                    <div className={`text-[10px] font-medium uppercase leading-none ${textClass} opacity-70`}>INR</div>
+                    <div className={`text-xs font-semibold leading-tight ${textClass}`}>1,265</div>
+                  </>
+                )}
               </div>
             );
           })}

@@ -24,7 +24,6 @@ const ChevronRight = () => (
 // --- Data ---
 // --- Data ---
 
-
 interface DishSectionProps {
   title?: string;
   description?: string;
@@ -33,27 +32,21 @@ interface DishSectionProps {
 
 export const DishSection: React.FC<DishSectionProps> = ({ title, description, data }) => {
   return (
-    <section className="md:py-24 bg-white overflow-hidden">
+    <section className="pt-16 md:py-24 bg-white overflow-hidden">
       {/* Title */}
       {title && (
-        <div className="container mx-auto px-4 mb-16  ">
-        <div className="flex flex-col md:flex-row justify-between items-start gap-8 w-full">
-          
-          {/* Left: Title */}
-          <div className="md:w-1/2">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl text-primary leading-tight">
-             {title}
-            </h2>
-          </div>
+        <div className="container mx-auto px-4 mb-8 md:mb-16  ">
+          <div className="flex flex-col md:flex-row justify-between items-start gap-8 w-full">
+            {/* Left: Title */}
+            <div className="md:w-1/2">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl text-primary leading-tight">{title}</h2>
+            </div>
 
-          {/* Right: Description */}
-          <div className="md:w-1/2 flex md:justify-end">
-            <p className="text-secondary text-sm md:text-base leading-relaxed max-w-xl">
-              {description}
-            </p>
+            {/* Right: Description */}
+            <div className="md:w-1/2 flex md:justify-end">
+              <p className="text-secondary text-base md:text-lg leading-relaxed max-w-xl">{description}</p>
+            </div>
           </div>
-
-        </div>
         </div>
       )}
 
@@ -96,7 +89,7 @@ export const DishSection: React.FC<DishSectionProps> = ({ title, description, da
               el: ".swiper-scrollbar-custom",
               draggable: true,
             }}
-            autoplay={{ delay: 2000, disableOnInteraction: true }}
+            autoplay={{ delay: 2000, disableOnInteraction: false }}
             breakpoints={{
               320: { slidesPerView: 1.15, spaceBetween: 16, centeredSlides: true },
               640: { slidesPerView: 1.1, spaceBetween: 20, centeredSlides: true },
@@ -119,7 +112,7 @@ export const DishSection: React.FC<DishSectionProps> = ({ title, description, da
                   `}
                     >
                       {/* IMAGE CONTAINER */}
-                      <div className="relative w-full h-[350px] md:h-[500px] overflow-hidden shadow-sm">
+                      <div className="relative w-full h-[350px] md:h-[500px] overflow-hidden ">
                         <Image
                           src={item.image}
                           alt={item.title}
@@ -146,12 +139,12 @@ export const DishSection: React.FC<DishSectionProps> = ({ title, description, da
                     {/* --- MOBILE LAYOUT (New, Overlapping Text Card) --- */}
                     <div className="block lg:hidden relative group select-none h-full pt-4">
                       {/* IMAGE CONTAINER */}
-                      <div className="relative w-full h-[400px] overflow-hidden shadow-sm">
+                      <div className="relative w-full h-[400px] overflow-hidden ">
                         <Image src={item.image} alt={item.title} fill className="object-cover" />
                       </div>
 
                       {/* TEXT CONTENT (Overlapping) */}
-                      <div className="relative -mt-16 w-[90%] mx-auto bg-white p-6 shadow-md z-10 text-center">
+                      <div className="relative -mt-16 w-[90%] ml-auto bg-white p-6  z-10 ">
                         {item.mobileLogo ? (
                           <div className="relative w-full h-12 mb-2 flex justify-center items-center">
                             <Image src={item.mobileLogo} alt={item.title} width={100} height={40} className="object-contain" />
@@ -169,7 +162,7 @@ export const DishSection: React.FC<DishSectionProps> = ({ title, description, da
           </Swiper>
 
           {/* Custom Scrollbar Container */}
-          <div className="swiper-scrollbar-custom h-1 bg-gray-200 mt-10 relative overflow-hidden rounded-full w-[90%] mx-auto lg:hidden">
+          <div className="swiper-scrollbar-custom h-1 bg-[#E2E2E2] mt-6 relative overflow-hidden rounded-full w-[90%] mx-auto lg:hidden [&_.swiper-scrollbar-drag]:!bg-[#001446]">
             {/* Swiper will inject the drag handle here automatically */}
           </div>
         </div>

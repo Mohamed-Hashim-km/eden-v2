@@ -41,7 +41,7 @@ function Overview() {
       case "oyster":
         return "Oyster Bay";
       case "forest":
-        return "Food & Forest";
+        return "Food & \n Forest";
       default:
         return key;
     }
@@ -62,8 +62,8 @@ function Overview() {
         {/* --- Mobile Header --- */}
         <div className="block md:hidden px-4 md:px-0 mb-12 text-left">
           <h2 className="text-[32px] leading-[1.2] text-[#0A1629] mb-6 ">The Eden Dining Philosophy</h2>
-          <div className="w-16 border-t-2 border-[#9F9F9F] mb-6" />
-          <p className="text-[#5E5E5E] text-base font-light leading-relaxed">
+          <div className="w-24 border-t-2 border-[#9F9F9F] mb-6" />
+          <p className="text-secondary text-base  leading-relaxed">
             Our culinary ethos is defined by a commitment to purity and artisanal technique. By pairing the finest ingredients with attentive
             hospitality, we create a dining experience that is both comforting and profoundly flavorful.
           </p>
@@ -82,8 +82,9 @@ function Overview() {
                   // but swiper updates automatically due to key or content change usually.
                 }}
                 className={`
-                  flex-1 pb-4 text-xl font-normal cursor-pointer tracking-wide transition-all duration-300 relative 
-                  ${activeTab === tab ? "text-primary" : "text-gray-400 hover:text-gray-600"}
+                  flex-1 pb-4 text-xl font-normal cursor-pointer tracking-wide transition-all whitespace-pre-line md:whitespace-normal
+  duration-300 relative 
+                  ${activeTab === tab ? "text-primary" : "text-secondary hover:text-gray-600"}
                 `}
               >
                 {getTabLabel(tab)}
@@ -109,7 +110,7 @@ function Overview() {
         </div>
 
         {/* --- Mobile: Swiper --- */}
-        <div className="md:hidden flex flex-col gap-8">
+        <div className="md:hidden flex flex-col gap-16">
           <Swiper
             modules={[Autoplay]}
             onSwiper={setSwiperInstance}

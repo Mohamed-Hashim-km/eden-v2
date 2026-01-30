@@ -77,7 +77,7 @@ export const Hero: React.FC<HeroProps> = ({
 
         {/* 3. Mobile Content */}
         <div className="px-6 pb-20 text-center flex flex-col items-center">
-          <h1 className="text-[#001446] text-4xl font-serif mb-4 leading-tight">
+          <h1 className="text-[#001446] text-4xl  mb-4 leading-tight">
             A New Standard of
             <br />
             Comfort

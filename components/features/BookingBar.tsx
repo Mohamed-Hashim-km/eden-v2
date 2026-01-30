@@ -275,7 +275,7 @@ export const BookingBar: React.FC<BookingBarProps> = ({
         {/* Initial Collapsed State (The Card) */}
         {!isMobileExpanded && (
           <div className="bg-white p-6  rounded-sm w-full mx-auto" onClick={() => setIsMobileExpanded(true)}>
-            <h3 className="text-[#001446] font-medium text-lg mb-4 font-serif">Check-In/Check-Out</h3>
+            <h3 className="text-[#001446] font-medium text-lg mb-4 ">Check-In/Check-Out</h3>
             <div className="flex items-center justify-between border-b border-gray-200 pb-2 cursor-pointer">
               <span className="text-gray-400 text-sm">
                 {dateRange.start && dateRange.end ? `${formatDate(dateRange.start)} - ${formatDate(dateRange.end)}` : "SelectDates"}
@@ -290,7 +290,7 @@ export const BookingBar: React.FC<BookingBarProps> = ({
         {/* Expanded State (The Full Form) */}
         {isMobileExpanded && (
           <div className="bg-[#f9f9f9] w-full flex flex-col gap-6 py-12 px-6 rounded-b-xl  animate-in slide-in-from-top-2 duration-300">
-            <h3 className="text-[#001446] font-medium text-xl font-serif">Check-In/Check-Out</h3>
+            <h3 className="text-[#001446] font-medium text-xl ">Check-In/Check-Out</h3>
             <div className="border-b border-gray-200 pb-2 flex justify-between items-center" onClick={() => setIsMobileExpanded(false)}>
               <span className="text-gray-500 text-base">
                 {dateRange.start && dateRange.end ? `${formatDate(dateRange.start)} - ${formatDate(dateRange.end)}` : "SelectDates"}
@@ -300,7 +300,7 @@ export const BookingBar: React.FC<BookingBarProps> = ({
 
             {enableLocationSelection && (
               <div className="flex flex-col gap-2 pt-2">
-                <h4 className="text-[#001446] text-xl font-serif">Location</h4>
+                <h4 className="text-[#001446] text-xl ">Location</h4>
                 <div className="border-b border-gray-200 pb-2 flex justify-between items-center" onClick={() => setIsLocationOpen(!isLocationOpen)}>
                   <span className="text-gray-500 text-base">{selectedLocation}</span>
                   <span className={`transform transition-transform ${isLocationOpen ? "rotate-180" : ""}`}>
@@ -346,7 +346,7 @@ export const BookingBar: React.FC<BookingBarProps> = ({
                 <button onClick={handleMobilePrevMonth} className="p-2 hover:bg-gray-100 rounded-full">
                   <ChevronLeftIcon />
                 </button>
-                <span className="text-[#001446] text-lg font-serif font-medium">
+                <span className="text-[#001446] text-lg  font-medium">
                   {currentMobileDate.toLocaleDateString("en-GB", { month: "long", year: "numeric" })}
                 </span>
                 <button onClick={handleMobileNextMonth} className="p-2 hover:bg-gray-100 rounded-full">
@@ -357,7 +357,7 @@ export const BookingBar: React.FC<BookingBarProps> = ({
               {/* Days Grid */}
               <div className="grid grid-cols-7 mb-4">
                 {["S", "M", "T", "W", "T", "F", "S"].map((d, i) => (
-                  <div key={i} className="text-center text-xs font-serif font-bold text-[#001446] opacity-60">
+                  <div key={i} className="text-center text-xs  font-bold text-[#001446] opacity-60">
                     {d}
                   </div>
                 ))}
@@ -399,7 +399,7 @@ export const BookingBar: React.FC<BookingBarProps> = ({
                       onClick={() => handleMobileDateClick(day)}
                     >
                       <div
-                        className={`w-9 h-9 flex items-center justify-center text-sm font-serif transition-all duration-200 ${bgClass} ${textClass} ${!isStart && !isEnd && !isInRange ? "hover:bg-gray-50 rounded-full" : ""}`}
+                        className={`w-9 h-9 flex items-center justify-center text-sm  transition-all duration-200 ${bgClass} ${textClass} ${!isStart && !isEnd && !isInRange ? "hover:bg-gray-50 rounded-full" : ""}`}
                       >
                         {day}
                       </div>
@@ -414,31 +414,31 @@ export const BookingBar: React.FC<BookingBarProps> = ({
               <div className="flex flex-col gap-3">
                 <div className="flex items-center gap-3">
                   <div className="w-6 h-6 rounded-full bg-[#001446]"></div>
-                  <span className="text-[#001446] text-sm font-serif">Selected</span>
+                  <span className="text-[#001446] text-sm ">Selected</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-6 h-6 rounded-full border border-gray-200 bg-white"></div>
-                  <span className="text-[#001446] text-sm font-serif">Available</span>
+                  <span className="text-[#001446] text-sm ">Available</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <CrossCircleIcon />
-                  <span className="text-[#001446] text-sm font-serif">Please contact the Hotel</span>
+                  <span className="text-[#001446] text-sm ">Please contact the Hotel</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-6 h-6 rounded-full bg-[#D2B48C]"></div>
-                  <span className="text-[#001446] text-sm font-serif">Restrictions Apply</span>
+                  <span className="text-[#001446] text-sm ">Restrictions Apply</span>
                 </div>
               </div>
             </div>
 
             {/* Room Control */}
             <div className="pt-6 border-t border-gray-100 mt-4">
-              <h4 className="text-[#001446] text-xl font-serif mb-6">Room 1</h4>
+              <h4 className="text-[#001446] text-xl  mb-6">Room 1</h4>
 
               {/* Adults Mobile */}
               <div className="flex justify-between items-center mb-6">
                 <div>
-                  <div className="text-[#001446] text-lg font-serif">Adults</div>
+                  <div className="text-[#001446] text-lg ">Adults</div>
                   <div className="text-gray-400 text-xs font-sans mt-1">(12 Years & above)</div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -461,7 +461,7 @@ export const BookingBar: React.FC<BookingBarProps> = ({
               {/* Children Mobile */}
               <div className="flex justify-between items-center mb-0">
                 <div>
-                  <div className="text-[#001446] text-lg font-serif">Children</div>
+                  <div className="text-[#001446] text-lg ">Children</div>
                   <div className="text-gray-400 text-xs font-sans mt-1">(0-11 years)</div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -484,7 +484,7 @@ export const BookingBar: React.FC<BookingBarProps> = ({
 
             {/* Add Another Room */}
             <div className="border-t border-gray-100 mt-4 pt-6 pb-2">
-              <button className="flex items-center justify-center gap-2 w-full text-[#001446] font-serif text-lg py-2">
+              <button className="flex items-center justify-center gap-2 w-full text-[#001446]  text-lg py-2">
                 Add Another Room
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 1V13M13 7H1" stroke="#001446" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

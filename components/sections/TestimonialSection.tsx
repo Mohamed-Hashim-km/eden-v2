@@ -57,7 +57,7 @@ export const TestimonialSection: React.FC<TestimonialSectionProps> = ({ title, s
           {/* Left Column: Content */}
           <div className="lg:w-[50%] flex flex-col justify-center">
             <h2 className="text-4xl md:text-5xl lg:text-6xl  text-primary mb-6 leading-tight">{title}</h2>
-            <p className="text-secondary text-lg md:max-w-[70%] mb-12 leading-relaxed">{subtitle}</p>
+            <p className="text-secondary text-lg md:max-w-[70%] mb-3 md:mb-12 leading-relaxed">{subtitle}</p>
 
             <div className="hidden lg:block">
               <div className="flex items-center gap-2 mb-2">
@@ -92,7 +92,7 @@ export const TestimonialSection: React.FC<TestimonialSectionProps> = ({ title, s
             >
               {reviews.map((review, index) => (
                 <SwiperSlide key={index} className="h-auto">
-                  <div className="border border-[#D2C5B3] p-10 h-full flex flex-col justify-between min-h-[330px] bg-transparent transition-all duration-300 hover:shadow-lg">
+                  <div className="border border-secondary p-10 h-full flex flex-col justify-between min-h-[330px] bg-transparent transition-all duration-300 hover:shadow-lg">
                     <p className="text-[#65676B] text-lg leading-relaxed mb-6">“{review.text}”</p>
                     <p className="text-[#1B1B1B] font-medium text-lg">- {review.author}</p>
                   </div>
@@ -126,7 +126,7 @@ export const TestimonialSection: React.FC<TestimonialSectionProps> = ({ title, s
           </div>
           </div>
           {/* Mobile Rating Section */}
-          <div className="block lg:hidden mt-12">
+          <div className="block lg:hidden ">
             <div className="flex items-center gap-2 mb-2">
               <span className="text-2xl text-primary font-bold">{averageRating} Stars</span>
             </div>
