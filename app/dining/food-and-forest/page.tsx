@@ -3,6 +3,7 @@ import DiningPhilosophy from "@/components/dining/DiningPhilosophy";
 import DiningSection from "@/components/dining/DiningSection";
 import Overview from "@/components/dining/Overview";
 import { DishSection } from "@/components/dining/subPage/DishSection";
+import LocationCard from "@/components/dining/subPage/LocationCard";
 import { OtherDiningOptions } from "@/components/dining/subPage/OtherDiningOptions";
 import { Hero } from "@/components/rooms/Hero";
 import RoomGalleryCarousel from "@/components/rooms/RoomGalleryCarousel";
@@ -108,6 +109,7 @@ const page = () => {
           },
         ]}
       />
+      <LocationCard />
       <OtherDiningOptions data={diningOptions} title="" />
       <ImageCtaSection
         backgroundImage="/1.webp"

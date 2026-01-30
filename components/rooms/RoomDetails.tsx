@@ -65,7 +65,7 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
           {/* Left Column: Description - Takes 7/12 columns (approx 58%) */}
           <div className="lg:col-span-7 flex flex-col gap-16">
-            <div className="text-secondary leading-loose text-[1.05rem] space-y-8 font-light">
+            <div className="text-secondary leading-loose text-[1.05rem] space-y-8 ">
               {Array.isArray(description) ? description.map((para, idx) => <p key={idx}>{para}</p>) : <p>{description}</p>}
             </div>
 
@@ -83,50 +83,50 @@ const RoomDetails: React.FC<RoomDetailsProps> = ({
               {/* View */}
               {details.view && (
                 <div>
-                  <h4 className="text-primary font-bold text-[15px] mb-2 tracking-wide font-sans">View:</h4>
-                  <p className="text-secondary text-[15px] leading-relaxed font-light">{details.view}</p>
+                  <h4 className="text-primary font-bold text-[15px] mb-2 tracking-wide ">View:</h4>
+                  <p className="text-secondary text-[15px] leading-relaxed ">{details.view}</p>
                 </div>
               )}
 
               {/* Size */}
               {details.size && (
                 <div>
-                  <h4 className="text-primary font-bold text-[15px] mb-2 tracking-wide font-sans">Size:</h4>
-                  <p className="text-secondary text-[15px] font-light">{details.size}</p>
+                  <h4 className="text-primary font-bold text-[15px] mb-2 tracking-wide ">Size:</h4>
+                  <p className="text-secondary text-[15px] ">{details.size}</p>
                 </div>
               )}
 
               {/* Occupancy */}
               {details.occupancy && (
                 <div>
-                  <h4 className="text-primary font-bold text-[15px] mb-2 tracking-wide font-sans">Occupancy:</h4>
-                  <p className="text-secondary text-[15px] font-light">{details.occupancy}</p>
+                  <h4 className="text-primary font-bold text-[15px] mb-2 tracking-wide ">Occupancy:</h4>
+                  <p className="text-secondary text-[15px] ">{details.occupancy}</p>
                 </div>
               )}
 
               {/* Bedding */}
-              {details.bedding && (
+              {details.bedding && ( 
                 <div>
-                  <h4 className="text-primary font-bold text-[15px] mb-2 tracking-wide font-sans">Bedding:</h4>
-                  <p className="text-secondary text-[15px] font-light">{details.bedding}</p>
+                  <h4 className="text-primary font-bold text-[15px] mb-2 tracking-wide ">Bedding:</h4>
+                  <p className="text-secondary text-[15px] ">{details.bedding}</p>
                 </div>
               )}
             </div>
 
             {/* Amenities Section */}
             <div>
-              <h4 className="text-primary font-bold text-[15px] mb-8 tracking-wide font-sans">Amenities</h4>
+              <h4 className="text-primary font-bold text-[15px] mb-8 tracking-wide ">Amenities</h4>
               <div className="flex flex-wrap items-center gap-12">
                 {amenities.map((item, index) => (
                   <div key={index} className="flex flex-col items-center gap-3 group">
-                    <div className="text-[32px] text-[#333333] font-light stroke-[0.5px]">{item.icon}</div>
+                    <div className="text-[32px] text-[#333333]  stroke-[0.5px]">{item.icon}</div>
                     <span className="text-[11px] text-secondary tracking-wide text-center">{item.label}</span>
                   </div>
                 ))}
 
                 {extraAmenitiesCount > 0 && (
                   <div className="flex flex-col items-center justify-center h-full mb-5">
-                    <span className="text-2xl text-[#333333] font-light">+{extraAmenitiesCount}</span>
+                    <span className="text-2xl text-[#333333] ">+{extraAmenitiesCount}</span>
                   </div>
                 )}
               </div>

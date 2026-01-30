@@ -53,7 +53,7 @@ export default function RoomPage() {
       <VenueSlider/>
       <CelebrationsList/>
       <WhatToExpect />
-      <GalleryOne
+     <GalleryOne
         title="Gallery"
         description="A glimpse of Terminal 5, where elegant indoor spaces and stunning rooftop views create unforgettable celebrations"
         cta=""

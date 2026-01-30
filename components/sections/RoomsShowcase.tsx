@@ -67,7 +67,7 @@ const RoomsShowcase = () => {
             <h2 className="text-4xl md:text-5xl lg:text-6xl leading-tight mb-5 text-primary">
             Spaces That Inspire Every Stay
             </h2>
-            <p className="text-secondary">
+            <p className="text-secondary text-base md:text-lg">
              From wellness and fitness to recreation and seamless service, Hotel Eden offers thoughtfully curated amenities designed to elevate every moment of your stay.
             </p>
           </div>
